@@ -1,18 +1,41 @@
+const restaurantData = require('../restaurantData.json');
 
-exports.seed = function(knex, Promise) {
+// console.log(restaurantData.length);
+// console.log(Object.keys(restaurantData[0])[0]);
+const allItems = [];
+
+restaurantData.forEach((res, index) => {
+  res[Object.keys(res)[0]].forEach((item, i) => {
+    const { name, protein, carbs, fats, calories } = item;
+    if( !name, !protein, !carbs, !fats, !calories ) {
+      return;
+    }
+    if (name === 'Item') {
+      return;
+    }
+    
+    const newItem = {
+      name: item.name,
+      type: item.type,
+      protein: Number(item.protein),
+      carbs: Number(item.carb),
+      fats: Number(item.fat),
+      calories: Number(item.calories),
+      calsperpro: Number(item.calperpro),
+      sodium: Number(item.sodium),
+      restaurant_id: index,
+    };
+    allItems.push(newItem)
+  });
+});
+
+
+exports.seed = async function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('items').insert([
-    {
-      id: 1, 
-      name: 'name',
-      type: 'type',
-      protein: 10,
-      carbs: 20,
-      fats: 5,
-      calories: 125,
-      calsperpro: 1.25,
-      sodium: 200,
-      restaurant_id: 1,
-    },
-  ]);
+
+  for (const item of allItems) {
+    await knex('items').insert([item]);
+  }
+
+  // return knex('items').insert(fith);
 };
