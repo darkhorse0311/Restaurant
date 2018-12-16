@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Fast Food Macros Database</title>
+        <meta name="description" content="Fast Food Macros is a database of fast food macro nutrition values. Fast food isn't the best, but you can use FastFoodMacros.com to plan your next fast food meal.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/demo.css">
+        <!-- Pushy CSS -->
+        <link rel="stylesheet" href="css/pushy.css">
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+		<style type="text/css">
+			.foodTable td {padding:2px;font-size:.8em;border-top:1px solid #E5E4E2;}
+			input {margin:4px;} 
+		</style>
+
+		<script type="text/javascript">var switchTo5x=true;</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+	</head>
+    <body>
+
+        <header class="site-header push" style="height:0px;text-align:left;width:100%;"></header><!-- Pushy Menu -->
+<nav class="pushy pushy-left" style="font-size:.8em;background-color:black;border-right:1px solid silver;line-height:1.1em;">
+	<ul>
+		<!--
+		<li class="pushy-submenu">
+			<a href="#">Submenu 1</a>
+			<ul>
+				<li class="pushy-link"><a href="#">Item 1</a></li>
+				<li class="pushy-link"><a href="#">Item 2</a></li>
+				<li class="pushy-link"><a href="#">Item 3</a></li>
+			</ul>
+		</li>
+		-->
+		<hr style="width:95%; margin:0 0 0 0; height:3px; border-color:yellow;" color="yellow">
+
+		<li class="sidebar-brand">
+			<a href="http://fastfoodmacros.com/" title="FastFoodMacros.com home page"><h2 style="color:yellow;font-weight:bold;font-size:1.9em">Fast Food Macros</h2></a>
+		</li>
+		
+			<li class="pushy-submenu">
+			<a href="#"><b style="font-size:1.5em;">Restaurants</b></a>
+			<ul>
+			
+				<li class="pushy-link"><a href="food.asp?n=Arby%27s+Macros&r=11" title="Fast Food macronutrients for Arby's">Arby's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Boston+Market+Macros&r=29" title="Fast Food macronutrients for Boston Market">Boston Market</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Burger+King+Macros&r=3" title="Fast Food macronutrients for Burger King">Burger King</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Chick%2DFil%2DA+Macros&r=12" title="Fast Food macronutrients for Chick-Fil-A">Chick-Fil-A</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Chipotle+Macros&r=8" title="Fast Food macronutrients for Chipotle">Chipotle</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Culver%27s+Macros&r=23" title="Fast Food macronutrients for Culver's">Culver's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Dairy+Queen+Macros&r=7" title="Fast Food macronutrients for Dairy Queen">Dairy Queen</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Del+Taco+Macros&r=28" title="Fast Food macronutrients for Del Taco">Del Taco</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Domino%27s+Macros&r=33" title="Fast Food macronutrients for Domino's">Domino's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=El+Pollo+Loco+Macros&r=27" title="Fast Food macronutrients for El Pollo Loco">El Pollo Loco</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Firehouse+Subs+Macros&r=13" title="Fast Food macronutrients for Firehouse Subs">Firehouse Subs</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Five+Guys+Macros&r=4" title="Fast Food macronutrients for Five Guys">Five Guys</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Hardee%27s%2FCarls+Jr%2E+Macros&r=6" title="Fast Food macronutrients for Hardee's/Carls Jr.">Hardee's/Carls Jr.</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=In%2DN%2DOut+Macros&r=14" title="Fast Food macronutrients for In-N-Out">In-N-Out</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Jack+in+the+Box+Macros&r=24" title="Fast Food macronutrients for Jack in the Box">Jack in the Box</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Jersey+Mike%27s+Macros&r=31" title="Fast Food macronutrients for Jersey Mike's">Jersey Mike's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Jimmy+John%27s+Macros&r=30" title="Fast Food macronutrients for Jimmy John's">Jimmy John's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Kentucky+Fried+Chicken+Macros&r=15" title="Fast Food macronutrients for Kentucky Fried Chicken">Kentucky Fried Chicken</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Krystal+Burger+Macros&r=25" title="Fast Food macronutrients for Krystal Burger">Krystal Burger</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=McDonald%27s+Macros&r=1" title="Fast Food macronutrients for McDonald's">McDonald's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Moe%27s+Macros&r=9" title="Fast Food macronutrients for Moe's">Moe's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Panda+Express+Macros&r=5" title="Fast Food macronutrients for Panda Express">Panda Express</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Popeyes+Chicken++Macros&r=16" title="Fast Food macronutrients for Popeyes Chicken ">Popeyes Chicken </a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Potbelly+Macros&r=32" title="Fast Food macronutrients for Potbelly">Potbelly</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Qdoba+Macros&r=34" title="Fast Food macronutrients for Qdoba">Qdoba</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Quiznos+Macros&r=17" title="Fast Food macronutrients for Quiznos">Quiznos</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Sonic+Drive%2DIn+Macros&r=18" title="Fast Food macronutrients for Sonic Drive-In">Sonic Drive-In</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Starbucks+Macros&r=26" title="Fast Food macronutrients for Starbucks">Starbucks</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Subway+Macros&r=19" title="Fast Food macronutrients for Subway">Subway</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Taco+Bell+Macros&r=20" title="Fast Food macronutrients for Taco Bell">Taco Bell</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Tijuana+Flats+Burrito+Builder+Macros&r=10" title="Fast Food macronutrients for Tijuana Flats Burrito Builder">Tijuana Flats Burrito Builder</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Wendy%27s+Macros&r=2" title="Fast Food macronutrients for Wendy's">Wendy's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Whataburger+Macros&r=21" title="Fast Food macronutrients for Whataburger">Whataburger</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=YaYa%27s+Macros&r=37" title="Fast Food macronutrients for YaYa's">YaYa's</a></li>
+				
+				<li class="pushy-link"><a href="food.asp?n=Zaxby%27s+Macros&r=22" title="Fast Food macronutrients for Zaxby's">Zaxby's</a></li>
+				
+			</ul>
+			</li>
+			
+
+		<li><hr style="width:95%;"></li>
+		<li class="pushy-submenu">
+			<a href="#"><b style="font-size:1.5em;">Calculators</b></a>
+			<ul>
+				<li class="pushy-link"><a href="total-daily-energy-expenditure.asp" title="Calculate your Total Daily Energy Expenditure (TDEE)">Total Daily Energy Expenditure</a></li>
+				<li class="pushy-link"><a href="calculating-your-macros.asp" title="Calculate your macronutrient needs">How to Calculate Your Macros</a></li>
+				<li class="pushy-link"><a href="calories-burned-calculator.asp" title="Calculate calories burned">Exercise Calories Burned Calculator</a></li>
+				<li class="pushy-link"><a href="calculate-your-bmi.asp" title="Calculate your body mass index">Body Mass Index (BMI)</a></li>
+				<li class="pushy-link"><a href="maximum-muscular-potential-calculator.asp" title="Calculate your genetic maximum muscular body mass">Maximum Muscular Potential</a></li>
+				<li class="pushy-link"><a href="calculate-your-body-fat-percentage.asp" title="Calculate your body fat levels">Body Fat Calculator</a></li>
+				<li class="pushy-link"><a href="wilks-coefficient-calculator.asp" title="Calculate your Wilks Score">Wilks Score Calculator</a></li>
+				<li class="pushy-link"><a href="rep-calculator.asp" title="Calculate your 1 rep max ans other reps">1RM and Reps Calculator</a></li>
+				<li class="pushy-link"><a href="alcohol-calories-calculator.asp" title="Calculate the calories from alcohol on your beer, wine, or liquor">Calories In Alcohol Calculator</a></li>
+				<li class="pushy-link"><a href="maximum-rate-of-fat-loss.asp" title="how quickly can I lose fat">Max Rate of Fat Loss</a></li>
+
+				
+
+			</ul>
+		</li>
+
+		<li><hr style="width:95%;"></li>
+		<li class="pushy-submenu">
+			<a href="#"><b style="font-size:1.5em;">Articles and Info</b></a>
+			<ul>
+				<li class="pushy-link"><a href="too-much-sodium.asp" title="Effects of too much sodium">Too Much Sodium?</a></li>
+				<li class="pushy-link"><a href="protein-fats-carbs.asp" title="Protein, Fats and Carbs - How Much?">Protein, Fats, and Carbohydrates</a></li>
+				<li class="pushy-link"><a href="choosing-healthy-fast-food-options.asp" title="How to choose healthy fast food options">Healthy Fast Food Options</a></li>
+				<li class="pushy-link"><a href="http://fastfoodmacros.com/what-is-macro-dieting.asp" title="If It Meets Your Macros dieting explained">What is Macro-Based Dieting?</a></li>
+				<li class="pushy-link"><a href="what-is-saturated-fat.asp" title="What is Saturated fat?">What is Saturated Fat?</a></li>
+				<li class="pushy-link"><a href="fast-food-places.asp" title="list of fast food restaurants">Fast Food Places</a></li>
+			</ul>
+		</li>
+
+		<li><hr style="width:95%;"></li>
+		<li class="pushy-submenu">
+			<a href="#"><b style="font-size:1.5em;">Site Information</b></a>
+			<ul>
+				<li class="pushy-link"><a href="about.asp" title="About FastFoodMacros.com">About</a></li>
+				<li class="pushy-link"><a href="faq.asp" title="FastFoodMacros.com frequently asked questions">F.A.Q.</a></li>
+				<li class="pushy-link"><a href="contact.asp" title="Contact form for FastFoodMacros.com">Contact</a></li>
+			</ul>
+		</li>
+	</ul>
+
+	<hr style="width:95%; margin:20px 0 40px 0; height:3px; border-color:yellow;" color="yellow">
+	
+	<div style="text-align:center;background-color:white;border:1px solid yellow;border-left:1px solid black;">
+    	<a href="https://amzn.to/2EcGk9B" rel="nofollow"><img src="images/orgain-organic-protein.jpg" alt"orgain-organic-protein" style="width:80%;margin-top:10px;"/></a>
+	    <div style="padding:10px;font-size:16px;line-height:22px;padding-bottom:25px;">
+	        <a href="https://amzn.to/2EcGk9B" rel="nofollow" style="color:blue;">
+	        <b style="font-size:20px;">21 grams of organic plant based protein</b><br/>
+    	    5 grams organic fiber<br/>
+    	    3 grams net carbs<br/>
+    	    0 grams sugar<br/>
+    	    150 calories per serving<br/><br/>
+            Gluten free, kosher, vegan, non-GMO, soy free, dairy free, carrageenan free, and no artificial ingredients<br/><br/>
+            <b style="font-size:20px;">Certified USDA Organic!</b></a>
+        </div>
+	</div>
+
+</nav>
+
+        <!-- Site Overlay -->
+        <div class="site-overlay"></div>
+
+        <!-- Your Content -->
+        <div id="container" style="font-size:.9em;line-height:1.2em;margin-right:10px;">
+            <!-- Menu Button -->
+            <div class="menu-btn">&#9776; Menu</div>
+
+			<h1>Fast Food Macros</h1>
+			<h3>Please Choose Restaurant from the Left Navigation</h3>
+
+			<p>"Macros" is short for macronutrients, which refers to the total amount of protein, fat, carbohydrates (carbs) and calories. Counting macros is used in the dieting practice of If It Fits Your Macros (IIFYM), a plan that consists of eating whatever you want, as long as you adhere to your macronutrient goals</p>
+			<p>When people think of dieting, the first thing they usually think of is changing what they eat. "Dieting" has long been associated with "eating healthy" or, as bodybuilders term it, "eating clean". But this is not the focus with eating a macro based diet.</p>
+			<p>While eating healthy food obviously has benefits, you don't have to eat healthy to lose weight. Unless you have a medical condition, you lose weight by eating fewer calories than you expend. While some research has shown that the source of those calories can matter, it's in fact a very very small impact. If you eat fewer calories than you burn, you will lose weight.</p>
+			<p>Here's the basis of a macro based diet:
+			<p>1. Know how many calories your body burns in an average day. This is your <a href="http://fastfoodmacros.com/total-daily-energy-expenditure.asp">Total Daily Energy Expenditure (TDEE)</a></p>
+			<p>2. <a href="http://fastfoodmacros.com/calculating-your-macros.asp">Calculate your macros</a> based on whether you're cutting, maintaining, or bulking</p>
+			<p>3. <a href="http://fastfoodmacros.com/faq.asp#macro-split">Split those calories up between fat, protein and carbs</a> in a ratio that is most beneficial for muscle preservation and fat loss without a drop in daily energy. Typical numbers might be half a gram to a gram of protein per pound of bodyweight, with the remaining calories split between fat and carbs.</p>
+
+			<h4>Sodium in Fast Food</h4>
+			<p>One thing to be aware of is the overwhelming amount of sodium in most fast food. While the occasional fast food meal is not going to do harm, <a href="http://fastfoodmacros.com/too-much-sodium.asp">too much sodium</a> in your diet can have adverse health effects, the main one being high blood pressure. The recommended daily allowance of sodium is 2,300mg per day. As an example, the Italian with Grilled Chick Salad sub from Firehouse Subs has 2,330mgs of sodium, more than the USRDA!</p>
+			<p>
+			There are some cool tables below:
+			<br/>
+			<li><a href="#top-protein">Top foods by total of protein</a></li>
+			<li><a href="#top-protein-per-calorie">Top foods by protein per calorie</a></li>
+			<li><a href="#least-sodium-per-protein-gram">Least sodium per gram of protein</a></li>
+			<li><a href="#least-sodium-per-calorie">Least sodium per calorie</a></li>
+			</p>
+
+			<hr/>
+
+			<div class="4u">
+				<a name="top-protein">
+				<h2>Top by Total Protein</h2>
+				<p>The top 10 foods listed by total grams of protein</p>
+				<p>
+					<table cellpadding=0 cellspacing=0 class="foodTable"><tr><td><strong>Restaurant</strong></td><td><strong>Food Item</strong></td><td><strong>Protein</strong></td><td><strong>Fat</strong></td><td><strong>Carbs</strong></td><td><strong>Calories</strong></td><td><strong>Sodium</strong></td><tr><tr><td><a href="food.asp?n=Zaxby%27s&r=22">Zaxby's</a></td><td>20 Buffalo Fingerz, no sauce</td><td style="text-align:right;">179</td><td style="text-align:right;">158</td><td style="text-align:right;">61</td><td style="text-align:right;">2370</td><td style="text-align:right;">8660</td></tr><tr><td><a href="food.asp?n=Zaxby%27s&r=22">Zaxby's</a></td><td>20 Chicken Fingerz</td><td style="text-align:right;">177</td><td style="text-align:right;">142</td><td style="text-align:right;">75</td><td style="text-align:right;">2270</td><td style="text-align:right;">9810</td></tr><tr><td><a href="food.asp?n=Zaxby%27s&r=22">Zaxby's</a></td><td>20 Buffalo Wings, no sauce</td><td style="text-align:right;">122</td><td style="text-align:right;">118</td><td style="text-align:right;">7</td><td style="text-align:right;">1570</td><td style="text-align:right;">2140</td></tr><tr><td><a href="food.asp?n=Sonic+Drive%2DIn&r=18">Sonic Drive-In</a></td><td>Asian Sweet Chili Boneless Wings, 24</td><td style="text-align:right;">119</td><td style="text-align:right;">84</td><td style="text-align:right;">246</td><td style="text-align:right;">2210</td><td style="text-align:right;">8250</td></tr><tr><td><a href="food.asp?n=Culver%27s&r=23">Culver's</a></td><td>Fried Chicken Dinner, 4 piece, no roll</td><td style="text-align:right;">115</td><td style="text-align:right;">57</td><td style="text-align:right;">45</td><td style="text-align:right;">1140</td><td style="text-align:right;">3130</td></tr><tr><td><a href="food.asp?n=Sonic+Drive%2DIn&r=18">Sonic Drive-In</a></td><td>Honey BBQ Boneless Wings, 24</td><td style="text-align:right;">114</td><td style="text-align:right;">84</td><td style="text-align:right;">199</td><td style="text-align:right;">2040</td><td style="text-align:right;">6000</td></tr><tr><td><a href="food.asp?n=Zaxby%27s&r=22">Zaxby's</a></td><td>Wings and Things, Large</td><td style="text-align:right;">92</td><td style="text-align:right;">124.3</td><td style="text-align:right;">148.2</td><td style="text-align:right;">2081</td><td style="text-align:right;">4556</td></tr><tr><td><a href="food.asp?n=Zaxby%27s&r=22">Zaxby's</a></td><td>10 Buffalo Fingerz, no sauce</td><td style="text-align:right;">88</td><td style="text-align:right;">77.6</td><td style="text-align:right;">30.7</td><td style="text-align:right;">1171</td><td style="text-align:right;">4289</td></tr><tr><td><a href="food.asp?n=Zaxby%27s&r=22">Zaxby's</a></td><td>10 Chicken Fingerz</td><td style="text-align:right;">87</td><td style="text-align:right;">69.6</td><td style="text-align:right;">36.7</td><td style="text-align:right;">1131</td><td style="text-align:right;">4869</td></tr><tr><td><a href="food.asp?n=Quiznos&r=17">Quiznos</a></td><td>Italian Meatball, 12", no dressing</td><td style="text-align:right;">85</td><td style="text-align:right;">77.5</td><td style="text-align:right;">116</td><td style="text-align:right;">1470</td><td style="text-align:right;">3430</td></tr></table>
+				</p>
+			</div>
+			<div class="4u">
+				<a name="top-protein-per-calorie">
+				<h2>Top by Calories per Gram of Protein</h2>
+				<p>The top 10 foods listed by the number of calories per gram of protein</p>
+				<p>
+					<table cellpadding=0 cellspacing=0 class="foodTable"><tr><td><strong>Restaurant</strong></td><td><strong>Food Item</strong></td><td><strong>Protein</strong></td><td><strong>Fat</strong></td><td><strong>Carbs</strong></td><td><strong>Calories</strong></td><td style="text-align:right;"><strong>Cal/Protein</strong></td><td><strong>Sodium</strong></td><tr><tr><td><a href="food.asp?n=Jimmy+John%27s&r=30">Jimmy John's</a></td><td>Turkey Slim Unwich</td><td style="text-align:right;">14</td><td style="text-align:right;">0.5</td><td style="text-align:right;">1</td><td style="text-align:right;">60</td><td style="text-align:right;">4.3</td><td style="text-align:right;">530</td></tr><tr><td><a href="food.asp?n=El+Pollo+Loco&r=27">El Pollo Loco</a></td><td>Chicken Breast, Skinless</td><td style="text-align:right;">40</td><td style="text-align:right;">3.5</td><td style="text-align:right;">0</td><td style="text-align:right;">180</td><td style="text-align:right;">4.5</td><td style="text-align:right;">560</td></tr><tr><td><a href="food.asp?n=Moe%27s&r=9">Moe's</a></td><td>Fish (Junior)</td><td style="text-align:right;">9</td><td style="text-align:right;">1</td><td style="text-align:right;">0</td><td style="text-align:right;">41</td><td style="text-align:right;">4.6</td><td style="text-align:right;">21</td></tr><tr><td><a href="food.asp?n=Moe%27s&r=9">Moe's</a></td><td>Fish</td><td style="text-align:right;">12</td><td style="text-align:right;">1</td><td style="text-align:right;">0</td><td style="text-align:right;">55</td><td style="text-align:right;">4.6</td><td style="text-align:right;">28</td></tr><tr><td><a href="food.asp?n=YaYa%27s&r=37">YaYa's</a></td><td>Breast, skinless</td><td style="text-align:right;">32.5</td><td style="text-align:right;">4</td><td style="text-align:right;">0</td><td style="text-align:right;">153</td><td style="text-align:right;">4.7</td><td style="text-align:right;">397</td></tr><tr><td><a href="food.asp?n=Boston+Market&r=29">Boston Market</a></td><td>Skinless Chicken Breast bowl, no sauce</td><td style="text-align:right;">27</td><td style="text-align:right;">1.5</td><td style="text-align:right;">0</td><td style="text-align:right;">130</td><td style="text-align:right;">4.8</td><td style="text-align:right;">280</td></tr><tr><td><a href="food.asp?n=Boston+Market&r=29">Boston Market</a></td><td>Mediterranean Chicken Carver Sandwich</td><td style="text-align:right;">27</td><td style="text-align:right;">1.5</td><td style="text-align:right;">0</td><td style="text-align:right;">130</td><td style="text-align:right;">4.8</td><td style="text-align:right;">280</td></tr><tr><td><a href="food.asp?n=Boston+Market&r=29">Boston Market</a></td><td>Rotisserie Chicken Carver Sandwich</td><td style="text-align:right;">27</td><td style="text-align:right;">1.5</td><td style="text-align:right;">0</td><td style="text-align:right;">130</td><td style="text-align:right;">4.8</td><td style="text-align:right;">280</td></tr><tr><td><a href="food.asp?n=Jimmy+John%27s&r=30">Jimmy John's</a></td><td>Turkey Tom Unwich, no mayo</td><td style="text-align:right;">14</td><td style="text-align:right;">0.5</td><td style="text-align:right;">3</td><td style="text-align:right;">70</td><td style="text-align:right;">5.0</td><td style="text-align:right;">530</td></tr><tr><td><a href="food.asp?n=Subway&r=19">Subway</a></td><td>Chicken Strips</td><td style="text-align:right;">16</td><td style="text-align:right;">1.5</td><td style="text-align:right;">0</td><td style="text-align:right;">80</td><td style="text-align:right;">5.0</td><td style="text-align:right;">210</td></tr></table>
+				</p>
+			</div>
+			<div class="4u">
+				<a name="least-sodium-per-protein-gram">
+				<h2>Least Sodium per Gram of Protein</h2>
+				<p>The top 10 foods listed by the least amount of sodium per gram of protein for foods with 5 or more grams of protein (lower is better)</p>
+				<p>
+					<table cellpadding=0 cellspacing=0 class="foodTable"><tr><td><strong>Restaurant</strong></td><td><strong>Food Item</strong></td><td><strong>Protein</strong></td><td><strong>Fat</strong></td><td><strong>Carbs</strong></td><td><strong>Calories</strong></td><td><strong>Sodium</strong></td><td style="text-align:right;"><strong>Sodium/Protein</strong></td><tr><tr><td><a href="food.asp?n=Panda+Express&r=5">Panda Express</a></td><td>Brown Steamed Rice</td><td style="text-align:right;">9</td><td style="text-align:right;">4</td><td style="text-align:right;">86</td><td style="text-align:right;">420</td><td style="text-align:right;">15</td><td style="text-align:right;">1.67</td></tr><tr><td><a href="food.asp?n=Moe%27s&r=9">Moe's</a></td><td>Fish</td><td style="text-align:right;">12</td><td style="text-align:right;">1</td><td style="text-align:right;">0</td><td style="text-align:right;">55</td><td style="text-align:right;">28</td><td style="text-align:right;">2.33</td></tr><tr><td><a href="food.asp?n=Moe%27s&r=9">Moe's</a></td><td>Fish (Junior)</td><td style="text-align:right;">9</td><td style="text-align:right;">1</td><td style="text-align:right;">0</td><td style="text-align:right;">41</td><td style="text-align:right;">21</td><td style="text-align:right;">2.33</td></tr><tr><td><a href="food.asp?n=Five+Guys&r=4">Five Guys</a></td><td>Bunless Hamburger</td><td style="text-align:right;">32</td><td style="text-align:right;">34</td><td style="text-align:right;">0</td><td style="text-align:right;">440</td><td style="text-align:right;">100</td><td style="text-align:right;">3.13</td></tr><tr><td><a href="food.asp?n=Five+Guys&r=4">Five Guys</a></td><td>Bunless Little Burger</td><td style="text-align:right;">16</td><td style="text-align:right;">17</td><td style="text-align:right;">0</td><td style="text-align:right;">220</td><td style="text-align:right;">50</td><td style="text-align:right;">3.13</td></tr><tr><td><a href="food.asp?n=Wendy%27s&r=2">Wendy's</a></td><td>Sour Cream and Chive Baked Potato</td><td style="text-align:right;">8</td><td style="text-align:right;">2.5</td><td style="text-align:right;">63</td><td style="text-align:right;">310</td><td style="text-align:right;">35</td><td style="text-align:right;">4.38</td></tr><tr><td><a href="food.asp?n=Starbucks&r=26">Starbucks</a></td><td>Cherry Yogurt Parfait</td><td style="text-align:right;">14</td><td style="text-align:right;">7</td><td style="text-align:right;">39</td><td style="text-align:right;">280</td><td style="text-align:right;">70</td><td style="text-align:right;">5.00</td></tr><tr><td><a href="food.asp?n=Starbucks&r=26">Starbucks</a></td><td>Blueberries and Honey Yogurt Parfait</td><td style="text-align:right;">14</td><td style="text-align:right;">2.5</td><td style="text-align:right;">42</td><td style="text-align:right;">240</td><td style="text-align:right;">100</td><td style="text-align:right;">7.14</td></tr><tr><td><a href="food.asp?n=Boston+Market&r=29">Boston Market</a></td><td>Swiss Cheese</td><td style="text-align:right;">6</td><td style="text-align:right;">6</td><td style="text-align:right;">0</td><td style="text-align:right;">80</td><td style="text-align:right;">45</td><td style="text-align:right;">7.50</td></tr><tr><td><a href="food.asp?n=Potbelly&r=32">Potbelly</a></td><td>Extra Swiss</td><td style="text-align:right;">6</td><td style="text-align:right;">6</td><td style="text-align:right;">1</td><td style="text-align:right;">75</td><td style="text-align:right;">45</td><td style="text-align:right;">7.50</td></tr></table>
+				</p>
+			</div>
+			<div class="4u">
+				<a name="least-sodium-per-calorie">
+				<h2>Least Sodium per Calorie</h2>
+				<p>The top 10 foods listed by the least amount of sodium per calorie (lower is better)</p>
+				<p>
+					<table cellpadding=0 cellspacing=0 class="foodTable"><tr><td><strong>Restaurant</strong></td><td><strong>Food Item</strong></td><td><strong>Protein</strong></td><td><strong>Fat</strong></td><td><strong>Carbs</strong></td><td><strong>Calories</strong></td><td style="text-align:right;"><strong>Sodium/Calorie</strong></td><td><strong>Sodium</strong></td><tr><tr><td><a href="food.asp?n=Panda+Express&r=5">Panda Express</a></td><td>Brown Steamed Rice</td><td style="text-align:right;">9</td><td style="text-align:right;">4</td><td style="text-align:right;">86</td><td style="text-align:right;">420</td><td style="text-align:right;">0.04</td><td style="text-align:right;">15</td></tr><tr><td><a href="food.asp?n=Tijuana+Flats+Burrito+Builder&r=10">Tijuana Flats Burrito Builder</a></td><td>Jalapenos</td><td style="text-align:right;">0.1</td><td style="text-align:right;">0</td><td style="text-align:right;">0.3</td><td style="text-align:right;">2</td><td style="text-align:right;">0.05</td><td style="text-align:right;">0.1</td></tr><tr><td><a href="food.asp?n=Potbelly&r=32">Potbelly</a></td><td>Avocado</td><td style="text-align:right;">1</td><td style="text-align:right;">5</td><td style="text-align:right;">3</td><td style="text-align:right;">44</td><td style="text-align:right;">0.07</td><td style="text-align:right;">3</td></tr><tr><td><a href="food.asp?n=Tijuana+Flats+Burrito+Builder&r=10">Tijuana Flats Burrito Builder</a></td><td>Grilled Onions</td><td style="text-align:right;">0.3</td><td style="text-align:right;">0</td><td style="text-align:right;">3.4</td><td style="text-align:right;">15</td><td style="text-align:right;">0.07</td><td style="text-align:right;">1.1</td></tr><tr><td><a href="food.asp?n=Tijuana+Flats+Burrito+Builder&r=10">Tijuana Flats Burrito Builder</a></td><td>Diced Onions</td><td style="text-align:right;">0.3</td><td style="text-align:right;">0</td><td style="text-align:right;">3.4</td><td style="text-align:right;">15</td><td style="text-align:right;">0.07</td><td style="text-align:right;">1.1</td></tr><tr><td><a href="food.asp?n=Tijuana+Flats+Burrito+Builder&r=10">Tijuana Flats Burrito Builder</a></td><td>Grilled Peppers</td><td style="text-align:right;">0.3</td><td style="text-align:right;">0.1</td><td style="text-align:right;">1.6</td><td style="text-align:right;">8</td><td style="text-align:right;">0.11</td><td style="text-align:right;">0.9</td></tr><tr><td><a href="food.asp?n=Wendy%27s&r=2">Wendy's</a></td><td>Sour Cream and Chive Baked Potato</td><td style="text-align:right;">8</td><td style="text-align:right;">2.5</td><td style="text-align:right;">63</td><td style="text-align:right;">310</td><td style="text-align:right;">0.11</td><td style="text-align:right;">35</td></tr><tr><td><a href="food.asp?n=Potbelly&r=32">Potbelly</a></td><td>Mushrooms</td><td style="text-align:right;">1</td><td style="text-align:right;">0</td><td style="text-align:right;">1</td><td style="text-align:right;">6</td><td style="text-align:right;">0.17</td><td style="text-align:right;">1</td></tr><tr><td><a href="food.asp?n=Five+Guys&r=4">Five Guys</a></td><td>Bunless Hamburger</td><td style="text-align:right;">32</td><td style="text-align:right;">34</td><td style="text-align:right;">0</td><td style="text-align:right;">440</td><td style="text-align:right;">0.23</td><td style="text-align:right;">100</td></tr><tr><td><a href="food.asp?n=Five+Guys&r=4">Five Guys</a></td><td>Bunless Little Burger</td><td style="text-align:right;">16</td><td style="text-align:right;">17</td><td style="text-align:right;">0</td><td style="text-align:right;">220</td><td style="text-align:right;">0.23</td><td style="text-align:right;">50</td></tr></table>
+				</p>
+			</div>
+            <div class="menu-btn" style="margin-top:20px;">&#9776; Menu</div>
+		</div>
+
+        <footer class="site-footer push">
+<hr/>
+    <div id="amzn-assoc-ad-cf32465e-7e4b-4e9f-b1fa-99be4c5d8cad"></div>
+    <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=cf32465e-7e4b-4e9f-b1fa-99be4c5d8cad"></script>
+	&nbsp;<a href="http://fastfoodmacros.com/">FastFoodMacros.com</a>
+	<div style="color:#999;">&nbsp;Copyright 2018</div>
+</footer>
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=10843967; 
+var sc_invisible=1; 
+var sc_security="c948026e"; 
+var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="http://c.statcounter.com/10843967/0/c948026e/1/"
+alt="web analytics"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+<script type="text/javascript">stLight.options({publisher: "6685f395-319b-457f-b494-680724af686e", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<script>
+var options={ "publisher": "6685f395-319b-457f-b494-680724af686e", "logo": { "visible": false, "url": "http://fastfoodmacros.com", "img": "http://fastfoodmacros.com/images/fastfoodmacros-logo.png", "height": 24}, "ad": { "visible": false, "openDelay": "5", "closeDelay": "0"}, "livestream": { "domain": "", "type": "sharethis", "customColors": { "widgetBackgroundColor": "#FFFFFF", "articleLinkColor": "#006fbb"}}, "ticker": { "visible": false, "domain": "", "title": "", "type": "sharethis", "customColors": { "widgetBackgroundColor": "#9d9d9d", "articleLinkColor": "#00487f"}}, "facebook": { "visible": false, "profile": "sharethis"}, "fblike": { "visible": false, "url": ""}, "twitter": { "visible": false, "user": "sharethis"}, "twfollow": { "visible": false}, "custom": [{ "visible": false, "title": "Custom 1", "url": "", "img": "", "popup": false, "popupCustom": { "width": 300, "height": 250}}, { "visible": false, "title": "Custom 2", "url": "", "img": "", "popup": false, "popupCustom": { "width": 300, "height": 250}}, { "visible": false, "title": "Custom 3", "url": "", "img": "", "popup": false, "popupCustom": { "width": 300, "height": 250}}], "chicklets": { "items": ["facebook", "twitter", "googleplus", "reddit", "stumbleupon", "email", "sharethis"]}, "shadow": "gloss", "background": "#000000", "color": "#FFFFFF", "arrowStyle": "light"};
+var st_bar_widget = new sharethis.widgets.sharebar(options);
+</script>
+
+        <!-- Pushy JS -->
+        <script src="js/pushy.min.js"></script>
+
+    </body>
+</html>
