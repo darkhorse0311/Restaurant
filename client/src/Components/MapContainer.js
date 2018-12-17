@@ -25,22 +25,25 @@ class MapContainer extends Component {
         const namesString = 'Mcdonald OR Wendy';
 
         var request = {
-            bounds,
-            query: namesString,
-            type: 'restaurant'
+            keyword: namesString,
+            name: namesString,
+            bounds: bounds,
+            // fields: ['formatted_address', 'geometry', 'icon', 'id', 'name', 'permanently_closed', 'photos', 'place_id', 'plus_code', 'types']
         };
 
         const service = new google.maps.places.PlacesService(map);
-        service.textSearch(request, (res, status, pagination) => {
-            // console.log('res', res);
-            this.setState(previusState => {
-                return {
-                    restaurants: [...previusState.restaurants, ...res]
-                }
-            })
-            // if (pagination.hasNextPage) {
-            //     pagination.nextPage();
-            // }
+
+        service.nearbySearch(request, (res, status) => {
+            console.log('status', status);
+            console.log('res', res);
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                this.setState(previusState => {
+                    return {
+                        restaurants: res
+                        // restaurants: [...previusState.restaurants, ...res]
+                    }
+                })
+            }
         });
     }
 
