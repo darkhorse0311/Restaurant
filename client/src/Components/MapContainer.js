@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { connect } from 'react-redux';
+import { updateSelected } from '../redux/actions/MapActions';
+
+
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 class MapContainer extends Component {
@@ -60,6 +64,7 @@ class MapContainer extends Component {
     onMarkerClick = (e, place) => {
         console.log('place', place);
         this.setState({selectedPlace: place})
+        this.props.updateSelected(place)
     }
 
     render() {
@@ -97,6 +102,4 @@ class MapContainer extends Component {
     }
 }
 
-export default GoogleApiWrapper({
-  apiKey: key
-})(MapContainer);
+export default connect(null, { updateSelected })(GoogleApiWrapper({apiKey: key})(MapContainer));
