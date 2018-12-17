@@ -70,7 +70,11 @@ class MapContainer extends Component {
     render() {
         return (
         <Map 
-            style={{width: '500px', height: '300px', marginLeft: '-250px', marginTop: '-150px' }}
+            style={{
+                width: '600px', height: '350px', 
+                marginLeft: '-600px', 
+                marginTop: '-175px'
+            }}
             mapTypeControl={false}
             streetViewControl={false}
             rotateControl={false}
