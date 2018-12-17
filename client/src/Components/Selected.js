@@ -12,10 +12,24 @@ class Selected extends Component {
                 </Container>
             )
         }
-        const { name } = this.props.selected;
+        const { name, items } = this.props.selected;
         return (
             <Container>
                 <h3>{name}</h3>
+                <ListWrapper>
+                {
+                    items.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <h4>{item.name}</h4>
+                                <div>Protein: {item.protein}</div>
+                                <div>Carbs: {item.carbs}</div>
+                                <div>Fats: {item.fats}</div>
+                            </div>
+                        );
+                    })
+                }
+                </ListWrapper>
             </Container>
         );
     }
@@ -29,6 +43,11 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {})(Selected);
+
+const ListWrapper = styled.div`
+    width: 100%;
+    overflow: scroll;
+`;
 
 const Container = styled.div`
     width: 200px;

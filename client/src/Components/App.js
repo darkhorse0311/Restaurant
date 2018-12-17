@@ -22,12 +22,12 @@ const Container = styled.div`
   max-width: 900px;
   min-width: 600px;
   margin: 0 auto;
-  border: solid 1px red;
   height: 100vh;
   padding: 50px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   position: relative;
+  /* border: solid 1px red; */
 `;
 
