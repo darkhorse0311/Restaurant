@@ -1,31 +1,42 @@
 import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 class MapContainer extends Component {
     state = {
-        lat: 40.7644,
-        lng: -73.9235,
+        lat: 40.703486,
+        lng: -73.808929,
         restaurants: [],
         selectedPlace: {},
     }
 
-    fetchPlaces = (mapProps, map) => {
-        const { lat, lng } = this.state;
+    fetchPlaces = async (mapProps, map) => {
         const { google } = mapProps;
-
-        const current = new google.maps.LatLng(lat, lng);
+        const mapBounds = map.getBounds();
+        const bounds = new google.maps.LatLngBounds(mapBounds.getSouthWest(), mapBounds.getNorthEast())
+        
+        // const names = await axios.get('http://localhost:9001/api/res/names');
+        // const namesString = names.data.map(obj => obj.name).join(' OR ');
+        // console.log('namesString', namesString);
+        const namesString = 'Mcdonald OR Wendy';
 
         var request = {
-            query: 'mcdonald',
-            location: current,
-            radius: 200,
+            bounds,
+            query: namesString,
             type: 'restaurant'
         };
 
         const service = new google.maps.places.PlacesService(map);
-        service.textSearch(request, (res, status) => {
-            this.setState({restaurants: res})
+        service.textSearch(request, (res, status, pagination) => {
+            // console.log('res', res);
+            this.setState(previusState => {
+                return {
+                    restaurants: [...previusState.restaurants, ...res]
+                }
+            })
+            // if (pagination.hasNextPage) {
+            //     pagination.nextPage();
+            // }
         });
     }
 
@@ -47,6 +58,7 @@ class MapContainer extends Component {
     }
 
     onMarkerClick = (e, place) => {
+        console.log('place', place);
         this.setState({selectedPlace: place})
     }
 
@@ -54,20 +66,20 @@ class MapContainer extends Component {
         return (
         <Map 
             style={{width: '500px', height: '300px', marginLeft: '-250px', marginTop: '-150px' }}
-            google={this.props.google} 
+            mapTypeControl={false}
+            streetViewControl={false}
+            rotateControl={false}
+            fullscreenControl={false}
             zoom={15}
+            google={this.props.google} 
             initialCenter={
                 {
                     lat: this.state.lat,
                     lng: this.state.lng
                 }
             }
-            onReady={this.fetchPlaces}
-            mapTypeControl={false}
-            streetViewControl={false}
-            rotateControl={false}
-            fullscreenControl={false}
-            
+            // onReady={this.fetchPlaces}
+            onTilesloaded={this.fetchPlaces}
         >
 
             {
@@ -80,12 +92,6 @@ class MapContainer extends Component {
                     /> 
                 })
             }
-
-            <InfoWindow onClose={this.onInfoWindowClose}>
-                <div>
-                <h1>{this.state.selectedPlace.name}</h1>
-                </div>
-            </InfoWindow>
         </Map>
         );
     }
