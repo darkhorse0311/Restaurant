@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { updateSelected } from '../redux/actions/MapActions';
 
 
@@ -8,8 +9,10 @@ const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 class MapContainer extends Component {
     state = {
-        lat: 40.703486,
-        lng: -73.808929,
+        lat: 40.7536,
+        lng: -73.9832,
+        // lat: 40.703486,
+        // lng: -73.808929,
         restaurants: [],
         selectedPlace: {},
     }
@@ -19,10 +22,10 @@ class MapContainer extends Component {
         const mapBounds = map.getBounds();
         const bounds = new google.maps.LatLngBounds(mapBounds.getSouthWest(), mapBounds.getNorthEast())
         
-        // const names = await axios.get('http://localhost:9001/api/res/names');
-        // const namesString = names.data.map(obj => obj.name).join(' OR ');
-        // console.log('namesString', namesString);
-        const namesString = 'Mcdonald OR Wendy';
+        const names = await axios.get('http://localhost:9001/api/res/names');
+        const namesString = names.data.map(obj => obj.name).join(' OR ');
+        console.log('namesString', namesString);
+        // const namesString = 'Mcdonald OR Wendy';
 
         var request = {
             keyword: namesString,
@@ -65,7 +68,7 @@ class MapContainer extends Component {
     }
 
     onMarkerClick = (e, place) => {
-        console.log('place', place);
+        console.log('place', place.name);
         this.setState({selectedPlace: place})
         this.props.updateSelected(place)
     }
@@ -82,7 +85,7 @@ class MapContainer extends Component {
             streetViewControl={false}
             rotateControl={false}
             fullscreenControl={false}
-            zoom={15}
+            zoom={14}
             google={this.props.google} 
             initialCenter={
                 {
