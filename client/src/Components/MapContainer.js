@@ -1,115 +1,57 @@
-import React, { Component } from "react";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
-import { connect } from 'react-redux';
-import axios from 'axios';
-import { updateSelected } from '../redux/actions/MapActions';
+import React, { Component } from 'react';
+import mapboxgl from 'mapbox-gl'
 
+const mapBoxToken = "pk.eyJ1Ijoicm5sZCIsImEiOiJjanBzdGdjODkxb3JwM3ltZm1vOWQxOGFqIn0._OcNwJ_Q7XvH6a0hEahVnQ";
 
-const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+mapboxgl.accessToken = mapBoxToken;
+
+// mapbox://styles/mapbox/satellite-v9
+// mapbox://styles/mapbox/dark-v9
 
 class MapContainer extends Component {
+
     state = {
-        lat: 40.7536,
-        lng: -73.9832,
-        // lat: 40.703486,
-        // lng: -73.808929,
-        restaurants: [],
-        selectedPlace: {},
+        lng: -74.0060,
+        lat: 40.7128,
+        zoom: 12
     }
 
-    fetchPlaces = async (mapProps, map) => {
-        const { google } = mapProps;
-        const mapBounds = map.getBounds();
-        const bounds = new google.maps.LatLngBounds(mapBounds.getSouthWest(), mapBounds.getNorthEast())
-        
-        const names = await axios.get('http://localhost:9001/api/res/names');
-        const namesString = names.data.map(obj => obj.name).join(' OR ');
-        console.log('namesString', namesString);
-        // const namesString = 'Mcdonald OR Wendy';
-
-        var request = {
-            keyword: namesString,
-            name: namesString,
-            bounds: bounds,
-            // fields: ['formatted_address', 'geometry', 'icon', 'id', 'name', 'permanently_closed', 'photos', 'place_id', 'plus_code', 'types']
-        };
-
-        const service = new google.maps.places.PlacesService(map);
-
-        service.nearbySearch(request, (res, status) => {
-            console.log('status', status);
-            console.log('res', res);
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                this.setState(previusState => {
-                    return {
-                        restaurants: res
-                        // restaurants: [...previusState.restaurants, ...res]
-                    }
-                })
-            }
+    componentDidMount() {
+        const { lng, lat, zoom } = this.state;
+    
+        const map = new mapboxgl.Map({
+          container: this.mapContainer,
+          style: 'mapbox://styles/mapbox/dark-v9',
+          center: [lng, lat],
+          zoom
         });
-    }
-
-    getLocation = () => {
-        const options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0
-        };
-
-        const error = (err) => console.log(err);
-
-        const success = (pos) => {
-            const crd = pos.coords;
-            this.setState({lat: crd.latitude, lng: crd.longitude});
-        }
-
-        navigator.geolocation.getCurrentPosition(success, error, options)
-    }
-
-    onMarkerClick = (e, place) => {
-        console.log('place', place.name);
-        this.setState({selectedPlace: place})
-        this.props.updateSelected(place)
-    }
+    
+        map.on('move', () => {
+          const { lng, lat } = map.getCenter();
+    
+          this.setState({
+            lng: lng.toFixed(4),
+            lat: lat.toFixed(4),
+            zoom: map.getZoom().toFixed(2)
+          });
+        });
+      }
 
     render() {
-        return (
-        <Map 
-            style={{
-                width: '600px', height: '350px', 
-                marginLeft: '-600px', 
-                marginTop: '-175px'
-            }}
-            mapTypeControl={false}
-            streetViewControl={false}
-            rotateControl={false}
-            fullscreenControl={false}
-            zoom={14}
-            google={this.props.google} 
-            initialCenter={
-                {
-                    lat: this.state.lat,
-                    lng: this.state.lng
-                }
-            }
-            // onReady={this.fetchPlaces}
-            onTilesloaded={this.fetchPlaces}
-        >
 
-            {
-                this.state.restaurants.map((place, index) => {
-                    return <Marker
-                        name={place.name}
-                        position={place.geometry.location}
-                        onClick={e => this.onMarkerClick(e, place)}
-                        key={index}
-                    /> 
-                })
-            }
-        </Map>
+        return (
+            <div 
+                ref={el => this.mapContainer = el} 
+                style={{
+                    width: '100vw',
+                    height: '100vh',
+                    position: 'fixed',
+                    top: 0,
+                    left: 0
+                }}
+            />
         );
     }
 }
 
-export default connect(null, { updateSelected })(GoogleApiWrapper({apiKey: key})(MapContainer));
+export default MapContainer;
