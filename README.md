@@ -1,2 +1,2 @@
 # Carbtographer
-Application that recommends meals that fit specific micronutrients
+Application that recommends macro friendly meals from local restaurants 
