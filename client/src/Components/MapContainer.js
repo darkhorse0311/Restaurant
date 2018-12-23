@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import ReactMapBoxGl, { Layer, Feature, Popup } from 'react-mapbox-gl';
 
-const token= "pk.eyJ1Ijoicm5sZCIsImEiOiJjanBzdGdjODkxb3JwM3ltZm1vOWQxOGFqIn0._OcNwJ_Q7XvH6a0hEahVnQ";
+const token = process.env.REACT_APP_MAP_BOX_KEY;
 
 const Mapbox = ReactMapBoxGl({
-    minZoom: 8,
-    maxZoom: 15,
+    minZoom: 10,
     accessToken: token
   });
 
 const mapStyle = {
-flex: 1,
-width: '100vw',
-height: '100vh'
+    flex: 1,
+    width: '100vw',
+    height: '100vh',
+    position: 'fixed',
+    top: 0,
+    left: 0
 };
 
 // mapbox://styles/mapbox/satellite-v9
@@ -24,19 +26,33 @@ class MapContainer extends Component {
     state = {
         fitBounds: undefined,
         center: [-74.0060, 40.7128],
-        zoom: [12],
+        zoom: [15],
         station: undefined,
         stations: {}
     }
 
-    render() {
+    componentDidMount() {
+        this.getPlaces();
+    }
 
+    getPlaces = async () => {
+        // geocoding/v5/{endpoint}/{search_text}.json
+
+        // endpoint = mapbox.places
+        // search-text = name
+        const names = await axios.get('http://localhost:9001/api/res/names');
+
+    }
+
+    render() {
+        const { center, zoom } = this.state; 
         return (
             <Mapbox 
                 // eslint-disable-next-line react/style-prop-object
                 style="mapbox://styles/mapbox/dark-v9"
                 containerStyle={mapStyle}
-
+                center={center}
+                zoom={zoom}
             />
         );
     }
