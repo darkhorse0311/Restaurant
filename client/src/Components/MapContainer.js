@@ -3,8 +3,6 @@ import axios from 'axios';
 import ReactMapBoxGl, { Layer, Feature, Popup } from 'react-mapbox-gl';
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
-const yelpKey = "tBhbeh5BmDyg0mFH9pK9-ZRgxb5PJV9E9GmMA85ARx_t_Irirnmw1z1FXKBL3HdGImIci_5NpklAvCqJknf6-nuoSw4mQZwzompFQia5iQ8ASrvveObUl3S_rDQgXHYx";
-
 const Mapbox = ReactMapBoxGl({
     minZoom: 10,
     accessToken: token
