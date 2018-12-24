@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import MapContainer from './MapContainer';
-// import Selected from './Selected';
+import Header from './Header';
 
 class App extends Component {
   render() {
     return (
       <Container>
-        {/* <Selected /> */}
+        <Header/>
         <MapContainer/>
       </Container>
     );
