@@ -57,22 +57,44 @@ router.get('/locations', async (req, res) => {
     fragment businessInfo on Businesses{
         total
             business {
-            name
-            coordinates {
-                latitude
-                longitude
-            }
-            photos
-            distance
+                id
+                name
+                coordinates {
+                    latitude
+                    longitude
+                }
+                photos
+                distance
         }
     }
     `;
 
     const yelpRes = await client.request(chainedQuery);
-    // console.log('yelpRes', yelpRes);
 
-    res.status(200).json(yelpRes)
+    const resArray = Object.values(yelpRes);
 
+    const ids = [];
+    const uniqueBusinesses = [];
+
+    resArray.forEach(busArr => {
+        busArr.business.forEach(bus => {
+            const id = bus.id
+            if(!ids.includes(id)) {
+                ids.push(id);
+                uniqueBusinesses.push(bus)
+            }
+        })
+    })
+
+    const validBusinesess = [];
+
+    uniqueBusinesses.forEach(bus => {
+        if(names.includes(bus.name)){
+            validBusinesess.push(bus)
+        }
+    })
+
+    res.status(200).json(validBusinesess)
 })
 
 module.exports = router;
