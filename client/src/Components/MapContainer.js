@@ -18,9 +18,6 @@ const mapStyle = {
     left: 0
 };
 
-// mapbox://styles/mapbox/satellite-v9
-// mapbox://styles/mapbox/dark-v9
-
 class MapContainer extends Component {
 
     state = {
@@ -604,6 +601,11 @@ class MapContainer extends Component {
         
     }
 
+    clearPlace = () => {
+        console.log('here')
+        this.setState({place: null, zoom: [14]});
+    }
+
     markerClick = async (place, coord) => {
         const items = await axios.get(`http://localhost:9001/api/res/items?name=${place.name}`);
 
@@ -613,14 +615,6 @@ class MapContainer extends Component {
             place: {...place, coord, items: items.data}
         })
     }
-
-    // markerClick = (station: Station, { feature }: { feature: any }) => {
-    //     this.setState({
-    //       center: feature.geometry.coordinates,
-    //       zoom: [14],
-    //       station
-    //     });
-    //   };
 
     render() {
         const { center, zoom, places, place } = this.state; 
@@ -662,16 +656,10 @@ class MapContainer extends Component {
                             coordinates={place.coord}
                         >
                             <StyledPopup>
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: '10px',
-                                        left: '0px',
-                                        padding: '5px 10px',
-                                        width: '100%',
-                                        backgroundColor: 'white'
-                                    }}
-                                >{place.name}</div>
+                                <PopupHeader>   
+                                    {place.name}
+                                    <span onClick={() => this.clearPlace()}>x</span>
+                                </PopupHeader>
                                 <ListWrapper>
                                 {
                                     place.items.map((item, i) => (
@@ -709,4 +697,23 @@ const ListWrapper = styled.div`
     width: 100%;
     overflow: scroll;
     margin-top: 10px;
+`;
+
+const PopupHeader = styled.div`
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 10px;
+    width: 100%;
+    background-color: white;
+    span {
+        position: absolute;
+        right: 5px;
+        top: 0px;
+        font-weight: 800;
+        width: 20px;
+        height: 20px;
+        user-select: none;
+        cursor: pointer;
+    }
 `;
