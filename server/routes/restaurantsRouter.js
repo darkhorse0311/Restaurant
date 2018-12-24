@@ -19,9 +19,11 @@ router.get('/names', async (req, res) => {
 });
 
 router.get('/items', async (req, res) => {
-    const nameSplit = req.query.name.split(' ');
+    // const nameSplit = req.query.name.split(' ');
 
-    const name = nameSplit.length > 2 ? nameSplit[0] : nameSplit.join('');
+    // const name = nameSplit.length > 2 ? nameSplit[0] : nameSplit.join('');
+
+    const name = req.query.name;
 
     const restaurant = await db('restaurants').where('name', '=', name).first();
     // console.log('restaurant', restaurant);

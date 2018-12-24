@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
-import ReactMapBoxGl, { Layer, Feature } from 'react-mapbox-gl';
+import axios from 'axios';
+import ReactMapBoxGl, { Layer, Feature, Popup } from 'react-mapbox-gl';
+import styled from 'styled-components';
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 const Mapbox = ReactMapBoxGl({
@@ -25,7 +26,8 @@ class MapContainer extends Component {
     state = {
         fitBounds: undefined,
         center: [-74.0060, 40.7128],
-        zoom: [15],
+        zoom: [14],
+        place: null,
         places: [
             {
               "id": "r4jG613xCL4ispS14rEBnA",
@@ -602,8 +604,29 @@ class MapContainer extends Component {
         
     }
 
+    markerClick = async (place, coord) => {
+        const items = await axios.get(`http://localhost:9001/api/res/items?name=${place.name}`);
+
+        this.setState({
+            center: coord,
+            zoom:[16],
+            place: {...place, coord, items: items.data}
+        })
+    }
+
+    // markerClick = (station: Station, { feature }: { feature: any }) => {
+    //     this.setState({
+    //       center: feature.geometry.coordinates,
+    //       zoom: [14],
+    //       station
+    //     });
+    //   };
+
     render() {
-        const { center, zoom, places } = this.state; 
+        const { center, zoom, places, place } = this.state; 
+        const flyToOptions = {
+            speed: 0.8
+        };
         return (
             <Mapbox 
                 // eslint-disable-next-line react/style-prop-object
@@ -611,6 +634,7 @@ class MapContainer extends Component {
                 containerStyle={mapStyle}
                 center={center}
                 zoom={zoom}
+                flyToOptions={flyToOptions}
             >
                 <Layer 
                     type="symbol" 
@@ -625,14 +649,64 @@ class MapContainer extends Component {
                             <Feature
                                 coordinates={coord}
                                 key={i}
+                                onClick={() => this.markerClick(place, coord)}
                             />
                         )
                     })
                 }
                 </Layer>
+                {
+                    place && (
+                        <Popup
+                            key={place.id} 
+                            coordinates={place.coord}
+                        >
+                            <StyledPopup>
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        top: '10px',
+                                        left: '0px',
+                                        padding: '5px 10px',
+                                        width: '100%',
+                                        backgroundColor: 'white'
+                                    }}
+                                >{place.name}</div>
+                                <ListWrapper>
+                                {
+                                    place.items.map((item, i) => (
+                                        <div key={i}>
+                                            <h4>{item.name}</h4>
+                                            <div>Protein: {item.protein}</div>
+                                            <div>Carbs: {item.carbs}</div>
+                                            <div>Fats: {item.fats}</div>
+                                        </div>
+                                    ))
+                                }
+                                </ListWrapper>
+                            </StyledPopup>
+                        </Popup>
+                    )
+                }
             </Mapbox>
         );
     }
 }
 
 export default MapContainer;
+
+const StyledPopup = styled.div`
+  background: white;
+  color: #3f618c;
+  font-weight: 400;
+  padding: 5px;
+  border-radius: 2px;
+  max-height: 200px;
+  overflow: scroll;
+`;
+
+const ListWrapper = styled.div`
+    width: 100%;
+    overflow: scroll;
+    margin-top: 10px;
+`;
