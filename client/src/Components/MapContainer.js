@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReactMapBoxGl, { Layer, Feature, Popup } from 'react-mapbox-gl';
-import styled from 'styled-components';
+import StyledPopup from './StyledPopup';
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 const Mapbox = ReactMapBoxGl({
@@ -634,6 +634,9 @@ class MapContainer extends Component {
                     type="symbol" 
                     id="marker"
                     layout={{ "icon-image": "marker-15" }}
+                    style={{
+                        zIndex: 5
+                    }}
                 >
                 {
                     places.map((place, i) => {
@@ -655,24 +658,7 @@ class MapContainer extends Component {
                             key={place.id} 
                             coordinates={place.coord}
                         >
-                            <StyledPopup>
-                                <PopupHeader>   
-                                    {place.name}
-                                    <span onClick={() => this.clearPlace()}>x</span>
-                                </PopupHeader>
-                                <ListWrapper>
-                                {
-                                    place.items.map((item, i) => (
-                                        <div key={i}>
-                                            <h4>{item.name}</h4>
-                                            <div>Protein: {item.protein}</div>
-                                            <div>Carbs: {item.carbs}</div>
-                                            <div>Fats: {item.fats}</div>
-                                        </div>
-                                    ))
-                                }
-                                </ListWrapper>
-                            </StyledPopup>
+                            <StyledPopup place={place} clearPlace={this.clearPlace}/>
                         </Popup>
                     )
                 }
@@ -682,38 +668,3 @@ class MapContainer extends Component {
 }
 
 export default MapContainer;
-
-const StyledPopup = styled.div`
-  background: white;
-  color: #3f618c;
-  font-weight: 400;
-  padding: 5px;
-  border-radius: 2px;
-  max-height: 200px;
-  overflow: scroll;
-`;
-
-const ListWrapper = styled.div`
-    width: 100%;
-    overflow: scroll;
-    margin-top: 10px;
-`;
-
-const PopupHeader = styled.div`
-    position: absolute;
-    top: 10px;
-    left: 0px;
-    padding: 5px 10px;
-    width: 100%;
-    background-color: white;
-    span {
-        position: absolute;
-        right: 5px;
-        top: 0px;
-        font-weight: 800;
-        width: 20px;
-        height: 20px;
-        user-select: none;
-        cursor: pointer;
-    }
-`;

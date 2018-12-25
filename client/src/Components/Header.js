@@ -16,7 +16,7 @@ const StyledHeader = styled.div`
     width: 100vw;
     height: 60px;
     position: fixed;
-    z-index: 99;
+    z-index: 2;
     top: 0;
     left: 0;
     display: flex;
