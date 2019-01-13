@@ -1,4 +1,5 @@
 const restaurantsRouter = require('../routes/restaurantsRouter');
+const authRouter = require('../routes/authRouter');
 
 module.exports = server => {
     server.get('/', (req, res) => {
@@ -6,4 +7,5 @@ module.exports = server => {
     })
 
     server.use('/api/res', restaurantsRouter);
+    server.use('/auth', authRouter);
 }

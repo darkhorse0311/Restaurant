@@ -34,7 +34,7 @@ exports.seed = async function(knex, Promise) {
   // Deletes ALL existing entries
 
   for (const item of allItems) {
-    await knex('items').insert([item]);
+    await knex('items').insert(item);
   }
 
   // return knex('items').insert(fith);
