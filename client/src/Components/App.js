@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import { Route } from 'react-router-dom';
+
 import MapContainer from './MapContainer';
 import Header from './Header';
+import Register from './Register';
+import Login from './Login';
 
 class App extends Component {
   render() {
@@ -10,6 +14,8 @@ class App extends Component {
       <Container>
         <Header/>
         <MapContainer/>
+        <Route path="/login" component={props => <Login {...props}/>}/>
+        <Route path="/register" component={props => <Register {...props}/>}/>
       </Container>
     );
   }
