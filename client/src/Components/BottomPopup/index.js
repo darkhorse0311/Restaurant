@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import Item from './Item';
+import Arrows from './Arrows';
 
 const BottomPopup = ({place, clearPlace}) => {
     return (
@@ -16,6 +17,7 @@ const BottomPopup = ({place, clearPlace}) => {
                 ))
             }
             </ItemList>
+            <Arrows/>
         </StyledContainer>
     );
 }
@@ -38,6 +40,9 @@ const Header = styled.div`
     align-items: center;
     height: 54px;
     width: 100%;
+    span {
+        z-index: 3;
+    }
 `;
 
 const StyledContainer = styled.div`
