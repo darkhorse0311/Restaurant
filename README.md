@@ -26,6 +26,41 @@ Response:
 }
 ```
 
+##### GET `/names`
+
+- Returns all restaurant names in database
+
+Response:
+```
+[
+    {
+        id: 1
+        name: "Name"
+    }
+]
+```
+
+##### GET `/items/all`
+
+- Returns all items in database
+
+Response:
+```
+[
+    {
+        "id": 0,
+        "name": "item name",
+        "type": "type",
+        "protein": 0,
+        "carbs": 0,
+        "fats": 0,
+        "calories": 0,
+        "sodium": 0,
+        "r_id": 0
+    }
+]
+```
+
 ##### GET `/*`
 
 - 404 Endpoint
