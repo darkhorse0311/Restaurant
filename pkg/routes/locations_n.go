@@ -40,15 +40,16 @@ func _getLocations(w http.ResponseWriter, req *http.Request) {
 	db.Find(&names)
 	// create a client (safe to share across requests)
 	client := graphql.NewClient(url)
+	// all businesses
 	var ab []models.Business
-	var us []string
-
+	// unique id
+	var uid []string
 	for _, name := range names {
 		yr := _searchBusiness(client, name)
 		for _, business := range yr.Search.Business {
 			var exist bool
 			exist = false
-			for _, id := range us {
+			for _, id := range uid {
 				if id == business.ID {
 					exist = true
 				}
@@ -63,7 +64,7 @@ func _getLocations(w http.ResponseWriter, req *http.Request) {
 
 			if exist == false && vn == true {
 				ab = append(ab, business)
-				us = append(us, business.ID)
+				uid = append(uid, business.ID)
 			}
 		}
 	}
