@@ -97,7 +97,7 @@ const start = async () => {
         const restInfo = getResturantInfo(resPage.data);
         resturants.push(restInfo);
     }
-    fs.writeFileSync('./restuarantData.json', JSON.stringify(resturants))
+    fs.writeFileSync('./restaurantData.json', JSON.stringify(resturants))
 }
 
 start();

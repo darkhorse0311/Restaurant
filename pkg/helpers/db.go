@@ -40,7 +40,7 @@ func InitDB() (*gorm.DB, error) {
 	db.AutoMigrate(&models.Restaurants{}, &models.Items{})
 
 	// Open our jsonFile
-	jsonFile, err := os.Open("/Users/reynaldo/go/src/github.com/reynld/carbtographer/restuarantData.json")
+	jsonFile, err := os.Open("/Users/reynaldo/go/src/github.com/reynld/carbtographer/restaurantData.json")
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Println(err)
