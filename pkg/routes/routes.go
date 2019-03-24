@@ -21,6 +21,8 @@ func ConfigureRoutes(database *gorm.DB, router *mux.Router) {
 	r.HandleFunc("/items/{id}", getItems).Methods("GET")
 	r.HandleFunc("/locations", getLocations).Methods("GET")
 
+	r.Use(loggingMiddleware)
+
 	r.NotFoundHandler = http.HandlerFunc(routeNotFound)
 
 }

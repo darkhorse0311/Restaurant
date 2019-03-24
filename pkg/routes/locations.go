@@ -3,7 +3,6 @@ package routes
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -33,7 +32,7 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan models.
 		id.RID = rest.ID
 	}
 
-	fmt.Printf("\n%s\n%v\n", rest.Name, res)
+	// fmt.Printf("\n%s\n%v\n", rest.Name, res)
 
 	ch <- res
 }
