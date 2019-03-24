@@ -58,6 +58,7 @@ var err error
 var port string
 
 func main() {
+	godotenv.Load()
 	db, err = helpers.InitDB()
 
 	if err != nil {
@@ -65,8 +66,7 @@ func main() {
 	}
 	defer db.Close()
 
-	godotenv.Load()
-	port := os.Getenv("PORT")
+	port = os.Getenv("PORT")
 	if port == "" {
 		port = "9001"
 	}

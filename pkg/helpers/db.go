@@ -39,8 +39,9 @@ func InitDB() (*gorm.DB, error) {
 	db.DropTableIfExists(&models.Restaurants{}, &models.Items{})
 	db.AutoMigrate(&models.Restaurants{}, &models.Items{})
 
+	path := os.Getenv("SQLITE_PATH")
 	// Open our jsonFile
-	jsonFile, err := os.Open("/Users/reynaldo/go/src/github.com/reynld/carbtographer/restaurantData.json")
+	jsonFile, err := os.Open(path)
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Println(err)
