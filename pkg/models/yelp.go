@@ -10,6 +10,7 @@ type Business struct {
 	} `json:"coordinates"`
 	Photos   []string `json:"photos"`
 	Distance float64  `json:"distance"`
+	RID      int      `json:"r_id"`
 }
 
 // Search db response

@@ -11,12 +11,12 @@ import (
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
-func searchBusiness(cl *graphql.Client, s string, ch chan models.YelpResponse) {
+func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan models.YelpResponse) {
 	key := os.Getenv("YELP_API_KEY")
 	var res models.YelpResponse
 
 	req := graphql.NewRequest(yelpQuery)
-	req.Var("name", s)
+	req.Var("name", rest.Name)
 	req.Header.Add("Authorization", "Bearer "+key)
 
 	ctx := context.Background()
@@ -25,7 +25,12 @@ func searchBusiness(cl *graphql.Client, s string, ch chan models.YelpResponse) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// fmt.Printf("\nYR: %s\n%v\n", s, res)
+
+	for i := range res.Search.Business {
+		id := &res.Search.Business[i]
+		id.RID = rest.ID
+	}
+
 	ch <- res
 }
 
@@ -43,7 +48,7 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 	c := make(chan models.YelpResponse)
 
 	for _, name := range names {
-		go searchBusiness(client, name.Name, c)
+		go searchBusiness(client, name, c)
 	}
 
 	count := 0
