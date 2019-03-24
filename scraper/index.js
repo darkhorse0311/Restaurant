@@ -40,8 +40,8 @@ const getResturantInfo = (page) => {
             name: null,
             type: null,
             protein: null,
-            fat: null,
-            carb: null,
+            fats: null,
+            carbs: null,
             calories: null,
             calperpro: null,
             sodium: null
@@ -61,10 +61,10 @@ const getResturantInfo = (page) => {
                     item.protein = Number($(el).first().text());
                     break;
                 case 4 : 
-                    item.fat = Number($(el).first().text());
+                    item.fats = Number($(el).first().text());
                     break;
                 case 5 : 
-                    item.carb = Number($(el).first().text());
+                    item.carbs = Number($(el).first().text());
                     break;
                 case 6 : 
                     item.calories = Number($(el).first().text());

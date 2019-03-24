@@ -49,10 +49,8 @@ func InitDB() (*gorm.DB, error) {
 
 	// Convert file to array of bytes
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-
 	// Makes a array of Restuarant strucs
 	jsonInfo := make([]Restuarant, 0)
-
 	// Converst array of bytes to array of structs
 	json.Unmarshal(byteValue, &jsonInfo)
 
@@ -61,14 +59,15 @@ func InitDB() (*gorm.DB, error) {
 		db.Create(&models.Restaurants{Name: rest.Name})
 		for _, item := range rest.Items {
 			db.Create(&models.Items{
-				Name:     item.Name,
-				Type:     item.Type,
-				Protein:  item.Protein,
-				Carbs:    item.Carbs,
-				Fats:     item.Fats,
-				Calories: item.Calories,
-				Sodium:   item.Sodium,
-				RID:      i + 1,
+				Name:      item.Name,
+				Type:      item.Type,
+				Protein:   item.Protein,
+				Carbs:     item.Carbs,
+				Fats:      item.Fats,
+				Calories:  item.Calories,
+				CalPerPro: item.CalPerPro,
+				Sodium:    item.Sodium,
+				RID:       i + 1,
 			})
 		}
 	}

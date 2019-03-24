@@ -40,9 +40,9 @@ Response:
 ]
 ```
 
-##### GET `/items/all`
+##### GET `/items/{id}`
 
-- Returns all items in database
+- Returns all items per restuarant
 
 Response:
 ```
@@ -55,6 +55,7 @@ Response:
         "carbs": 0,
         "fats": 0,
         "calories": 0,
+        "calperpro": 0.0
         "sodium": 0,
         "r_id": 0
     }

@@ -38,10 +38,6 @@ func routeNotFound(w http.ResponseWriter, req *http.Request) {
 	w.Write(res)
 }
 
-var db *gorm.DB
-var err error
-var port string
-
 func getNames(w http.ResponseWriter, req *http.Request) {
 	var rest []models.Restaurants
 	db.Find(&rest)
@@ -49,12 +45,17 @@ func getNames(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(&rest)
 }
 
-func getAllItems(w http.ResponseWriter, req *http.Request) {
+func getItems(w http.ResponseWriter, req *http.Request) {
+	params := mux.Vars(req)
 	var items []models.Items
-	db.Find(&items)
-
+	// db.Find(&items, params["id"])
+	db.Where("r_id = ?", params["id"]).Find(&items)
 	json.NewEncoder(w).Encode(&items)
 }
+
+var db *gorm.DB
+var err error
+var port string
 
 func main() {
 	db, err = helpers.InitDB()
@@ -73,7 +74,7 @@ func main() {
 	r.HandleFunc("/", getServerIsUp).Methods("GET")
 
 	r.HandleFunc("/names", getNames).Methods("GET")
-	r.HandleFunc("/items/all", getAllItems).Methods("GET")
+	r.HandleFunc("/items/{id}", getItems).Methods("GET")
 
 	r.NotFoundHandler = http.HandlerFunc(routeNotFound)
 	fmt.Println("server live on port: " + port)
