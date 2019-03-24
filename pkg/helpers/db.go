@@ -36,18 +36,8 @@ func InitDB() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	// Migrate the schema
+	db.DropTableIfExists(&models.Restaurants{}, &models.Items{})
 	db.AutoMigrate(&models.Restaurants{}, &models.Items{})
-	// Create foreign key relation // Does not work on SQLite3
-	// db.Model(&Items{}).AddForeignKey("r_id", "restaurants(id)", "RESTRICT", "RESTRICT")
-
-	SeedDB(db)
-
-	return db, nil
-}
-
-// SeedDB seeds database Restuarant and Items Tables
-func SeedDB(db *gorm.DB) {
 
 	// Open our jsonFile
 	jsonFile, err := os.Open("/Users/reynaldo/go/src/github.com/reynld/carbtographer/restuarantData.json")
@@ -82,4 +72,6 @@ func SeedDB(db *gorm.DB) {
 			})
 		}
 	}
+
+	return db, nil
 }
