@@ -40,15 +40,14 @@ const getResturantInfo = (page) => {
             name: null,
             type: null,
             protein: null,
-            fat: null,
-            carb: null,
+            fats: null,
+            carbs: null,
             calories: null,
             calperpro: null,
             sodium: null
         };
 
         $(element).children().each((i, el) => {
-            let section = {};
             switch(i) {
                 case 1 :
                     // section = {type: $(el).first().text()};
@@ -59,31 +58,33 @@ const getResturantInfo = (page) => {
                     item.type = $(el).first().text();
                     break;
                 case 3 : 
-                    item.protein = $(el).first().text();
+                    item.protein = Number($(el).first().text());
                     break;
                 case 4 : 
-                    item.fat = $(el).first().text();
+                    item.fats = Number($(el).first().text());
                     break;
                 case 5 : 
-                    item.carb = $(el).first().text();
+                    item.carbs = Number($(el).first().text());
                     break;
                 case 6 : 
-                    item.calories = $(el).first().text();
+                    item.calories = Number($(el).first().text());
                     break;
                 case 7 : 
-                    item.calperpro = $(el).first().text();
+                    item.calperpro = Number($(el).first().text());
                     break;
                 case 8 : 
-                    item.sodium = $(el).first().text();
+                    item.sodium = Number($(el).first().text());
                     break;
                 default: ;
             }
-            // console.log(item.name);
         })
-        menuItems.push(item);
+
+        if (item.name != null && item.name != "Item"){
+            menuItems.push(item);
+        }
     });
 
-    return {[resName]: menuItems};
+    return {name: resName, items: menuItems};
 }
 
 const start = async () => {
@@ -96,7 +97,7 @@ const start = async () => {
         const restInfo = getResturantInfo(resPage.data);
         resturants.push(restInfo);
     }
-    fs.writeFileSync('./resturantData.json', JSON.stringify(resturants))
+    fs.writeFileSync('./restaurantData.json', JSON.stringify(resturants))
 }
 
 start();

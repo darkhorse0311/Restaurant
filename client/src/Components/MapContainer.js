@@ -41,7 +41,7 @@ class MapContainer extends Component {
 
   markerClick = async (place, coord) => {
     const items = await axios.get(
-      `http://localhost:9001/api/res/items?name=${place.name}`
+      `http://localhost:9001/items/${place.r_id}`
     );
 
     this.setState({
