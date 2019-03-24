@@ -31,25 +31,31 @@ func searchBusiness(c *graphql.Client, s string) models.YelpResponse {
 
 func getLocations(w http.ResponseWriter, req *http.Request) {
 	url := os.Getenv("YELP_URL")
-	// var names []models.Restaurants
-	// db.Find(&names)
-
+	var names []models.Restaurants
+	db.Find(&names)
 	// create a client (safe to share across requests)
 	client := graphql.NewClient(url)
-	yr := searchBusiness(client, "Mcdonalds")
+	var ab []models.Business
+	var us []string
 
-	json.NewEncoder(w).Encode(&yr)
+	for _, name := range names {
+		yr := searchBusiness(client, name.Name)
+		for _, business := range yr.Search.Business {
+			var exist bool
+			exist = false
+			for _, id := range us {
+				if id == business.ID {
+					exist = true
+				}
+			}
 
-	// }
+			if exist == false {
+				ab = append(ab, business)
+				us = append(us, business.ID)
+			}
+		}
+	}
 
-	// set headers
-
-	// set any variables
-
-	// run and capture the response
-	// var respData ResponseStruct
-	// if err := client.Run(ctx, r, &respData); err != nil {
-	// 	log.Fatal(err)
-	// }
+	json.NewEncoder(w).Encode(&ab)
 
 }
