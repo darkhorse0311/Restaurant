@@ -3,6 +3,7 @@ package routes
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +12,8 @@ import (
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
-func searchBusiness(c *graphql.Client, s string) models.YelpResponse {
+func searchBusiness(cl *graphql.Client, s string, ch chan models.YelpResponse) {
+	fmt.Printf("started: %s\n", s)
 	key := os.Getenv("YELP_API_KEY")
 	var res models.YelpResponse
 
@@ -21,12 +23,12 @@ func searchBusiness(c *graphql.Client, s string) models.YelpResponse {
 
 	ctx := context.Background()
 
-	err := c.Run(ctx, req, &res)
+	err := cl.Run(ctx, req, &res)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	return res
+	fmt.Printf("ended: %s\n", s)
+	ch <- res
 }
 
 func getLocations(w http.ResponseWriter, req *http.Request) {
@@ -38,8 +40,15 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 	var ab []models.Business
 	var us []string
 
+	c := make(chan models.YelpResponse)
+
 	for _, name := range names {
-		yr := searchBusiness(client, name.Name)
+		go searchBusiness(client, name.Name, c)
+	}
+
+	count := 0
+	for yr := range c {
+		// ab = append(ab, yr.Search.Business...)
 		for _, business := range yr.Search.Business {
 			var exist bool
 			exist = false
@@ -48,11 +57,14 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 					exist = true
 				}
 			}
-
 			if exist == false {
 				ab = append(ab, business)
 				us = append(us, business.ID)
 			}
+		}
+		count++
+		if count >= len(names) {
+			close(c)
 		}
 	}
 
