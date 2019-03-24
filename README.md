@@ -1,6 +1,9 @@
 # Carbtographer
 Application that recommends macro friendly meals from local restaurants 
 
+##### NOTICE
+Recently ported Node.js backend to a golang backend.
+Old Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbtographer/tree/node-backend).
 
 ## Server Side
 
@@ -12,7 +15,7 @@ Application that recommends macro friendly meals from local restaurants
 
 `JWT_SECRET`: JWT Secret for genrating JWT
 
-## ENDPOINTS
+### ENDPOINTS
 
 ##### GET `/`
 
