@@ -22,3 +22,8 @@ type Search struct {
 type YelpResponse struct {
 	Search Search `json:"search"`
 }
+
+// // YelpParentResponse db response
+// type YelpParentResponse struct {
+// 	Data Data `json:"data"`
+// }
