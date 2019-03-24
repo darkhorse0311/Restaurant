@@ -3,9 +3,11 @@ package routes
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/machinebox/graphql"
 	"github.com/reynld/carbtographer/pkg/models"
@@ -31,15 +33,16 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan models.
 		id.RID = rest.ID
 	}
 
+	fmt.Printf("\n%s\n%v\n", rest.Name, res)
+
 	ch <- res
 }
 
 func getLocations(w http.ResponseWriter, req *http.Request) {
-	url := os.Getenv("YELP_URL")
 	var names []models.Restaurants
 	db.Find(&names)
 
-	client := graphql.NewClient(url)
+	client := graphql.NewClient("https://api.yelp.com/v3/graphql")
 	// all businesses
 	var ab []models.Business
 	// unique id
@@ -48,6 +51,7 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 	c := make(chan models.YelpResponse)
 
 	for _, name := range names {
+		time.Sleep(time.Millisecond * 150)
 		go searchBusiness(client, name, c)
 	}
 
