@@ -40,6 +40,36 @@ Response:
 ]
 ```
 
+##### GET `/locations`
+
+- Returns returant info based on lat and long
+
+Payload:
+```
+{
+    lat: 0.0,
+    lng: 0.0
+}
+```
+
+Response:
+```
+[
+  {
+    "id": "id",
+    "name": "Name",
+    "coordinates": {
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    "photos": [
+      "url"
+    ],
+    "distance": 20.0
+  }
+]
+```
+
 ##### GET `/items/{id}`
 
 - Returns all items per restuarant
