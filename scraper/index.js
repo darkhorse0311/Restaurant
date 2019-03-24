@@ -58,22 +58,22 @@ const getResturantInfo = (page) => {
                     item.type = $(el).first().text();
                     break;
                 case 3 : 
-                    item.protein = $(el).first().text();
+                    item.protein = Number($(el).first().text());
                     break;
                 case 4 : 
-                    item.fat = $(el).first().text();
+                    item.fat = Number($(el).first().text());
                     break;
                 case 5 : 
-                    item.carb = $(el).first().text();
+                    item.carb = Number($(el).first().text());
                     break;
                 case 6 : 
-                    item.calories = $(el).first().text();
+                    item.calories = Number($(el).first().text());
                     break;
                 case 7 : 
-                    item.calperpro = $(el).first().text();
+                    item.calperpro = Number($(el).first().text());
                     break;
                 case 8 : 
-                    item.sodium = $(el).first().text();
+                    item.sodium = Number($(el).first().text());
                     break;
                 default: ;
             }
@@ -97,7 +97,7 @@ const start = async () => {
         const restInfo = getResturantInfo(resPage.data);
         resturants.push(restInfo);
     }
-    fs.writeFileSync('./resturantData.json', JSON.stringify(resturants))
+    fs.writeFileSync('./restuarantData.json', JSON.stringify(resturants))
 }
 
 start();
