@@ -1,26 +1,7 @@
 [
   {
-    "Arby's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Arby's",
+    "items": [
       {
         "name": "Angus 3 Cheese and Bacon no ranch",
         "type": "Beef",
@@ -380,41 +361,12 @@
         "calories": "480",
         "calperpro": "14.5",
         "sodium": "1050"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "BostonMarket": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "BostonMarket",
+    "items": [
       {
         "name": "All White Chicken Salad",
         "type": "Chicken",
@@ -964,41 +916,12 @@
         "calories": "40",
         "calperpro": "0",
         "sodium": "230"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "BurgerKing": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "BurgerKing",
+    "items": [
       {
         "name": "A1 Smokey Bacon Tendercrisp",
         "type": "Chicken",
@@ -1428,41 +1351,12 @@
         "calories": "500",
         "calperpro": "23.8",
         "sodium": "650"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Chick-Fil-A": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Chick-Fil-A",
+    "items": [
       {
         "name": "Asian Salad",
         "type": "Salad",
@@ -1692,41 +1586,12 @@
         "calories": "420",
         "calperpro": "12.4",
         "sodium": "930"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Chipotle": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Chipotle",
+    "items": [
       {
         "name": "Barbacoa",
         "type": "Beef",
@@ -1936,41 +1801,12 @@
         "calories": "210",
         "calperpro": "60",
         "sodium": "345"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Culver's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Culver's",
+    "items": [
       {
         "name": "Bacon Deluxe, single, no mayo",
         "type": "Beef",
@@ -2450,41 +2286,12 @@
         "calories": "990",
         "calperpro": "15",
         "sodium": "995"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "DairyQueen": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "DairyQueen",
+    "items": [
       {
         "name": "1/2 lb FlameThrower GrillBurger",
         "type": "Beef",
@@ -2944,41 +2751,12 @@
         "calories": "570",
         "calperpro": "23.8",
         "sodium": "1170"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "DelTaco": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "DelTaco",
+    "items": [
       {
         "name": "1/2lb Bean and Cheese Burrito, green",
         "type": "Vegetarian ",
@@ -3618,41 +3396,12 @@
         "calories": "170",
         "calperpro": "14.2",
         "sodium": "520"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Domino's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Domino's",
+    "items": [
       {
         "name": "Chicken Alfredo in tin",
         "type": "Pasta",
@@ -3872,41 +3621,12 @@
         "calories": "580",
         "calperpro": "14.9",
         "sodium": "2120"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "ElPolloLoco": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "ElPolloLoco",
+    "items": [
       {
         "name": "Avocado Bacon Tostada Salad, Chicken",
         "type": "Salad",
@@ -4696,41 +4416,12 @@
         "calories": "640",
         "calperpro": "16.8",
         "sodium": "2000"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "FirehouseSubs": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "FirehouseSubs",
+    "items": [
       {
         "name": "Balsamic Salad Dressing",
         "type": "Sauce, Dressing, Salsa",
@@ -5410,41 +5101,12 @@
         "calories": "418",
         "calperpro": "18.2",
         "sodium": "1033"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "FiveGuys": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "FiveGuys",
+    "items": [
       {
         "name": "A.1. Steak Sauce",
         "type": "Extras",
@@ -5854,41 +5516,12 @@
         "calories": "440",
         "calperpro": "27.5",
         "sodium": "1040"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Hardee's/CarlsJr.": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Hardee's/CarlsJr.",
+    "items": [
       {
         "name": "1/2lb Bacon Cheese, no mayo",
         "type": "Beef",
@@ -6348,41 +5981,12 @@
         "calories": "220",
         "calperpro": "14.7",
         "sodium": "550"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "In-N-Out": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "In-N-Out",
+    "items": [
       {
         "name": "Cheeseburger mustard and ketchup, no spread",
         "type": "Beef",
@@ -6462,41 +6066,12 @@
         "calories": "540",
         "calperpro": "33.8",
         "sodium": "1510"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "JackintheBox": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "JackintheBox",
+    "items": [
       {
         "name": "4 Carb Scrambler with Sausage",
         "type": "Breakfast",
@@ -7106,41 +6681,12 @@
         "calories": "1010",
         "calperpro": "25.2",
         "sodium": "1580"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "JerseyMike's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "JerseyMike's",
+    "items": [
       {
         "name": "#4 in a tub",
         "type": "Deli Meat",
@@ -8560,41 +8106,12 @@
         "calories": "220",
         "calperpro": "44",
         "sodium": "1200"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "JimmyJohn's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "JimmyJohn's",
+    "items": [
       {
         "name": "8\" 9-Grain Bread",
         "type": "Bread, Shell",
@@ -9024,41 +8541,12 @@
         "calories": "284",
         "calperpro": "14.9",
         "sodium": "889"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "KentuckyFriedChicken": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "KentuckyFriedChicken",
+    "items": [
       {
         "name": "Baked Beans, regular size",
         "type": "Vegetarian ",
@@ -9378,41 +8866,12 @@
         "calories": "70",
         "calperpro": "0",
         "sodium": "160"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "KrystalBurger": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "KrystalBurger",
+    "items": [
       {
         "name": "1 Egg Custom",
         "type": "Breakfast",
@@ -9612,41 +9071,12 @@
         "calories": "200",
         "calperpro": "18.2",
         "sodium": "620"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "McDonald's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "McDonald's",
+    "items": [
       {
         "name": "Artisan Grilled Chicken Sandwich",
         "type": "Chicken",
@@ -10066,41 +9496,12 @@
         "calories": "530",
         "calperpro": "21.2",
         "sodium": "1420"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Moe's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Moe's",
+    "items": [
       {
         "name": "Bacon",
         "type": "Ham, Pork",
@@ -10490,41 +9891,12 @@
         "calories": "290",
         "calperpro": "32.2",
         "sodium": "1070"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "PandaExpress": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "PandaExpress",
+    "items": [
       {
         "name": "Beijing Beef",
         "type": "Beef",
@@ -10744,41 +10116,12 @@
         "calories": "380",
         "calperpro": "54.3",
         "sodium": "0"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "PopeyesChicken": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "PopeyesChicken",
+    "items": [
       {
         "name": "Bacon Biscuit",
         "type": "Breakfast",
@@ -11118,41 +10461,12 @@
         "calories": "210",
         "calperpro": "16.2",
         "sodium": "410"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Potbelly": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Potbelly",
+    "items": [
       {
         "name": "Avocado",
         "type": "Extras",
@@ -11962,41 +11276,12 @@
         "calories": "426",
         "calperpro": "12.5",
         "sodium": "1596"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Qdoba": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Qdoba",
+    "items": [
       {
         "name": "Ancho Chili BBQ Sauce",
         "type": "Sauce, Dressing, Salsa",
@@ -12496,41 +11781,12 @@
         "calories": "290",
         "calperpro": "19.3",
         "sodium": "600"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Quiznos": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Quiznos",
+    "items": [
       {
         "name": "Apple Harvest Chicken, full, no dressing",
         "type": "Salad",
@@ -13360,41 +12616,12 @@
         "calories": "340",
         "calperpro": "24.3",
         "sodium": "550"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "SonicDrive-In": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "SonicDrive-In",
+    "items": [
       {
         "name": "All-American Dog",
         "type": "Beef",
@@ -13854,41 +13081,12 @@
         "calories": "800",
         "calperpro": "27.6",
         "sodium": "2140"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Starbucks": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Starbucks",
+    "items": [
       {
         "name": "8-Grain Roll",
         "type": "Bread, Shell",
@@ -14288,41 +13486,12 @@
         "calories": "160",
         "calperpro": "32",
         "sodium": "125"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Subway": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Subway",
+    "items": [
       {
         "name": "6\" Bacon, Egg and Cheese",
         "type": "Breakfast",
@@ -14952,41 +14121,12 @@
         "calories": "160",
         "calperpro": "10.7",
         "sodium": "520"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "TacoBell": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "TacoBell",
+    "items": [
       {
         "name": "7-Layer Burrito",
         "type": "Vegetarian ",
@@ -15726,41 +14866,12 @@
         "calories": "830",
         "calperpro": "20.8",
         "sodium": "2100"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "TijuanaFlatsBurritoBuilder": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "TijuanaFlatsBurritoBuilder",
+    "items": [
       {
         "name": "Bangin' Chicken",
         "type": "Chicken",
@@ -16010,41 +15121,12 @@
         "calories": "300",
         "calperpro": "30",
         "sodium": "800"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Wendy's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Wendy's",
+    "items": [
       {
         "name": "Apple Pecan Chicken Salad Full Size",
         "type": "Salad",
@@ -16394,41 +15476,12 @@
         "calories": "340",
         "calperpro": "10.6",
         "sodium": "930"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Whataburger": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Whataburger",
+    "items": [
       {
         "name": "A1 Thick and Hearty Burger",
         "type": "Beef",
@@ -16898,41 +15951,12 @@
         "calories": "530",
         "calperpro": "20.4",
         "sodium": "1370"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "YaYa's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "YaYa's",
+    "items": [
       {
         "name": "American Sandwich",
         "type": "Chicken",
@@ -17442,41 +16466,12 @@
         "calories": "75",
         "calperpro": "7.3",
         "sodium": "150"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   },
   {
-    "Zaxby's": [
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
-      },
-      {
-        "name": null,
-        "type": null,
-        "protein": null,
-        "fat": null,
-        "carb": null,
-        "calories": null,
-        "calperpro": null,
-        "sodium": null
-      },
+    "name": "Zaxby's",
+    "items": [
       {
         "name": "10 Boneless Wings, no sauce",
         "type": "Chicken",
@@ -18136,16 +17131,6 @@
         "calories": "220",
         "calperpro": "220",
         "sodium": "620"
-      },
-      {
-        "name": "Item",
-        "type": "Type",
-        "protein": "Protein",
-        "fat": "Fat",
-        "carb": "Carbs",
-        "calories": "Calories",
-        "calperpro": "Cal/Pro",
-        "sodium": "Sodium"
       }
     ]
   }

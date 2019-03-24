@@ -48,7 +48,6 @@ const getResturantInfo = (page) => {
         };
 
         $(element).children().each((i, el) => {
-            let section = {};
             switch(i) {
                 case 1 :
                     // section = {type: $(el).first().text()};
@@ -78,12 +77,14 @@ const getResturantInfo = (page) => {
                     break;
                 default: ;
             }
-            // console.log(item.name);
         })
-        menuItems.push(item);
+
+        if (item.name != null && item.name != "Item"){
+            menuItems.push(item);
+        }
     });
 
-    return {[resName]: menuItems};
+    return {name: resName, items: menuItems};
 }
 
 const start = async () => {
