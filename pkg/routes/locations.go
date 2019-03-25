@@ -3,16 +3,18 @@ package routes
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/machinebox/graphql"
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
-func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan models.YelpResponse) {
+func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- models.YelpResponse) {
 	key := os.Getenv("YELP_API_KEY")
 	var res models.YelpResponse
 
@@ -32,14 +34,15 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan models.
 		id.RID = rest.ID
 	}
 
-	// fmt.Printf("\n%s\n%v\n", rest.Name, res)
-
+	fmt.Printf("\n%s\n%v\n", rest.Name, res)
 	ch <- res
 }
 
 func getLocations(w http.ResponseWriter, req *http.Request) {
 	var names []models.Restaurants
 	db.Find(&names)
+	// Length of names
+	ln := len(names)
 
 	client := graphql.NewClient("https://api.yelp.com/v3/graphql")
 	// all businesses
@@ -48,41 +51,43 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 	var uid []string
 
 	c := make(chan models.YelpResponse)
+	var wg sync.WaitGroup
 
-	for _, name := range names {
-		time.Sleep(time.Millisecond * 150)
-		go searchBusiness(client, name, c)
+	fmt.Printf("LEN : %d\n", ln)
+
+	for i, name := range names {
+		wg.Add(1)
+		go func(n models.Restaurants, m int) {
+			time.Sleep(time.Millisecond * time.Duration(150*m))
+			searchBusiness(client, n, c)
+		}(name, i)
 	}
 
-	count := 0
-	for yr := range c {
-		for _, business := range yr.Search.Business {
-			exist := false
-			for _, id := range uid {
-				if id == business.ID {
-					exist = true
+	go func() {
+		for yr := range c {
+			for _, business := range yr.Search.Business {
+				exist := false
+				for _, id := range uid {
+					if id == business.ID {
+						exist = true
+					}
+				}
+				//valid name
+				vn := false
+				for _, name := range names {
+					if name.Name == business.Name {
+						vn = true
+					}
+				}
+				if exist == false && vn == true {
+					ab = append(ab, business)
+					uid = append(uid, business.ID)
 				}
 			}
-
-			//valid name
-			vn := false
-			for _, name := range names {
-				if name.Name == business.Name {
-					vn = true
-				}
-			}
-
-			if exist == false && vn == true {
-				ab = append(ab, business)
-				uid = append(uid, business.ID)
-			}
+			wg.Done()
 		}
-		count++
-		if count >= len(names) {
-			close(c)
-		}
-	}
+	}()
 
+	wg.Wait()
 	json.NewEncoder(w).Encode(&ab)
-
 }
