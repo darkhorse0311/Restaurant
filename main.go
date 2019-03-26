@@ -34,6 +34,6 @@ func main() {
 	r := mux.NewRouter()
 	routes.ConfigureRoutes(db, r)
 
-	// fmt.Println("server live on port: " + port)
+	fmt.Println("server live on port: " + port)
 	log.Fatal(http.ListenAndServe(":" + port, handlers.CORS()(r)))
 }
