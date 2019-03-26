@@ -30,15 +30,31 @@ type Restuarant struct {
 
 // InitDB creates, migrates and seeds database
 func InitDB() (*gorm.DB, error) {
-	db, err := gorm.Open("sqlite3", "./carbtographer.sqlite3")
-	// db, err := gorm.Open("postgres", "host=localhost port=5432 user=reynaldo dbname=reynaldo")
+	host := os.Getenv("AWS_HOST")
+	ap := os.Getenv("AWS_PORT")
+	user := os.Getenv("AWS_USER")
+	dbname := os.Getenv("AWS_DBNAME")
+	pass := os.Getenv("AWS_PASSWORD")
+	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", host, ap, user, dbname, pass)
+
+	db, err := gorm.Open(
+		"postgres",
+		dburi)
 	if err != nil {
 		return nil, err
 	}
 
+	// Migrate and seed DB
+	// migrateSeed(db)
+
+	return db, nil
+}
+
+func migrateSeed(db *gorm.DB) {
 	db.DropTableIfExists(&models.Restaurants{}, &models.Items{})
 	db.AutoMigrate(&models.Restaurants{}, &models.Items{})
 
+	// Path to json file to seed DB
 	path := os.Getenv("SQLITE_PATH")
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
@@ -72,6 +88,4 @@ func InitDB() (*gorm.DB, error) {
 			})
 		}
 	}
-
-	return db, nil
 }

@@ -9,11 +9,10 @@ import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"github.com/reynld/carbtographer/pkg/helpers"
 	"github.com/reynld/carbtographer/pkg/routes"
-	// _ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 var db *gorm.DB

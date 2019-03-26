@@ -10,14 +10,17 @@ Old Node.js back end on `node-backend` branch [here](https://github.com/reynld/c
 ### Enviroment Variables
 
 `YELP_CLIENT_ID`: Yelp GraphQL API Client ID
-
 `YELP_API_KEY`: Yelp GraphQL API Key
 
-`JWT_SECRET`: JWT Secret for genrating JWT
+`AWS_HOST`: AWS DB Host URL
+`AWS_PORT`: AWS DB Port
+`AWS_USER`: AWS DB User
+`AWS_DBNAME`: AWS DBNAME
+`AWS_PASSWORD`: AWS Password
 
 ### ENDPOINTS
 
-##### GET `/`
+#### GET `/`
 
 - Default endpoint
 
@@ -29,7 +32,7 @@ Response:
 }
 ```
 
-##### GET `/names`
+#### GET `/names`
 
 - Returns all restaurant names in database
 
@@ -43,13 +46,13 @@ Response:
 ]
 ```
 
-##### GET `/locations/{lat}/{lon}`
+#### GET `/locations/{lat}/{lon}`
 
 - Returns returant info based on lat and long
 
-URL Parameters:  
-`lat`: Latitude  
-`lon`: Longitude  
+##### PARAMETERS:  
+`lat`: latitude  
+`lon`: longitude  
 
 Response:
 ```
@@ -69,7 +72,7 @@ Response:
 ]
 ```
 
-##### GET `/items/{id}`
+#### GET `/items/{id}`
 
 - Returns all items per restuarant
 
@@ -94,7 +97,7 @@ Response:
 ]
 ```
 
-##### GET `/*`
+#### GET `/*`
 
 - 404 Endpoint
 
