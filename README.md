@@ -43,17 +43,13 @@ Response:
 ]
 ```
 
-##### GET `/locations`
+##### GET `/locations/{lat}/{lon}`
 
 - Returns returant info based on lat and long
 
-Payload:
-```
-{
-    lat: 0.0,
-    lng: 0.0
-}
-```
+URL Parameters:
+`lat`: Latitude
+`lon`: Longitude
 
 Response:
 ```
@@ -76,6 +72,9 @@ Response:
 ##### GET `/items/{id}`
 
 - Returns all items per restuarant
+
+URL Parameters:
+`id`: Restaurant ID
 
 Response:
 ```
