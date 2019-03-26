@@ -18,6 +18,38 @@ Old Node.js back end on `node-backend` branch [here](https://github.com/reynld/c
 `AWS_DBNAME`: AWS DBNAME
 `AWS_PASSWORD`: AWS Password
 
+### Backend Deployment Heroku
+
+#### Setup Repo
+1. Clone repo outside of `$GOPATH`
+`git clone https://github.com/reynld/carbtographer`
+
+2. Initialize go modules
+`go mod init`
+
+3. Make sure that any unused modules have been removed from your application:
+`go mod tidy`
+
+4. Vendoring dependencies:
+`go mod vendor`
+
+#### Setup Heroku
+1. Install Heroku CLI
+`brew tap heroku/brew && brew install heroku`
+
+2. Login to Heroku
+`heroku login`
+
+3. Create App on heroku
+`heroku create`
+
+4. Push code up
+`git push heroku master`
+
+5. Open app
+`heroku open`
+
+
 ### ENDPOINTS
 
 #### GET `/`
