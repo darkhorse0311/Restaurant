@@ -17,7 +17,6 @@ import (
 
 var db *gorm.DB
 var err error
-var port string
 
 func main() {
 	godotenv.Load()
@@ -28,10 +27,7 @@ func main() {
 	}
 	defer db.Close()
 
-	port = os.Getenv("PORT")
-	if port == "" {
-		port = "9001"
-	}
+	port := os.Getenv("PORT")
 
 	r := mux.NewRouter()
 	routes.ConfigureRoutes(db, r)
