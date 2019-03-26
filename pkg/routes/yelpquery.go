@@ -1,10 +1,10 @@
 package routes
 
-var yelpQuery = `query ($name: String!) {
+var yelpQuery = `query ($name: String!, $lat:Float, $lon: Float) {
 	search(
 		term: $name,
-		longitude: -74.0060,
-		latitude: 40.7128,
+		latitude: $lat,
+		longitude: $lon,
 		radius: 500
 	) {
 		total
