@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -30,5 +31,7 @@ func main() {
 
 	r := mux.NewRouter()
 	routes.ConfigureRoutes(db, r)
+
+	fmt.Println("server live on port: " + port)
 	log.Fatal(http.ListenAndServe(":" + port, handlers.CORS()(r)))
 }

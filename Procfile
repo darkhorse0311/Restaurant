@@ -1,2 +1,2 @@
-web: carbtographer
+web: bin/carbtographer
 
