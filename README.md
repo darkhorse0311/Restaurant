@@ -1,24 +1,23 @@
 # Carbtographer
 Application that recommends macro friendly meals from local restaurants 
 
+###### [Backend Deployment Link](https://carbtographer.herokuapp.com/)
+
 ##### NOTICE
 Recently ported Node.js backend to a golang backend.
 Old Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbtographer/tree/node-backend).
 
-## Server Side
+## Backend
 
 ### Enviroment Variables
-
-`YELP_CLIENT_ID`: Yelp GraphQL API Client ID
 `YELP_API_KEY`: Yelp GraphQL API Key
-
 `AWS_HOST`: AWS DB Host URL
 `AWS_PORT`: AWS DB Port
 `AWS_USER`: AWS DB User
 `AWS_DBNAME`: AWS DBNAME
 `AWS_PASSWORD`: AWS Password
 
-### Backend Deployment Heroku
+### Deployment
 
 #### Setup Repo
 1. Clone repo outside of `$GOPATH`
