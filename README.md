@@ -35,6 +35,7 @@ Server will go live at
 
 `http://localhost:9001/`
 <br/>
+
 ## ENDPOINTS
 
 #### GET `/`
@@ -46,6 +47,7 @@ Server will go live at
 }
 ```
 <br/>
+
 #### GET `/names`
 
 Returns all restaurant names in database
@@ -59,6 +61,7 @@ Returns all restaurant names in database
 ]
 ```
 <br/>
+
 #### GET `/locations/{lat}/{lon}`
  
 Returns restaurant info based on lat and long
@@ -83,6 +86,7 @@ Returns restaurant info based on lat and long
 ]
 ```
 <br/>
+
 #### GET `/items/{id}`
 
 Returns all items for any given restaurant ID
@@ -106,6 +110,7 @@ Returns all items for any given restaurant ID
 ]
 ```
 <br/>
+
 #### GET `/*`
  
 404 Endpoint
