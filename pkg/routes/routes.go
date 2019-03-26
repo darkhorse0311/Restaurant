@@ -19,7 +19,9 @@ func ConfigureRoutes(database *gorm.DB, router *mux.Router) {
 
 	r.HandleFunc("/names", getNames).Methods("GET")
 	r.HandleFunc("/items/{id}", getItems).Methods("GET")
-	r.HandleFunc("/locations", getLocations).Methods("GET")
+	r.HandleFunc("/locations/{lat}/{lon}", getLocations).Methods("GET")
+
+	// lat: 40.7128, lon: -74.0060
 
 	r.Use(loggingMiddleware)
 
