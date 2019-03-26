@@ -1,73 +1,55 @@
 # Carbtographer
-Application that recommends macro friendly meals from local restaurants 
+Application that recommends macro friendly meals from local restaurants.
 
-###### [Backend Deployment Link](https://carbtographer.herokuapp.com/)
+[Backend Deployment Link](https://carbtographer.herokuapp.com/)
 
-##### NOTICE
+#### NOTICE
 Recently ported Node.js backend to a golang backend.
-Old Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbtographer/tree/node-backend).
+ 
+Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbtographer/tree/node-backend).
 
-## Backend
+# Backend
 
-### Enviroment Variables
-`YELP_API_KEY`: Yelp GraphQL API Key
-`AWS_HOST`: AWS DB Host URL
-`AWS_PORT`: AWS DB Port
-`AWS_USER`: AWS DB User
-`AWS_DBNAME`: AWS DBNAME
-`AWS_PASSWORD`: AWS Password
+## Enviroment Variables
+You will require a Yelp API Key to make authenticated requests.
+ 
+You can generate one following the intructions here:
+ [Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
+- ``YELP_API_KEY`` - your Yelp Key (API Key)
+- ``AWS_HOST`` - your database Host URL
+- ``AWS_PORT``- your database PORT
+- ``AWS_USER`` - your database user
+- ``AWS_DBNAME`` - your database name
+- ``AWS_PASSWORD`` - your database password
 
-### Deployment
+## Usage
+ With all eviroment variables in place you can now run the api locally
+ 
+#### Build
+ `go build`
+ 
+#### Run
+ `./carbtographer`
 
-#### Setup Repo
-1. Clone repo outside of `$GOPATH`
-`git clone https://github.com/reynld/carbtographer`
+Server will go live at
 
-2. Initialize go modules
-`go mod init`
-
-3. Make sure that any unused modules have been removed from your application:
-`go mod tidy`
-
-4. Vendoring dependencies:
-`go mod vendor`
-
-#### Setup Heroku
-1. Install Heroku CLI
-`brew tap heroku/brew && brew install heroku`
-
-2. Login to Heroku
-`heroku login`
-
-3. Create App on heroku
-`heroku create`
-
-4. Push code up
-`git push heroku master`
-
-5. Open app
-`heroku open`
-
-
-### ENDPOINTS
+`http://localhost:9001/`
+<br/>
+## ENDPOINTS
 
 #### GET `/`
-
-- Default endpoint
-
-Response:
+ 
 ```
 {
     status: 200,
     message: "server live on port: ####"
 }
 ```
-
+<br/>
 #### GET `/names`
 
-- Returns all restaurant names in database
-
-Response:
+Returns all restaurant names in database
+ 
 ```
 [
     {
@@ -76,16 +58,14 @@ Response:
     }
 ]
 ```
-
+<br/>
 #### GET `/locations/{lat}/{lon}`
-
-- Returns returant info based on lat and long
-
-##### PARAMETERS:  
+ 
+Returns restaurant info based on lat and long
+ 
 `lat`: latitude  
 `lon`: longitude  
-
-Response:
+ 
 ```
 [
   {
@@ -102,15 +82,13 @@ Response:
   }
 ]
 ```
-
+<br/>
 #### GET `/items/{id}`
 
-- Returns all items per restuarant
-
-URL Parameters:  
-`id`: Restaurant ID  
-
-Response:
+Returns all items for any given restaurant ID
+ 
+`id`: restaurant ID  
+ 
 ```
 [
     {
@@ -127,12 +105,11 @@ Response:
     }
 ]
 ```
-
+<br/>
 #### GET `/*`
-
-- 404 Endpoint
-
-Response:
+ 
+404 Endpoint
+ 
 ```
 {
     status: 404,
