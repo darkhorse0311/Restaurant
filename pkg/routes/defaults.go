@@ -6,7 +6,6 @@ import (
 
 // getServerIsUp '/' endpoint cheks if server is up
 func getServerIsUp(w http.ResponseWriter, req *http.Request) {
-
 	w.Write([]byte("server is live"))
 }
 

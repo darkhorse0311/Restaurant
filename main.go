@@ -27,11 +27,9 @@ func main() {
 	}
 	defer db.Close()
 
-	port := os.Getenv("PORT")
-
 	r := mux.NewRouter()
 	routes.ConfigureRoutes(db, r)
 
-	fmt.Println("server live on port: " + port)
-	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS()(r)))
+	fmt.Println("server live on port: " + os.Getenv("PORT"))
+	log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), handlers.CORS()(r)))
 }
