@@ -14,7 +14,8 @@ Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbt
 You will require a Yelp API Key to make authenticated requests.
  
 You can generate one following the intructions here:
- [Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
+
+[Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
 - ``YELP_API_KEY`` - your Yelp Key (API Key)
 - ``AWS_HOST`` - your database Host URL
 - ``AWS_PORT``- your database PORT
@@ -31,9 +32,6 @@ You can generate one following the intructions here:
 #### Run
  `./carbtographer`
 
-Server will go live at
-
-`http://localhost:9001/`
 <br/>
 
 ## ENDPOINTS
