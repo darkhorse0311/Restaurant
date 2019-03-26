@@ -20,8 +20,12 @@ var err error
 
 func main() {
 	godotenv.Load()
-	db, err = helpers.InitDB()
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 
+	db, err = helpers.InitDB()
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -30,6 +34,6 @@ func main() {
 	r := mux.NewRouter()
 	routes.ConfigureRoutes(db, r)
 
-	fmt.Println("server live on port: " + os.Getenv("PORT"))
-	log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), handlers.CORS()(r)))
+	fmt.Println("server live on port: " + port)
+	log.Fatal(http.ListenAndServe(":" + port, handlers.CORS()(r)))
 }
