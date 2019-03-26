@@ -47,9 +47,9 @@ Response:
 
 - Returns returant info based on lat and long
 
-URL Parameters:
-`lat`: Latitude
-`lon`: Longitude
+URL Parameters:  
+`lat`: Latitude  
+`lon`: Longitude  
 
 Response:
 ```
@@ -73,8 +73,8 @@ Response:
 
 - Returns all items per restuarant
 
-URL Parameters:
-`id`: Restaurant ID
+URL Parameters:  
+`id`: Restaurant ID  
 
 Response:
 ```
