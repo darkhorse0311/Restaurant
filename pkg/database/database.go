@@ -54,7 +54,7 @@ func migrateSeed() {
 	}
 }
 
-// getDBKeys makes sure all DB enviroment vriables are set and returns
+// getDBKeys makes sure all enviroment variables are set and return them
 func getDBKeys() (map[string]string, error) {
 	keys := []string{
 		"AWS_HOST",
@@ -62,6 +62,7 @@ func getDBKeys() (map[string]string, error) {
 		"AWS_USER",
 		"AWS_DBNAME",
 		"AWS_PASSWORD",
+		"YELP_API_KEY",
 	}
 
 	d := map[string]string{}

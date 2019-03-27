@@ -20,6 +20,7 @@ import (
 // searchBusiness gets ran in goroutine and returns the response to channel when done
 func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- models.YelpResponse, lat *float64, lon *float64) {
 	key := os.Getenv("YELP_API_KEY")
+
 	var res models.YelpResponse
 
 	req := graphql.NewRequest(models.YelpQuery)
