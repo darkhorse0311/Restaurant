@@ -1,4 +1,4 @@
-package helpers
+package database
 
 import (
 	"encoding/json"
@@ -10,47 +10,11 @@ import (
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
-// Items struct from json
-type Items struct {
-	Name      string  `json:"name"`
-	Type      string  `json:"type"`
-	Protein   int     `json:"protein"`
-	Fats      int     `json:"fats"`
-	Carbs     int     `json:"carbs"`
-	Calories  int     `json:"calories"`
-	CalPerPro float32 `json:"calperpro"`
-	Sodium    int     `json:"Sodium"`
-}
+var db *gorm.DB
+var err error
 
-// Restuarant struct from json
-type Restuarant struct {
-	Name  string  `json:"name"`
-	Items []Items `json:"items"`
-}
-
-// InitDB creates, migrates and seeds database
-func InitDB() (*gorm.DB, error) {
-	host := os.Getenv("AWS_HOST")
-	ap := os.Getenv("AWS_PORT")
-	user := os.Getenv("AWS_USER")
-	dbname := os.Getenv("AWS_DBNAME")
-	pass := os.Getenv("AWS_PASSWORD")
-	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", host, ap, user, dbname, pass)
-
-	db, err := gorm.Open(
-		"postgres",
-		dburi)
-	if err != nil {
-		return nil, err
-	}
-
-	// Migrate and seed DB
-	// migrateSeed(db)
-
-	return db, nil
-}
-
-func migrateSeed(db *gorm.DB) {
+// migrateSeed migrates and seeds databse with JSON file from scraper
+func migrateSeed() {
 	db.DropTableIfExists(&models.Restaurants{}, &models.Items{})
 	db.AutoMigrate(&models.Restaurants{}, &models.Items{})
 
@@ -67,7 +31,7 @@ func migrateSeed(db *gorm.DB) {
 	// Convert file to array of bytes
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	// Makes a array of Restuarant strucs
-	jsonInfo := make([]Restuarant, 0)
+	jsonInfo := make([]restuarant, 0)
 	// Converst array of bytes to array of structs
 	json.Unmarshal(byteValue, &jsonInfo)
 
@@ -88,4 +52,46 @@ func migrateSeed(db *gorm.DB) {
 			})
 		}
 	}
+}
+
+// getDBKeys makes sure all DB enviroment vriables are set and returns
+func getDBKeys() (map[string]string, error) {
+	keys := []string{
+		"AWS_HOST",
+		"AWS_PORT",
+		"AWS_USER",
+		"AWS_DBNAME",
+		"AWS_PASSWORD",
+	}
+
+	d := map[string]string{}
+
+	for _, key := range keys {
+		v := os.Getenv(key)
+		if v == "" {
+			return nil, fmt.Errorf("eviroment variable %s is required", key)
+		}
+		d[key] = v
+	}
+
+	return d, nil
+}
+
+// InitDB creates, migrates and seeds database
+func InitDB() (*gorm.DB, error) {
+
+	k, err := getDBKeys()
+	if err != nil {
+		panic(err)
+	}
+
+	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"], k["AWS_PASSWORD"])
+
+	db, err = gorm.Open("postgres", dburi)
+	if err != nil {
+		return nil, err
+	}
+	// Migrate and seed DB
+	// migrateSeed(db)
+	return db, nil
 }

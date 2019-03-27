@@ -1,6 +1,6 @@
 package models
 
-// Restaurants {name: string}
+// Restaurants resposne from databse
 type Restaurants struct {
 	ID   int    `gorm:"primary_key" json:"id"`
 	Name string `json:"name"`

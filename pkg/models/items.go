@@ -1,6 +1,6 @@
 package models
 
-//Items {}
+//Items from databse
 type Items struct {
 	ID        int     `gorm:"primary_key" json:"id"`
 	Name      string  `json:"name"`

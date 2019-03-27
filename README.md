@@ -4,7 +4,7 @@ Application that recommends macro friendly meals from local restaurants.
 [Backend Deployment Link](https://carbtographer.herokuapp.com/)
 
 #### NOTICE
-Recently ported Node.js backend to a golang backend.
+Recently ported Node.js backend to a Golang backend.
  
 Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbtographer/tree/node-backend).
 
@@ -13,9 +13,7 @@ Node.js back end on `node-backend` branch [here](https://github.com/reynld/carbt
 ## Enviroment Variables
 You will require a Yelp API Key to make authenticated requests.
  
-You can generate one following the intructions here:
-
-[Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
+You can generate one following the intructions here: [Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
 - ``YELP_API_KEY`` - your Yelp Key (API Key)
 - ``AWS_HOST`` - your database Host URL
 - ``AWS_PORT``- your database PORT
@@ -25,6 +23,9 @@ You can generate one following the intructions here:
 
 ## Usage
  With all eviroment variables in place you can now run the api locally
+
+#### Install
+`go install`
  
 #### Build
  `go build`

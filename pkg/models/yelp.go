@@ -24,7 +24,24 @@ type YelpResponse struct {
 	Search Search `json:"search"`
 }
 
-// // YelpParentResponse db response
-// type YelpParentResponse struct {
-// 	Data Data `json:"data"`
-// }
+// YelpQuery for business info
+var YelpQuery = `query ($name: String!, $lat:Float, $lon: Float) {
+	search(
+		term: $name,
+		latitude: $lat,
+		longitude: $lon,
+		radius: 500
+	) {
+		total
+		business {
+			id
+			name
+			coordinates {
+				latitude
+				longitude
+			}
+			photos
+			distance
+		}
+	}
+}`

@@ -8,34 +8,34 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
-	"github.com/reynld/carbtographer/pkg/helpers"
+	"github.com/reynld/carbtographer/pkg/database"
 	"github.com/reynld/carbtographer/pkg/routes"
 )
 
-var db *gorm.DB
-var err error
-var port string
-
 func main() {
 	godotenv.Load()
-	db, err = helpers.InitDB()
-
+	db, err := database.InitDB()
 	if err != nil {
 		panic("failed to connect database")
 	}
 	defer db.Close()
 
-	port = os.Getenv("PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
-		port = "9001"
+		panic("enviroment variable PORT is required")
 	}
 
 	r := mux.NewRouter()
-	routes.ConfigureRoutes(db, r)
+	r.Use(routes.LoggingMiddleware)
 
-	fmt.Println("server live on port: " + port)
+	r.HandleFunc("/", routes.GetServerIsUp).Methods("GET")
+	r.HandleFunc("/names", routes.GetNames).Methods("GET")
+	r.HandleFunc("/items/{id}", routes.GetItems).Methods("GET")
+	r.HandleFunc("/locations/{lat}/{lon}", routes.GetLocations).Methods("GET")
+	r.NotFoundHandler = http.HandlerFunc(routes.RouteNotFound)
+
+	fmt.Printf("server live on port: %s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS()(r)))
 }

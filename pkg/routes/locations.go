@@ -10,16 +10,19 @@ import (
 	"sync"
 	"time"
 
+	"github.com/reynld/carbtographer/pkg/database"
+
 	"github.com/gorilla/mux"
 	"github.com/machinebox/graphql"
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
+// searchBusiness gets ran in goroutine and returns the response to channel when done
 func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- models.YelpResponse, lat *float64, lon *float64) {
 	key := os.Getenv("YELP_API_KEY")
 	var res models.YelpResponse
 
-	req := graphql.NewRequest(yelpQuery)
+	req := graphql.NewRequest(models.YelpQuery)
 	req.Var("name", rest.Name)
 	req.Var("lat", lat)
 	req.Var("lon", lon)
@@ -36,21 +39,24 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- model
 		id.RID = rest.ID
 	}
 
-	// fmt.Printf("\n%s: %d", rest.Name, res.Search.Total)
 	ch <- res
 }
 
-func getLocations(w http.ResponseWriter, req *http.Request) {
+// GetLocations returns local businees that names match restuarants in our db
+func GetLocations(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 
-	lat, _ := strconv.ParseFloat(params["lat"], 64)
-	lon, _ := strconv.ParseFloat(params["lon"], 64)
+	lat, err := strconv.ParseFloat(params["lat"], 64)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lon, err := strconv.ParseFloat(params["lon"], 64)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	var names []models.Restaurants
-	db.Find(&names)
-	// Length of names
-	// ln := len(names)
-	// fmt.Printf("LEN : %d\n", ln)
+	database.GetNames(&names)
 
 	client := graphql.NewClient("https://api.yelp.com/v3/graphql")
 	var ab []models.Business // all businesses
@@ -64,7 +70,6 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 		go func(n models.Restaurants, m int) {
 			time.Sleep(time.Millisecond * time.Duration(150*m))
 			defer wg.Done()
-			// fmt.Printf("Started-%d: %s\n", m, n.Name)
 			searchBusiness(client, n, c, &lat, &lon)
 		}(name, i)
 	}
@@ -78,13 +83,14 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 						exist = true
 					}
 				}
-				//valid name
-				vn := false
+
+				vn := false //valid name
 				for _, name := range names {
 					if name.Name == business.Name {
 						vn = true
 					}
 				}
+
 				if exist == false && vn == true {
 					ab = append(ab, business)
 					uid = append(uid, business.ID)
@@ -93,8 +99,6 @@ func getLocations(w http.ResponseWriter, req *http.Request) {
 		}
 	}()
 
-	// fmt.Printf("\n\n\n------- BEFORE WAIT AND ENCODE -------\n\n\n")
 	wg.Wait()
 	json.NewEncoder(w).Encode(&ab)
-	// fmt.Printf("\n\n\n------- AFTER WAIT AND ENCODE -------\n\n\n")
 }
