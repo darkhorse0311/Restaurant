@@ -4,30 +4,26 @@ import Item from './Item';
 import Arrows from './Arrows';
 
 
-// {place && (
-//     <BottomPopup place={place} clearPlace={this.clearPlace} />
-//   )}
-
-const BottomPopup = ({place, clearPlace}) => {
-    return (
+const ItemsContainer = ({name, items, history}) => {
+    return items.length ? (
         <StyledContainer>
             <Header>
-                <h2>{place.name}</h2>
-                <span onClick={clearPlace}>X</span>
+                <h2>{name}</h2>
+                <span onClick={() => history.push('/')}>X</span>
             </Header>
             <ItemList>
             {
-                place.items.map((item, i) => (
+                items.map((item, i) => (
                     <Item key={i} item={item}/>
                 ))
             }
             </ItemList>
             <Arrows/>
         </StyledContainer>
-    );
+    ) : null;
 }
 
-export default BottomPopup;
+export default ItemsContainer;
 
 const ItemList = styled.div`
     height: 165px;

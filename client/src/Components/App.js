@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
 import Map from './Map/container';
+import Items from './Items/container';
 import Header from './Header';
-import Items from './Items';
 
 class App extends Component {
   render() {
