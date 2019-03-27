@@ -22,7 +22,7 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 - ``AWS_PASSWORD`` - your database password
 
 ## Usage
- With all eviroment variables in place you can now run the api locally
+ With all enviroment variables in place you can now run the api locally
 
 #### Install
 `go install`
