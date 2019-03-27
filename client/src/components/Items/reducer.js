@@ -1,4 +1,4 @@
-import { SET_BUSINESS, SET_ITEMS } from '../types'
+import { SET_BUSINESS, SET_ITEMS } from './actions'
 
 const defaultState = {
     id: null,

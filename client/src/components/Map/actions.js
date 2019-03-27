@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { SET_LAT_LON, SET_LOCATIONS, URL } from '../actions/MapActions'
+export const SET_LAT_LON = 'set_lan_lon';
+export const SET_LOCATIONS = 'set_locations';
+export const SET_CENTER = 'set_center';
+export const URL = 'https://carbtographer.herokuapp.com/';
 
 export const setCordinates = (lat, lon) => {
     return {
@@ -14,4 +17,11 @@ export const getLocations = (lat, lon) => async dispatch => {
         type: SET_LOCATIONS,
         payload: locations.data
     })
+}
+
+export const setCenter = (coords) => {
+    return {
+        type: SET_CENTER,
+        payload: coords
+    }
 }

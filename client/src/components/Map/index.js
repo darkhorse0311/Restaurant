@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
-import ReactMapBoxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
-import BottomPopup from './BottomPopup';
-
-import mockPlaces from './mockPlaces';
+import ReactMapBoxGl, { Layer, Feature } from "react-mapbox-gl";
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 const Mapbox = ReactMapBoxGl({
@@ -11,51 +7,16 @@ const Mapbox = ReactMapBoxGl({
   accessToken: token
 });
 
-const mapStyle = {
-  flex: 1,
-  width: "100vw",
-  height: "100vh",
-  position: "fixed",
-  top: 0,
-  left: 0
-};
-
-class MapContainer extends Component {
-  state = {
-    fitBounds: undefined,
-    center: [-74.006, 40.7128],
-    zoom: [14],
-    place: null,
-    places: mockPlaces
-  }
-
-  componentDidMount() {
-    this.getPlaces();
-  }
-
-  getPlaces = async () => {};
-
-  clearPlace = () => {
-    this.setState({ place: null, zoom: [14] });
-  };
-
+class Map extends Component {
   markerClick = async (place, coord) => {
-    const items = await axios.get(
-      `http://localhost:9001/items/${place.r_id}`
-    );
-
-    this.setState({
-      center: coord,
-      zoom: [16],
-      place: { ...place, coord, items: items.data }
-    });
+    const { setCenter, getItems } = this.props;
+    setCenter(coord);
+    getItems(place)
   };
 
   render() {
-    const { center, zoom, places, place } = this.state;
-    const flyToOptions = {
-      speed: 0.8
-    };
+    const { center, zoom, places, mapStyle } = this.props;
+    const flyToOptions = { speed: 0.8 };
     return (
       <Mapbox
         // eslint-disable-next-line react/style-prop-object
@@ -90,4 +51,4 @@ class MapContainer extends Component {
   }
 }
 
-export default MapContainer;
+export default Map;

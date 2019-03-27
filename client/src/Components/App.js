@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Route } from 'react-router-dom';
 
-import MapContainer from './MapContainer';
+import Map from './Map/container';
 import Header from './Header';
 import Items from './Items';
 
@@ -12,8 +12,8 @@ class App extends Component {
     return (
       <Container>
         <Header/>
-        <MapContainer/>
-        <Route path="/items" component={props => <Items {...props}/>}/>
+        <Route path="/" render={props => <Map {...props}/>} />
+        <Route path="/items" render={props => <Items {...props}/>}/>
       </Container>
     );
   }
