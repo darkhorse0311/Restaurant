@@ -3,6 +3,11 @@ import styled from 'styled-components'
 import Item from './Item';
 import Arrows from './Arrows';
 
+
+// {place && (
+//     <BottomPopup place={place} clearPlace={this.clearPlace} />
+//   )}
+
 const BottomPopup = ({place, clearPlace}) => {
     return (
         <StyledContainer>

@@ -85,9 +85,6 @@ class MapContainer extends Component {
             );
           })}
         </Layer>
-        {place && (
-          <BottomPopup place={place} clearPlace={this.clearPlace} />
-        )}
       </Mapbox>
     );
   }

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import mapReducer from './MapReducer';
+import mapReducer from './mapReducer';
+import businessReducer from './businessReducer';
 
 export default combineReducers({
-    info: mapReducer
+    map : mapReducer,
+    business: businessReducer,
 })

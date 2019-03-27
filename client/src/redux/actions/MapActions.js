@@ -1,13 +1,17 @@
 import axios from 'axios';
+import { SET_LAT_LON, SET_LOCATIONS, URL } from '../actions/MapActions'
 
-export const UPDATE_SELECTED = 'update_selected';
+export const setCordinates = (lat, lon) => {
+    return {
+        type: SET_LAT_LON,
+        payload: {lat, lon}
+    }
+}
 
-const url = 'http://localhost:9001';
-
-export const updateSelected = place => async dispatch => {
-    const items = await axios.get(`${url}/items/${place.r_id}`);
+export const getLocations = (lat, lon) => async dispatch => {
+    const locations = await axios.get(`${URL}/locations/${lat}/${lon}`);
     dispatch({
-        type: UPDATE_SELECTED,
-        payload: {...place, items: items.data}
+        type: SET_LOCATIONS,
+        payload: locations.data
     })
 }

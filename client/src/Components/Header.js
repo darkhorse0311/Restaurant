@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <StyledHeader>
             <h1>Carbtographer</h1>
-            <StyledButton>Signup</StyledButton>
+            {/* <StyledButton>Signup</StyledButton> */}
         </StyledHeader>
     );
 }
@@ -21,19 +21,20 @@ const StyledHeader = styled.div`
     left: 0;
     display: flex;
     padding: 0 30px;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /* justify-content: space-between; */
     align-items: center;
     color: rgba(255,255,255,0.74);
 `;
 
-const StyledButton = styled.span`
-    width: 140px;
-    height: 36px;
-    font-size: 18px;
-    line-height: 32px;
-    border: 2px solid rgba(255,255,255,0.74);
-    text-align: center;
-    border-radius: 18px;
-    font-weight: 600;
-    cursor: pointer;
-`;
+// const StyledButton = styled.span`
+//     width: 140px;
+//     height: 36px;
+//     font-size: 18px;
+//     line-height: 32px;
+//     border: 2px solid rgba(255,255,255,0.74);
+//     text-align: center;
+//     border-radius: 18px;
+//     font-weight: 600;
+//     cursor: pointer;
+// `;

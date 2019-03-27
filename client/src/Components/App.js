@@ -5,8 +5,7 @@ import { Route } from 'react-router-dom';
 
 import MapContainer from './MapContainer';
 import Header from './Header';
-import Register from './Register';
-import Login from './Login';
+import Items from './Items';
 
 class App extends Component {
   render() {
@@ -14,8 +13,7 @@ class App extends Component {
       <Container>
         <Header/>
         <MapContainer/>
-        <Route path="/login" component={props => <Login {...props}/>}/>
-        <Route path="/register" component={props => <Register {...props}/>}/>
+        <Route path="/items" component={props => <Items {...props}/>}/>
       </Container>
     );
   }
