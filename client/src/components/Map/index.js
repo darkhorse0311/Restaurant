@@ -4,12 +4,13 @@ import ReactMapBoxGl, { Layer, Feature } from "react-mapbox-gl";
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 const Mapbox = ReactMapBoxGl({
   minZoom: 10,
-  accessToken: token
+  accessToken: token,
 });
-
 class Map extends Component {
 
   componentDidMount() {
+    const { setLoading } = this.props;
+    setLoading(true)
     // this.getCurrentCoord();
   }
 
@@ -38,7 +39,7 @@ class Map extends Component {
   };
 
   render() {
-    const { center, zoom, mapStyle, locations, setCenter } = this.props;
+    const { center, zoom, mapStyle, locations, setCenter, setLoading } = this.props;
     const flyToOptions = { speed: 0.8 };
     console.log("center: ", center)
     return center.length === 2 ? (
@@ -53,6 +54,7 @@ class Map extends Component {
           const { lng, lat } = transform._center;
           setCenter([lng, lat]);
         }}
+        onStyleLoad={() => setLoading(false)}
       >
         <Layer
           type="symbol"

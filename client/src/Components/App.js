@@ -5,13 +5,13 @@ import { Route } from 'react-router-dom';
 
 import Map from './Map/container';
 import Items from './Items/container';
-import Header from './shared/Header';
+import Navigation from './Navigation/container';
 
 class App extends Component {
   render() {
     return (
       <Container>
-        <Header/>
+        <Navigation/>
         <Route path="/" render={props => (
           <>
             <Map {...props}/>

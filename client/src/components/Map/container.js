@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux'
 
 import {
     setCenter,
-    getLocations
+    getLocations,
+    setLoading,
 } from './actions'
 
 import {
@@ -37,7 +38,6 @@ const mapStateToProps = ({
     name,
 })
 
-
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
@@ -45,6 +45,7 @@ const mapDispatchToProps = dispatch => (
             getItems,
             setCenter,
             setShowModal,
+            setLoading,
         },
         dispatch
     )

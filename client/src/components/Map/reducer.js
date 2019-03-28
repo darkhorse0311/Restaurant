@@ -1,4 +1,4 @@
-import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER } from './actions'
+import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING } from './actions'
 import mockPlaces from '../shared/mockPlaces';
 
 const defaultState = {
@@ -14,7 +14,8 @@ const defaultState = {
         position: "fixed",
         top: 0,
         left: 0
-    }
+    },
+    loading: false,
 }
 
 export default (state = defaultState, action) => {
@@ -36,6 +37,12 @@ export default (state = defaultState, action) => {
                 ...state,
                 center: payload
             };
+        
+        case LOADING:
+            return {
+                ...state,
+                loading: payload
+            }
         default: return {...state};
     }
 } 

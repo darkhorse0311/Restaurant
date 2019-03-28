@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { LOADING } from '../Map/actions'
+
 export const SET_BUSINESS = 'set_business';
 export const SET_ITEMS = 'set_items';
 export const SHOW_MODAL = 'show_modal';
@@ -6,15 +8,14 @@ export const SHOW_MODAL = 'show_modal';
 export const URL = 'https://carbtographer.herokuapp.com/';
 
 export const getItems = place => async dispatch => {
-    dispatch({
-        type: SET_BUSINESS,
-        payload: place
-    })
+    dispatch({ type: LOADING, payload: true })
+    dispatch({ type: SET_BUSINESS, payload: place })
     const items = await axios.get(`${URL}/items/${place.r_id}`);
     dispatch({
         type: SET_ITEMS,
         payload: items.data
     })
+    dispatch({ type: LOADING, payload: false })
 }
 
 export const setBusiness = business => {
