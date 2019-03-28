@@ -19,7 +19,6 @@ class Map extends Component {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({coords}) => {
         const { longitude, latitude } = coords;
-        console.log(coords)
         getLocations(longitude, latitude)
         setCenter([longitude, latitude]);
       })
@@ -47,7 +46,7 @@ class Map extends Component {
       setCenter, 
       // setLoading,
     } = this.props;
-    
+
     const flyToOptions = { speed: 0.8 };
 
     return center.length === 2 ? (
