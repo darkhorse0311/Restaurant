@@ -10,9 +10,11 @@ const Mapbox = ReactMapBoxGl({
 
 class Map extends Component {
   markerClick = async (place, coord) => {
-    const { setCenter, getItems, setShowModal } = this.props;
+    const { setCenter, getItems, setShowModal, name } = this.props;
     setCenter(coord);
-    getItems(place);
+    if (place.name !== name) {
+      getItems(place);
+    }
     setShowModal(true)
   };
 

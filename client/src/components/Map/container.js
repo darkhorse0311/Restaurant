@@ -30,6 +30,7 @@ const mapStateToProps = ({
     },
     business: {
         showModal = false,
+        name = "",
     }
 }) => ({
     lat,
@@ -40,6 +41,7 @@ const mapStateToProps = ({
     places,
     mapStyle,
     showModal,
+    name,
 })
 
 
