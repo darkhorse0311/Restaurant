@@ -21,6 +21,7 @@ class Map extends Component {
       const { state } = result;
       if (state === "denied") {
           setCenter([-74.0060, 40.7128]);
+          getLocations(-74.0060, 40.7128)
           setPermission(false)
       } else {
         navigator.geolocation.getCurrentPosition((res) => {
@@ -49,8 +50,7 @@ class Map extends Component {
       zoom, 
       mapStyle, 
       locations, 
-      setCenter, 
-      // setLoading,
+      setCenter,
     } = this.props;
 
     const flyToOptions = { speed: 0.8 };
@@ -67,7 +67,6 @@ class Map extends Component {
           const { lng, lat } = transform._center;
           setCenter([lng, lat]);
         }}
-        // onStyleLoad={() => setLoading(false)}
       >
         <Layer
           type="symbol"
