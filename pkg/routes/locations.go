@@ -3,6 +3,7 @@ package routes
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -56,7 +57,9 @@ func GetLocations(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
+	fmt.Printf("before if")
 	if lon == float64(-74.0060) && lat == float64(40.7128) {
+		fmt.Printf("in if")
 		jsonRes := make([]models.Business, 0)
 		json.Unmarshal(DefaultLocation, &jsonRes)
 
