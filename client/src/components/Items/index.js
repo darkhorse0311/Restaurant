@@ -1,26 +1,27 @@
 import React from 'react';
 import styled from 'styled-components'
 import Item from './Item';
-import Arrows from './Arrows';
 
 
 const ItemsContainer = ({name, items, history}) => {
-    return items.length ? (
+    return (
         <StyledContainer>
             <Header>
                 <h2>{name}</h2>
-                <span onClick={() => history.push('/')}>X</span>
+                <i 
+                    onClick={() => history.push('/')}
+                    className={"down fas fa-long-arrow-alt-down"}
+                />
             </Header>
             <ItemList>
             {
-                items.map((item, i) => (
+                items.length ? items.map((item, i) => (
                     <Item key={i} item={item}/>
-                ))
+                )) : null
             }
             </ItemList>
-            <Arrows/>
         </StyledContainer>
-    ) : null;
+    );
 }
 
 export default ItemsContainer;
@@ -41,19 +42,25 @@ const Header = styled.div`
     align-items: center;
     height: 54px;
     width: 100%;
-    span {
-        z-index: 3;
+    padding: 0px 10px;
+    .down {
+        font-size: 26px;
+    }
+    h2 {
+        font-size: 26px;
+        font-weight: 600;
     }
 `;
 
 const StyledContainer = styled.div`
-    position: fixed;
+    width: 95%;
+    height: 95%;
     bottom: 0;
-    width: 100vw;
-    height: 254px;
+    left: 2.5%;
+    padding: 10px 10px 0px;
+    position: absolute;
     background: white;
-    z-index: 99;
-    padding: 0px 40px;
+    z-index: 999999;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     overflow: hidden;

@@ -1,5 +1,5 @@
 import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER } from './actions'
-import mockPlaces from '../../mockPlaces';
+import mockPlaces from '../shared/mockPlaces';
 
 const defaultState = {
     lat: null,

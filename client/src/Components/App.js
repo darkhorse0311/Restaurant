@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 
 import Map from './Map/container';
 import Items from './Items/container';
-import Header from './Header';
+import Header from './shared/Header';
 
 class App extends Component {
   render() {
@@ -22,12 +22,8 @@ class App extends Component {
 export default App;
 
 const Container = styled.div`
-  width: 100%;
-  max-width: 900px;
-  min-width: 600px;
-  margin: 0 auto;
+  width: 100vw;
   height: 100vh;
-  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
