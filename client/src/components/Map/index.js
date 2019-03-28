@@ -18,7 +18,6 @@ class Map extends Component {
     const { setCenter, getLocations, setPermission } = this.props;
 
     navigator.permissions.query({name:'geolocation'}).then(result => {
-      console.log(result)
       const { state } = result;
       if (state === "denied") {
           setCenter([-74.0060, 40.7128]);

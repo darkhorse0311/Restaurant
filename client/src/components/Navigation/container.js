@@ -7,10 +7,12 @@ const mapStateToProps = ({
     map: {
         center =[],
         loading,
+        permission
     }
 }) => ({
     center,
     loading,
+    permission,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
