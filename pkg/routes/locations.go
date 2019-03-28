@@ -56,7 +56,7 @@ func GetLocations(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
-	if lon == -74.0060 && lat == 40.7128 {
+	if lon == float64(-74.0060) && lat == float64(40.7128) {
 		jsonRes := make([]models.Business, 0)
 		json.Unmarshal(DefaultLocation, &jsonRes)
 
