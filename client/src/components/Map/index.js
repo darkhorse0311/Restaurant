@@ -39,9 +39,17 @@ class Map extends Component {
   };
 
   render() {
-    const { center, zoom, mapStyle, locations, setCenter, setLoading } = this.props;
+    const { 
+      center, 
+      zoom, 
+      mapStyle, 
+      locations, 
+      setCenter, 
+      // setLoading,
+    } = this.props;
+    
     const flyToOptions = { speed: 0.8 };
-    console.log("center: ", center)
+
     return center.length === 2 ? (
       <Mapbox
         // eslint-disable-next-line react/style-prop-object
