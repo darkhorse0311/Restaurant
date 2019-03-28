@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Item = ({item}) => {
     return (
@@ -63,20 +63,19 @@ const ItemMacros = styled.div`
 `;
 
 const StyledItem = styled.div`
-    width: 200px;
-    min-width: 200px;
-    height: 100%;
-    border: 1px solid rgba(0,0,0,0.4);
-    border-radius: 12px;
-    margin-right: 10px;
+    width: 100%;
+    height: 145px;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
     position: relative;
-    padding: 10px 20px;
+    padding: 20px 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
     h3 {
-        margin: 0px;
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
     }
+
 `;

@@ -3,19 +3,21 @@ import styled from 'styled-components';
 
 import { Route } from 'react-router-dom';
 
-import MapContainer from './MapContainer';
-import Header from './Header';
-import Register from './Register';
-import Login from './Login';
+import Map from './Map/container';
+import Items from './Items/container';
+import Navigation from './Navigation/container';
 
 class App extends Component {
   render() {
     return (
       <Container>
-        <Header/>
-        <MapContainer/>
-        <Route path="/login" component={props => <Login {...props}/>}/>
-        <Route path="/register" component={props => <Register {...props}/>}/>
+        <Navigation/>
+        <Route path="/" render={props => (
+          <>
+            <Map {...props}/>
+            <Items {...props}/>
+          </>
+        )} />
       </Container>
     );
   }
@@ -24,12 +26,8 @@ class App extends Component {
 export default App;
 
 const Container = styled.div`
-  width: 100%;
-  max-width: 900px;
-  min-width: 600px;
-  margin: 0 auto;
+  width: 100vw;
   height: 100vh;
-  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
