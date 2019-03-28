@@ -19,7 +19,6 @@ class Map extends Component {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({coords}) => {
         const { longitude, latitude } = coords;
-        console.log(coords)
         getLocations(longitude, latitude)
         setCenter([longitude, latitude]);
       })
@@ -39,9 +38,17 @@ class Map extends Component {
   };
 
   render() {
-    const { center, zoom, mapStyle, locations, setCenter, setLoading } = this.props;
+    const { 
+      center, 
+      zoom, 
+      mapStyle, 
+      locations, 
+      setCenter, 
+      // setLoading,
+    } = this.props;
+
     const flyToOptions = { speed: 0.8 };
-    console.log("center: ", center)
+
     return center.length === 2 ? (
       <Mapbox
         // eslint-disable-next-line react/style-prop-object
@@ -64,7 +71,7 @@ class Map extends Component {
             zIndex: 5
           }}
         >
-          {locations.map((place, i) => {
+          {locations.length && locations.map((place, i) => {
             const { longitude, latitude } = place.coordinates;
             const coord = [longitude, latitude];
             return (

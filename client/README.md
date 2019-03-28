@@ -1,7 +1,7 @@
 # Frontend
 Frontend built in React.js, Redux and Styled Components
 
-[Frontend Link](https://carbtographer.com)
+Frontend Link: https://carbtographer.com
 
 ## Enviroment Variables
 You will require a Mapbox Access Token to make authenticated requests.
