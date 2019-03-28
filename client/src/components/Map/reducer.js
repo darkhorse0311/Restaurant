@@ -1,4 +1,4 @@
-import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING } from './actions'
+import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from './actions'
 
 const defaultState = {
     locations: [],
@@ -12,6 +12,7 @@ const defaultState = {
         top: 0,
         left: 0
     },
+    permission: false,
     loading: false,
 }
 
@@ -39,6 +40,12 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 loading: payload
+            }
+
+        case SET_PERMISSION:
+            return {
+                ...state,
+                permission: payload
             }
         default: return {...state};
     }

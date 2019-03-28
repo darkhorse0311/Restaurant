@@ -15,16 +15,23 @@ class Map extends Component {
   }
 
   getCurrentCoord = () => {
-    const { setCenter, getLocations } = this.props;
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(({coords}) => {
-        const { longitude, latitude } = coords;
-        getLocations(longitude, latitude)
-        setCenter([longitude, latitude]);
-      })
-    } else {
-        console.log("error")
-    }
+    const { setCenter, getLocations, setPermission } = this.props;
+
+    navigator.permissions.query({name:'geolocation'}).then(result => {
+      const { state } = result;
+      if (state === "denied") {
+          setCenter([-74.0060, 40.7128]);
+          getLocations(-74.0060, 40.7128)
+          setPermission(false)
+      } else {
+        navigator.geolocation.getCurrentPosition((res) => {
+          const { longitude, latitude } = res.coords;
+          getLocations(longitude, latitude)
+          setCenter([longitude, latitude]);
+          setPermission(true)
+        })
+      }
+    })
   }
 
 
@@ -43,8 +50,7 @@ class Map extends Component {
       zoom, 
       mapStyle, 
       locations, 
-      setCenter, 
-      // setLoading,
+      setCenter,
     } = this.props;
 
     const flyToOptions = { speed: 0.8 };
@@ -61,7 +67,6 @@ class Map extends Component {
           const { lng, lat } = transform._center;
           setCenter([lng, lat]);
         }}
-        // onStyleLoad={() => setLoading(false)}
       >
         <Layer
           type="symbol"

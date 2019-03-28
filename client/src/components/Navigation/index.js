@@ -1,21 +1,27 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components'
 
-const Navigation = ({center, getLocations, loading}) => {
+const Navigation = ({center, getLocations, loading, permission}) => {
     return (
         <StyledHeader>
             <h1>Carbtographer</h1>
             {
                 loading
-                ? (<i className="fas fa-spinner spinner"></i>)
-                : (
-                <i
+                ? (<i className="fas fa-spinner spinner" />)
+                : (<i
                     className="fas fa-redo-alt"
                     onClick={() => {
                         getLocations(center[0], center[1])
                     }}
-                />
-                )
+                />)
+            }
+            {
+                !permission ? (
+                    <span className="geo-off">
+                        <i className="fas fa-map-marker-alt"/>
+                        Location Permissions: OFF
+                    </span>
+                ) : null
             }
         </StyledHeader>
     );
@@ -57,6 +63,17 @@ const StyledHeader = styled.div`
     h1 {
         line-height: 60px;
         margin: 0;
+    }
+    .geo-off {
+        font-size: 16px;
+        position: absolute;
+        left: 20px;
+        bottom: -15px;
+        i {
+            font-size: 16px;
+            height: 20px;
+            width: 30px;
+        }
     }
 `;
 
