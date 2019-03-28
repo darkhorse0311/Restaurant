@@ -71,7 +71,7 @@ class Map extends Component {
             zIndex: 5
           }}
         >
-          {locations.map((place, i) => {
+          {locations.length && locations.map((place, i) => {
             const { longitude, latitude } = place.coordinates;
             const coord = [longitude, latitude];
             return (
