@@ -14,6 +14,7 @@ const mapStateToProps = ({
         distance = null,
         r_id = null,
         items = [],
+        showModal = false,
     },
 }) => ({
     id,
@@ -23,6 +24,7 @@ const mapStateToProps = ({
     distance,
     r_id,
     items,
+    showModal
 })
 
 

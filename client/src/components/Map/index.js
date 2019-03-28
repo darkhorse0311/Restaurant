@@ -19,11 +19,10 @@ class Map extends Component {
   };
 
   render() {
-    const { center, zoom, places, mapStyle, showModal } = this.props;
+    const { center, zoom, places, mapStyle } = this.props;
     const flyToOptions = { speed: 0.8 };
     return (
-      <>
-        <Mapbox
+      <Mapbox
         // eslint-disable-next-line react/style-prop-object
         style="mapbox://styles/mapbox/dark-v9"
         containerStyle={mapStyle}
@@ -52,10 +51,6 @@ class Map extends Component {
           })}
         </Layer>
       </Mapbox>
-        {
-          showModal ? <Items/> : null
-        }
-      </>
     );
   }
 }

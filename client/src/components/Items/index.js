@@ -1,11 +1,11 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import Item from './Item';
 
 
-const ItemsContainer = ({name, items, setShowModal}) => {
+const ItemsContainer = ({name, items, setShowModal, showModal}) => {
     return (
-        <StyledContainer >
+        <StyledContainer showModal={showModal}>
             <Header>
                 <h2>{name}</h2>
                 <i 
@@ -26,11 +26,6 @@ const ItemsContainer = ({name, items, setShowModal}) => {
 
 export default ItemsContainer;
 
-const slideIn = keyframes`
-  100% {
-    transform: translateY(0);
-  }
-`;
 
 const StyledContainer = styled.div`
     width: 95%;
@@ -44,8 +39,14 @@ const StyledContainer = styled.div`
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     overflow: scroll;
-    /* transform: translateY(100%); */
-    /* animation: ${slideIn} 600ms ease-in forwards; */
+    transform: translateY(100%);
+    transition: transform 300ms;
+    ${props => props.showModal && css`
+        transform: translateY(0);
+    `}
+    ${props => !props.showModal && css`
+        transform: translateY(100%);
+    `}
 `;
 
 const ItemList = styled.div`

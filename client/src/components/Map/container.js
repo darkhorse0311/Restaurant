@@ -29,7 +29,6 @@ const mapStateToProps = ({
         mapStyle = {},
     },
     business: {
-        showModal = false,
         name = "",
     }
 }) => ({
@@ -40,7 +39,6 @@ const mapStateToProps = ({
     zoom,
     places,
     mapStyle,
-    showModal,
     name,
 })
 

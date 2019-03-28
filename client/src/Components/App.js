@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
 import Map from './Map/container';
+import Items from './Items/container';
 import Header from './shared/Header';
 
 class App extends Component {
@@ -11,7 +12,12 @@ class App extends Component {
     return (
       <Container>
         <Header/>
-        <Route path="/" render={props => <Map {...props}/>} />
+        <Route path="/" render={props => (
+          <>
+            <Map {...props}/>
+            <Items {...props}/>
+          </>
+        )} />
       </Container>
     );
   }
