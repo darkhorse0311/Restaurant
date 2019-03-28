@@ -15,14 +15,15 @@ class Map extends Component {
   }
 
   getCurrentCoord = () => {
-    const { setCenter, getLocations, setPermission } = this.props;
+    const { setCenter, getLocations, setPermission, setLoading } = this.props;
 
     navigator.permissions.query({name:'geolocation'}).then(result => {
       const { state } = result;
       if (state === "denied") {
           setCenter([-74.0060, 40.7128]);
-          getLocations(-74.0060, 40.7128)
           setPermission(false)
+          // getLocations(-74.0060, 40.7128)
+          setLoading(false)
       } else {
         navigator.geolocation.getCurrentPosition((res) => {
           const { longitude, latitude } = res.coords;
