@@ -32,6 +32,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
+  background-color: #2B2B2B;
   /* border: solid 1px red; */
 `;
 

@@ -14,29 +14,28 @@ class Map extends Component {
     this.getCurrentCoord();
   }
 
-  getCurrentCoord = async () => {
+  setDefaultValues = (err) => {
+    const { setCenter, getLocations, setPermission } = this.props;
+    setCenter([-74.0060, 40.7128]);
+    getLocations(-74.0060, 40.7128)
+    setPermission(false)
+  }
+
+  getCurrentCoord = () => {
     const { setCenter, getLocations, setPermission } = this.props;
 
-    try {
-      const results = await navigator.permissions.query({name:'geolocation'})
-      if (results.state !== "denied") {
-        navigator.geolocation.getCurrentPosition((res) => {
-          const { longitude, latitude } = res.coords;
-          getLocations(longitude, latitude)
-          setCenter([longitude, latitude]);
-          setPermission(true)
-        })
-      } else {
-        setCenter([-74.0060, 40.7128]);
-        getLocations(-74.0060, 40.7128)
-        setPermission(false)
-      }
-    } catch (err) {
-      console.log(err)
-      setCenter([-74.0060, 40.7128]);
-      getLocations(-74.0060, 40.7128)
-      setPermission(false)
-    }
+    if ("geolocation" in navigator) {
+      console.log("here", navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(res => {
+        const { longitude, latitude } = res.coords;
+        getLocations(longitude, latitude)
+        setCenter([longitude, latitude]);
+        setPermission(true)
+      }, err => {
+        console.log(err);
+        this.setDefaultValues()
+      })
+    } else {this.setDefaultValues()}
   }
 
 
