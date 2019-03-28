@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 
 import {
-    setCordinates,
-    getLocations,
-    setCenter
+    setCenter,
+    getLocations
 } from './actions'
 
 import {
@@ -20,8 +19,6 @@ import Map from './index';
 
 const mapStateToProps = ({
     map: {
-        lat = null,
-        lon = null,
         locations = [],
         center = [],
         zoom = [],
@@ -32,8 +29,6 @@ const mapStateToProps = ({
         name = "",
     }
 }) => ({
-    lat,
-    lon,
     locations,
     center,
     zoom,
@@ -46,7 +41,6 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
-            setCordinates,
             getLocations,
             getItems,
             setCenter,

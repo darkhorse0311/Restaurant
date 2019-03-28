@@ -4,15 +4,10 @@ export const SET_LOCATIONS = 'set_locations';
 export const SET_CENTER = 'set_center';
 export const URL = 'https://carbtographer.herokuapp.com/';
 
-export const setCordinates = (lat, lon) => {
-    return {
-        type: SET_LAT_LON,
-        payload: {lat, lon}
-    }
-}
 
-export const getLocations = (lat, lon) => async dispatch => {
+export const getLocations = (lon, lat) => async dispatch => {
     const locations = await axios.get(`${URL}/locations/${lat}/${lon}`);
+    console.log(locations)
     dispatch({
         type: SET_LOCATIONS,
         payload: locations.data
