@@ -5,6 +5,7 @@ import {
     setCenter,
     getLocations,
     setLoading,
+    setPermission,
 } from './actions'
 
 import {
@@ -25,6 +26,7 @@ const mapStateToProps = ({
         zoom = [],
         places = [],
         mapStyle = {},
+        permission = false,
     },
     business: {
         name = "",
@@ -36,6 +38,7 @@ const mapStateToProps = ({
     places,
     mapStyle,
     name,
+    permission,
 })
 
 const mapDispatchToProps = dispatch => (
@@ -46,6 +49,7 @@ const mapDispatchToProps = dispatch => (
             setCenter,
             setShowModal,
             setLoading,
+            setPermission,
         },
         dispatch
     )
