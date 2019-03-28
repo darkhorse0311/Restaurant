@@ -1,15 +1,15 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Item from './Item';
 
 
-const ItemsContainer = ({name, items, history}) => {
+const ItemsContainer = ({name, items, setShowModal}) => {
     return (
-        <StyledContainer>
+        <StyledContainer >
             <Header>
                 <h2>{name}</h2>
                 <i 
-                    onClick={() => history.push('/')}
+                    onClick={() => setShowModal(false)}
                     className={"down fas fa-long-arrow-alt-down"}
                 />
             </Header>
@@ -26,23 +26,48 @@ const ItemsContainer = ({name, items, history}) => {
 
 export default ItemsContainer;
 
+const slideIn = keyframes`
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const StyledContainer = styled.div`
+    width: 95%;
+    height: calc(100% - 60px);
+    bottom: 0;
+    left: 2.5%;
+    padding: 10px 20px 0px;
+    position: absolute;
+    background: white;
+    z-index: 1;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    overflow: scroll;
+    /* transform: translateY(100%); */
+    /* animation: ${slideIn} 600ms ease-in forwards; */
+`;
+
 const ItemList = styled.div`
-    height: 165px;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    padding-bottom: 20px;
     position: relative;
-    left: -100%;
-    transform: translateX(100%);
+    border-top: 1px solid black;
+    margin-top: 74px;
 `;
 
 const Header = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 54px;
+    height: 74px;
     width: 100%;
-    padding: 0px 10px;
+    padding: 10px 30px 10px;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
     .down {
         font-size: 26px;
     }
@@ -50,19 +75,5 @@ const Header = styled.div`
         font-size: 26px;
         font-weight: 600;
     }
-`;
-
-const StyledContainer = styled.div`
-    width: 95%;
-    height: 95%;
-    bottom: 0;
-    left: 2.5%;
-    padding: 10px 10px 0px;
-    position: absolute;
-    background: white;
-    z-index: 999999;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    overflow: hidden;
 `;
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactMapBoxGl, { Layer, Feature } from "react-mapbox-gl";
+import Items from '../Items/container';
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 const Mapbox = ReactMapBoxGl({
@@ -9,17 +10,18 @@ const Mapbox = ReactMapBoxGl({
 
 class Map extends Component {
   markerClick = async (place, coord) => {
-    const { setCenter, getItems, history } = this.props;
+    const { setCenter, getItems, setShowModal } = this.props;
     setCenter(coord);
     getItems(place);
-    history.push('/items')
+    setShowModal(true)
   };
 
   render() {
-    const { center, zoom, places, mapStyle } = this.props;
+    const { center, zoom, places, mapStyle, showModal } = this.props;
     const flyToOptions = { speed: 0.8 };
     return (
-      <Mapbox
+      <>
+        <Mapbox
         // eslint-disable-next-line react/style-prop-object
         style="mapbox://styles/mapbox/dark-v9"
         containerStyle={mapStyle}
@@ -48,6 +50,10 @@ class Map extends Component {
           })}
         </Layer>
       </Mapbox>
+        {
+          showModal ? <Items/> : null
+        }
+      </>
     );
   }
 }

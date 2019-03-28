@@ -1,4 +1,4 @@
-import { SET_BUSINESS, SET_ITEMS } from './actions'
+import { SET_BUSINESS, SET_ITEMS, SHOW_MODAL } from './actions'
 
 const defaultState = {
     id: null,
@@ -8,6 +8,7 @@ const defaultState = {
     distance: null,
     r_id: null,
     items: [],
+    showModal: false
 };
 
 export default (state = defaultState, action) => {
@@ -23,6 +24,11 @@ export default (state = defaultState, action) => {
                 ...state, 
                 items: payload
             };
+        case SHOW_MODAL:
+            return {
+                ...state,
+                showModal: payload
+            }
         default: return {...state};
     }
 }

@@ -8,6 +8,10 @@ import {
 } from './actions'
 
 import {
+    setShowModal,
+} from '../Items/actions'
+
+import {
     getItems,
 } from '../Items/actions'
 
@@ -22,8 +26,11 @@ const mapStateToProps = ({
         center = [],
         zoom = [],
         places = [],
-        mapStyle = {}
+        mapStyle = {},
     },
+    business: {
+        showModal = false,
+    }
 }) => ({
     lat,
     lon,
@@ -31,7 +38,8 @@ const mapStateToProps = ({
     center,
     zoom,
     places,
-    mapStyle
+    mapStyle,
+    showModal,
 })
 
 
@@ -42,6 +50,7 @@ const mapDispatchToProps = dispatch => (
             getLocations,
             getItems,
             setCenter,
+            setShowModal,
         },
         dispatch
     )

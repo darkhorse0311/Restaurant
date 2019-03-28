@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
+import { setShowModal } from './actions';
 
 import Items from './index';
 
@@ -27,7 +28,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
-        {},
+        {setShowModal},
         dispatch
     )
 );
