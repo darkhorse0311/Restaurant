@@ -1,9 +1,7 @@
 import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from './actions'
-import mockPlaces from './mockPlaces';
 
 const defaultState = {
-    locations: mockPlaces,
-    // locations: [],
+    locations: [],
     center: [],
     zoom: [14],
     mapStyle: {

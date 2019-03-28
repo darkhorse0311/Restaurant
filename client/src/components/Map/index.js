@@ -22,7 +22,7 @@ class Map extends Component {
   }
 
   getCurrentCoord = () => {
-    const { setCenter, getLocations, setPermission, setLoading } = this.props;
+    const { setCenter, getLocations, setPermission } = this.props;
 
     if ("geolocation" in navigator) {
       console.log("here", navigator.geolocation)

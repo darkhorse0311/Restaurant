@@ -56,6 +56,11 @@ func GetLocations(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
+	if lon == -74.0060 && lat == 40.7128 {
+		json.NewEncoder(w).Encode(&DefaultLocation)
+		return
+	}
+
 	var names []models.Restaurants
 	database.GetNames(&names)
 
