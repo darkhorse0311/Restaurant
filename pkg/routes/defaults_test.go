@@ -17,7 +17,7 @@ func TestGetServerIsUp(t *testing.T) {
 	}
 
 	rec := httptest.NewRecorder()
-	getServerIsUp(rec, req)
+	GetServerIsUp(rec, req)
 
 	res := rec.Result()
 	if res.StatusCode != http.StatusOK {
@@ -42,7 +42,7 @@ func TestRouteNotFound(t *testing.T) {
 	}
 
 	rec := httptest.NewRecorder()
-	routeNotFound(rec, req)
+	RouteNotFound(rec, req)
 
 	res := rec.Result()
 	if res.StatusCode != http.StatusNotFound {
