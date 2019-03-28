@@ -11,7 +11,7 @@ class Map extends Component {
   componentDidMount() {
     const { setLoading } = this.props;
     setLoading(true)
-    // this.getCurrentCoord();
+    this.getCurrentCoord();
   }
 
   getCurrentCoord = () => {
@@ -54,7 +54,7 @@ class Map extends Component {
           const { lng, lat } = transform._center;
           setCenter([lng, lat]);
         }}
-        onStyleLoad={() => setLoading(false)}
+        // onStyleLoad={() => setLoading(false)}
       >
         <Layer
           type="symbol"

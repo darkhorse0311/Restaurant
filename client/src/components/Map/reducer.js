@@ -1,11 +1,8 @@
 import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING } from './actions'
-import mockPlaces from '../shared/mockPlaces';
 
 const defaultState = {
-    locations: mockPlaces,
-    center: [-74.0060, 40.7128],
-    // locations: [],
-    // center: [],
+    locations: [],
+    center: [],
     zoom: [14],
     mapStyle: {
         flex: 1,
