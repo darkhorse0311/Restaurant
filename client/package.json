@@ -20,8 +20,19 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --coverage",
+    "update-snapshot": "jest -u",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageDirectory": "../JS_Junit_Report/coverage",
+    "coverageReporters": [
+      "text-summary",
+      "html",
+      "json"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
