@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { getLocations } from '../Map/actions';
 
-const mapStateToProps = ({
+export const mapStateToProps = ({
     map: {
         center =[],
         loading,
@@ -15,7 +15,7 @@ const mapStateToProps = ({
     permission,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+export const mapDispatchToProps = dispatch => bindActionCreators({
     getLocations,
 }, dispatch);
 
