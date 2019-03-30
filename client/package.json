@@ -29,6 +29,10 @@
       "text-summary",
       "html",
       "json"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js"
     ]
   },
   "eslintConfig": {

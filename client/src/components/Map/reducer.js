@@ -1,6 +1,6 @@
 import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from './actions'
 
-const defaultState = {
+export const defaultState = {
     locations: [],
     center: [],
     zoom: [14],

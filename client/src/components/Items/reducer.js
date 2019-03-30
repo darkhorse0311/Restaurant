@@ -1,6 +1,6 @@
 import { SET_BUSINESS, SET_ITEMS, SHOW_MODAL } from './actions'
 
-const defaultState = {
+export const defaultState = {
     id: null,
     name: "",
     coordinates: {},
