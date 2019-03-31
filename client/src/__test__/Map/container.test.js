@@ -1,15 +1,4 @@
 import { mapStateToProps, mapDispatchToProps } from '../../components/Map/container';
-// import { 
-//     setCenter,
-//     getLocations,
-//     setLoading,
-//     setPermission,
-// } from '../../components/Map/actions'
-// import { 
-//     setShowModal,
-//     getItems,
-// } from '../../components/Items/actions'
-// import { bindActionCreators } from 'redux';
 
 const initialState = {
     map: {
