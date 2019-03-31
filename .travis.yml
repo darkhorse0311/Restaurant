@@ -1,6 +1,7 @@
 matrix:
   include:
     - language: node_js
+      before_script: cd client
     - language: go
       go:
         - 1.x
