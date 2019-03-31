@@ -1,5 +1,5 @@
 import reducer, { defaultState } from '../../components/Map/reducer';
-import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from '../../components/Map/actions'
+import { SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from '../../components/Map/actions'
 
 const locations = [
     {
@@ -34,22 +34,6 @@ describe('Map reducer', () => {
     it('should return the initial state', () => {
         expect(reducer(undefined, {})).toEqual(defaultState)
     })
-
-    it('should handle SET_LAT_LON', () => {
-        expect(
-          reducer(defaultState, {
-            type: SET_LAT_LON,
-            payload: {
-                lon: -74.0060, 
-                lat: 40.7128
-            }
-          })
-        ).toEqual({
-            ...defaultState, 
-            lon: -74.0060, 
-            lat: 40.7128
-        })
-    });
 
     it('should handle SET_LOCATIONS', () => {
         expect(

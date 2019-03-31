@@ -19,12 +19,6 @@ export const defaultState = {
 export default (state = defaultState, action) => {
     const { payload, type } = action;
     switch(type) {
-        case SET_LAT_LON:
-            return {
-                ...state,
-                lat: payload.lat,
-                lon: payload.lon,
-            };
         case SET_LOCATIONS:
             return {
                 ...state,

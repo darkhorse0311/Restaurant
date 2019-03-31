@@ -18,13 +18,6 @@ export const getLocations = (lon, lat) => async dispatch => {
     dispatch({ type: LOADING, payload: false })
 }
 
-export const setCenter = (coords) => {
-    return {
-        type: SET_CENTER,
-        payload: coords
-    }
-}
-
-
+export const setCenter = (coords) => ({type: SET_CENTER, payload: coords });
 export const setLoading = (value) => ({ type: LOADING, payload: value });
 export const setPermission = (value) => ({ type: SET_PERMISSION, payload: value});
