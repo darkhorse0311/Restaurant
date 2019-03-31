@@ -8,7 +8,7 @@ matrix:
       script:
         - cd client
         - npm i
-        - npm test
+        - npm test --coverage --coverageReporters=text-lcov | coveralls
     - language: go
       go:
         - 1.x
