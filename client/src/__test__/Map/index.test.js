@@ -97,6 +97,23 @@ describe('Map Component', () => {
       expect(getCC).toHaveBeenCalled();
     });
 
+    it('componentDidMount calls setDefaultValues when geoLocation is denied', () => {
+      const wrapper = shallow(<Map {...props}/>);
+      const instance = wrapper.instance();
+      const setDV = jest.spyOn(instance, 'setDefaultValues');
+      const err = {
+        code: 1,
+        message: "User denied Geolocation"
+      };
+      const mockGeolocation = {
+        getCurrentPosition: jest.fn()
+        .mockImplementationOnce((success, error) => error(err))
+      };
+      global.navigator.geolocation = mockGeolocation;
+      instance.componentDidMount();
+      expect(setDV).toHaveBeenCalled();
+    });
+
 
 
     it('two features found', () => {

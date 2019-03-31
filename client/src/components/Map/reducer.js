@@ -1,4 +1,4 @@
-import { SET_LAT_LON, SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from './actions'
+import { SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION } from './actions'
 
 export const defaultState = {
     locations: [],

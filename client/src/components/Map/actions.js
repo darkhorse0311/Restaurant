@@ -1,5 +1,4 @@
 import axios from 'axios';
-export const SET_LAT_LON = 'set_lan_lon';
 export const SET_LOCATIONS = 'set_locations';
 export const SET_CENTER = 'set_center';
 export const LOADING = 'loading';

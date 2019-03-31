@@ -14,7 +14,7 @@ class Map extends Component {
     this.getCurrentCoord();
   }
 
-  setDefaultValues = (err) => {
+  setDefaultValues = () => {
     const { setCenter, getLocations, setPermission } = this.props;
     setCenter([-74.0060, 40.7128]);
     getLocations(-74.0060, 40.7128)
@@ -30,6 +30,8 @@ class Map extends Component {
         getLocations(longitude, latitude)
         setCenter([longitude, latitude]);
         setPermission(true)
+      }, err => {
+        this.setDefaultValues()
       });
     } else {this.setDefaultValues()}
   }
