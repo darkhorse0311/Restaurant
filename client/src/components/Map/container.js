@@ -10,21 +10,18 @@ import {
 
 import {
     setShowModal,
-} from '../Items/actions'
-
-import {
     getItems,
 } from '../Items/actions'
+
 
 import Map from './index';
 
 
-const mapStateToProps = ({
+export const mapStateToProps = ({
     map: {
         locations = [],
         center = [],
         zoom = [],
-        places = [],
         mapStyle = {},
         permission = false,
     },
@@ -35,13 +32,12 @@ const mapStateToProps = ({
     locations,
     center,
     zoom,
-    places,
     mapStyle,
     name,
     permission,
 })
 
-const mapDispatchToProps = dispatch => (
+export const mapDispatchToProps = dispatch => (
     bindActionCreators(
         {
             getLocations,
