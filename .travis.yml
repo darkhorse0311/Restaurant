@@ -1,7 +1,10 @@
 matrix:
   include:
     - language: node_js
+      cache: npm
       before_script: cd client && npm i
+      script:
+        - npm test
     - language: go
       go:
         - 1.x
