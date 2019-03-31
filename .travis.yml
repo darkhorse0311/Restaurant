@@ -3,7 +3,7 @@ matrix:
     - language: node_js
       - "node"
       cache:
-        directories:
+        - directories:
           - client/node_modules
       script:
         - cd client
