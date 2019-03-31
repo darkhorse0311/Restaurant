@@ -1,6 +1,6 @@
 import { mapStateToProps, mapDispatchToProps } from '../../components/Navigation/container';
-import { getLocations } from '../../components/Map/actions'
-import { bindActionCreators } from 'redux';
+// import { getLocations } from '../../components/Map/actions'
+// import { bindActionCreators } from 'redux';
 
 const initialState = {
     map: {

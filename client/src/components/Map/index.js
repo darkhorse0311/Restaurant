@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactMapBoxGl, { Layer, Feature } from "react-mapbox-gl";
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
-const Mapbox = ReactMapBoxGl({
+export const Mapbox = ReactMapBoxGl({
   minZoom: 10,
   accessToken: token,
 });
@@ -25,16 +25,12 @@ class Map extends Component {
     const { setCenter, getLocations, setPermission } = this.props;
 
     if ("geolocation" in navigator) {
-      console.log("here", navigator.geolocation)
       navigator.geolocation.getCurrentPosition(res => {
         const { longitude, latitude } = res.coords;
         getLocations(longitude, latitude)
         setCenter([longitude, latitude]);
         setPermission(true)
-      }, err => {
-        console.log(err);
-        this.setDefaultValues()
-      })
+      });
     } else {this.setDefaultValues()}
   }
 
@@ -67,8 +63,9 @@ class Map extends Component {
         center={center}
         zoom={zoom}
         flyToOptions={flyToOptions}
-        onMoveEnd={({transform}) => {
-          const { lng, lat } = transform._center;
+        onMoveEnd={e => {
+          const { transform = {} } = e || {};
+          const { lng = -74.0060, lat = 40.7128 } = transform._center || {};
           setCenter([lng, lat]);
         }}
       >
