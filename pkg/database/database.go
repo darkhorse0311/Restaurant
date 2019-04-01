@@ -37,7 +37,8 @@ func migrateSeed() {
 
 	// Loops through array of resturatns to seed database
 	for i, rest := range jsonInfo {
-		db.Create(&models.Restaurants{Name: rest.Name})
+		fmt.Printf("inserting: %d:%d \n", i, len(jsonInfo))
+		db.Create(&models.Restaurants{Name: rest.Name, Logo: rest.Logo})
 		for _, item := range rest.Items {
 			db.Create(&models.Items{
 				Name:      item.Name,
@@ -86,13 +87,17 @@ func InitDB() (*gorm.DB, error) {
 		panic(err)
 	}
 
-	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"], k["AWS_PASSWORD"])
+	// Production
+	// dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"], k["AWS_PASSWORD"])
+
+	// Local
+	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"])
 
 	db, err = gorm.Open("postgres", dburi)
 	if err != nil {
 		return nil, err
 	}
 	// Migrate and seed DB
-	// migrateSeed(db)
+	// migrateSeed()
 	return db, nil
 }

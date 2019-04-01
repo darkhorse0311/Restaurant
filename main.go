@@ -18,7 +18,7 @@ func main() {
 	godotenv.Load()
 	db, err := database.InitDB()
 	if err != nil {
-		panic("failed to connect database")
+		panic(err)
 	}
 	defer db.Close()
 
