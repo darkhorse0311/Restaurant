@@ -34,14 +34,6 @@ const props = {
     ],
     center: [-74.0060, 40.7128],
     zoom: [14],
-    mapStyle: {
-        flex: 1,
-        width: "100vw",
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        left: 0
-    },
     permission: false,
     name: "",
     getLocations: jest.fn(),

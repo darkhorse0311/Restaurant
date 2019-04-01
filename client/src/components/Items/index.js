@@ -29,16 +29,19 @@ export default ItemsContainer;
 
 const StyledContainer = styled.div`
     width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     height: calc(100% - 60px);
     bottom: 0;
-    left: 2.5%;
+    right: 2.5%;
     padding: 10px 20px 0px;
     position: absolute;
     background: white;
     z-index: 1;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    overflow: scroll;
     transform: translateY(100%);
     transition: transform 300ms;
     ${props => props.showModal && css`
@@ -47,6 +50,19 @@ const StyledContainer = styled.div`
     ${props => !props.showModal && css`
         transform: translateY(100%);
     `}
+
+    @media (min-width: 650px) {
+        width: 325px;
+        position: absolute;
+        height: 100vh;
+        right: 0;
+        margin-left: 0px;
+        transition: transform none;
+        transform: translateY(0);
+        border-top-right-radius: 0px;
+
+
+    }
 `;
 
 const ItemList = styled.div`
@@ -56,6 +72,7 @@ const ItemList = styled.div`
     position: relative;
     border-top: 1px solid black;
     margin-top: 74px;
+    overflow: scroll;
 `;
 
 const Header = styled.div`
@@ -65,10 +82,6 @@ const Header = styled.div`
     height: 74px;
     width: 100%;
     padding: 10px 30px 10px;
-    position: absolute;
-    z-index: 2;
-    left: 0;
-    top: 0;
     .down {
         font-size: 26px;
     }

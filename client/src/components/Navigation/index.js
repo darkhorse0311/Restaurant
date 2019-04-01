@@ -39,9 +39,12 @@ const rotation = keyframes`
 `
 
 const StyledHeader = styled.div`
-    width: 100vw;
+    width: 100%;
+    @media (min-width: 650px) {
+        width: calc(100vw - 325px)
+    };
     height: 60px;
-    position: fixed;
+    position: absolute;
     z-index: 2;
     top: 0;
     left: 0;
