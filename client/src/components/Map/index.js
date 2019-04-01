@@ -1,16 +1,19 @@
 import React, { Component } from "react";
-import ReactMapBoxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapBoxGl, { Layer, Feature, Image } from "react-mapbox-gl";
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 export const Mapbox = ReactMapBoxGl({
   minZoom: 10,
   accessToken: token,
 });
+
+
 class Map extends Component {
 
   componentDidMount() {
-    const { setLoading } = this.props;
-    setLoading(true)
+    const { setLoading, getAllBusinesses } = this.props;
+    getAllBusinesses();
+    setLoading(true);
     this.getCurrentCoord();
   }
 
@@ -49,13 +52,21 @@ class Map extends Component {
   render() {
     const { 
       center, 
-      zoom, 
-      mapStyle, 
+      zoom,
       locations, 
       setCenter,
     } = this.props;
 
     const flyToOptions = { speed: 0.8 };
+    
+    const mapStyle = {
+      flex: 1,
+      width: '100vw',
+      height: "100vh",
+      position: "fixed",
+      top: 0,
+      left: 0
+    };
 
     return center.length === 2 ? (
       <Mapbox
@@ -71,10 +82,11 @@ class Map extends Component {
           setCenter([lng, lat]);
         }}
       >
+        <Image id={'starbucks'} url={'https://i.imgur.com/Lt5dsl6.png'} />
         <Layer
           type="symbol"
           id="marker"
-          layout={{ "icon-image": "marker-15" }}
+          layout={{ "icon-image": "starbucks" }}
           style={{
             zIndex: 5
           }}
