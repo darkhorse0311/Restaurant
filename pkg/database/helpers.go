@@ -13,3 +13,8 @@ func GetItems(id string, items *[]models.Items) {
 func GetNames(rest *[]models.Restaurants) {
 	db.Find(&rest)
 }
+
+// GetIDByName returns the id of the restuarant
+func GetIDByName(name string, rest *[]models.Restaurants) {
+	db.Table("restaurants").Where("name = ?", name).Find(&rest)
+}

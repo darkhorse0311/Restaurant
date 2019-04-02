@@ -31,6 +31,15 @@ describe('Navigator Contianer', () => {
         expect(mapStateToProps(initialState)).toEqual(expectedState);
     });
 
+    it('should return expected state when no values passed in' , () => {
+        const expectedState = {
+            center: [],
+            permission: false,
+            loading: false,
+        }
+        expect(mapStateToProps()).toEqual(expectedState);
+    });
+
     it('should return getLocations prop function', () => {
         const dispatch = jest.fn();
         const response = mapDispatchToProps(dispatch)

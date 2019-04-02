@@ -3,6 +3,7 @@ export const SET_LOCATIONS = 'set_locations';
 export const SET_CENTER = 'set_center';
 export const LOADING = 'loading';
 export const SET_PERMISSION = 'set_permission';
+export const SET_BUSINESSES = 'set_businesses';
 
 
 const url = process.env.REACT_APP_BACKEND_URL;
@@ -13,6 +14,16 @@ export const getLocations = (lon, lat) => async dispatch => {
     dispatch({
         type: SET_LOCATIONS,
         payload: locations.data
+    })
+    dispatch({ type: LOADING, payload: false })
+}
+
+export const getAllBusinesses = () => async dispatch => {
+    dispatch({ type: LOADING, payload: true })
+    const names = await axios.get(`${url}/names`);
+    dispatch({
+        type: SET_BUSINESSES,
+        payload: names.data
     })
     dispatch({ type: LOADING, payload: false })
 }
