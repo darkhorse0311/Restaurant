@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapBoxGl, { Layer, Feature, Image } from "react-mapbox-gl";
+import ReactMapBoxGl, { Layer, Feature, Image, GeoJSONLayer } from "react-mapbox-gl";
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 export const Mapbox = ReactMapBoxGl({
@@ -26,7 +26,6 @@ class Map extends Component {
 
   getCurrentCoord = () => {
     const { setCenter, getLocations, setPermission } = this.props;
-
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(res => {
         const { longitude, latitude } = res.coords;
@@ -39,7 +38,6 @@ class Map extends Component {
     } else {this.setDefaultValues()}
   }
 
-
   markerClick = (place, coord) => {
     const { setCenter, getItems, setShowModal, name } = this.props;
     setCenter(coord);
@@ -49,12 +47,69 @@ class Map extends Component {
     setShowModal(true)
   };
 
+  renderFeature = (place) => {
+    const { longitude, latitude } = place.coordinates;
+    const coord = [longitude, latitude];
+    return (
+      <Feature
+        key={`feature-${place.id}`}
+        coordinates={coord}
+        onClick={() => {
+          this.markerClick(place, coord)
+        }}
+      />
+    );
+  }
+
+  renderLayer = (layer) => {
+    const { coords, icon, id} = layer;
+    return (
+      <Layer
+        type="symbol"
+        id={icon}
+        layout={{"icon-image": icon}}
+        style={{zIndex: 5}}
+        key={`bus-${id}`}
+        >
+        {coords.map(place => this.renderFeature(place))}
+      </Layer>
+    )
+  }
+
+  filterLayers = () => {
+    const { 
+      allBusinesses,
+      locations,
+    } = this.props;
+
+    let layers = [];
+    allBusinesses.forEach((bus, i) => {
+      let loc = []
+      locations.forEach(curb => {
+        if (curb.r_id === bus.id) {
+          loc.push(curb)
+        }
+      })
+
+      if (loc.length) {
+        layers.push({
+          coords: loc,
+          icon: `place-${bus.id}`,
+          id: `bus-${bus.id}`,
+        })
+      }
+    })
+
+    return layers;
+  }
+
   render() {
     const { 
       center, 
       zoom,
       locations, 
       setCenter,
+      allBusinesses,
     } = this.props;
 
     const flyToOptions = { speed: 0.8 };
@@ -82,28 +137,17 @@ class Map extends Component {
           setCenter([lng, lat]);
         }}
       >
-        <Image id={'starbucks'} url={'https://i.imgur.com/Lt5dsl6.png'} />
-        <Layer
-          type="symbol"
-          id="marker"
-          layout={{ "icon-image": "starbucks" }}
-          style={{
-            zIndex: 5
-          }}
-        >
-          {locations.length && locations.map((place, i) => {
-            const { longitude, latitude } = place.coordinates;
-            const coord = [longitude, latitude];
-            return (
-              <Feature
-                coordinates={coord}
-                key={i}
-                onClick={() => this.markerClick(place, coord)}
-              />
-            );
-          })}
-        </Layer>
+        {
+          allBusinesses.length 
+            && allBusinesses.map((bus) => <Image id={`place-${bus.id}`} url={bus.logo} key={`icon-${bus.id}`}/>)
+        }
+        {
+          allBusinesses.length 
+            && locations.length
+              && this.filterLayers().map(layer => this.renderLayer(layer))
+        }
       </Mapbox>
+    
     ): null;
   }
 }

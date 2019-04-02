@@ -25,6 +25,7 @@ export const mapStateToProps = ({
         zoom = [],
         mapStyle = {},
         permission = false,
+        allBusinesses = [],
     },
     business: {
         name = "",
@@ -36,6 +37,7 @@ export const mapStateToProps = ({
     mapStyle,
     name,
     permission,
+    allBusinesses,
 })
 
 export const mapDispatchToProps = dispatch => (
