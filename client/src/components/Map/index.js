@@ -51,6 +51,10 @@ class Map extends Component {
     setShowModal(true)
   };
 
+  imageLoaded = () => {
+    this.setState({imagesLoaded: this.state.imagesLoaded + 1})
+  }
+
   renderFeature = (place) => {
     const { longitude, latitude } = place.coordinates;
     const coord = [longitude, latitude];
@@ -78,9 +82,7 @@ class Map extends Component {
         <Image 
           id={icon} 
           url={logo}
-          onLoaded={() => {
-            this.setState({imagesLoaded: this.state.imagesLoaded + 1})
-          }}
+          onLoaded={() => this.imageLoaded()}
         />
         <Layer
           type="symbol"

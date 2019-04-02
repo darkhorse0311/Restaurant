@@ -26,11 +26,11 @@ export const mapStateToProps = ({
         mapStyle = {},
         permission = false,
         allBusinesses = [],
-    },
+    } = {},
     business: {
         name = "",
-    }
-}) => ({
+    } = {},
+} = {}) => ({
     locations,
     center,
     zoom,

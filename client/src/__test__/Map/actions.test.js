@@ -1,17 +1,18 @@
 import mockAxios from 'axios';
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-// import fetchMock from 'fetch-mock'
 
 import { 
     SET_LOCATIONS, 
     SET_CENTER, 
     LOADING, 
     SET_PERMISSION,
+    SET_BUSINESSES,
     getLocations,
     setCenter,
     setLoading,
     setPermission,
+    getAllBusinesses,
 } from '../../components/Map/actions'
 
 const middlewares = [thunk]
@@ -19,10 +20,6 @@ const mockStore = configureMockStore(middlewares)
 
 
 describe('Map Actions', () => {
-    // afterEach(() => {
-    //     fetchMock.restore()
-    // })
-
     it('should create actions LOADING twice and SET_LOCATIONS once', async () => {
         const expectedActions = [
             {type: LOADING, payload: true},
@@ -39,6 +36,26 @@ describe('Map Actions', () => {
         );
 
         return store.dispatch(getLocations()).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+        })
+    })
+
+    it('should create actions LOADING twice and SET_BUSINESSES once', async () => {
+        const expectedActions = [
+            {type: LOADING, payload: true},
+            {type: SET_BUSINESSES, payload: []},
+            {type: LOADING, payload: false},
+        ]
+        const store = mockStore({})
+
+        // setup axios
+        mockAxios.get.mockImplementationOnce(() =>
+            Promise.resolve({
+                data: []
+            })
+        );
+
+        return store.dispatch(getAllBusinesses()).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
     })
