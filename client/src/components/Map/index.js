@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapBoxGl, { Layer, Feature, Image, GeoJSONLayer } from "react-mapbox-gl";
+import ReactMapBoxGl, { Layer, Feature, Image } from "react-mapbox-gl";
 
 const token = process.env.REACT_APP_MAP_BOX_KEY;
 export const Mapbox = ReactMapBoxGl({
@@ -9,6 +9,10 @@ export const Mapbox = ReactMapBoxGl({
 
 
 class Map extends Component {
+
+  state = {
+    imagesLoaded: 0,
+  }
 
   componentDidMount() {
     const { setLoading, getAllBusinesses } = this.props;
@@ -62,17 +66,32 @@ class Map extends Component {
   }
 
   renderLayer = (layer) => {
-    const { coords, icon, id} = layer;
+    const { coords, icon, id, logo } = layer;
+
+    // let img = new Image();
+    // img.src = logo;
+    // img.alt = icon;
+    // img.width = 60;
+    // img.height = 60;
     return (
-      <Layer
-        type="symbol"
-        id={icon}
-        layout={{"icon-image": icon}}
-        style={{zIndex: 5}}
-        key={`bus-${id}`}
+      <React.Fragment key={id}>
+        <Image 
+          id={icon} 
+          url={logo}
+          onLoaded={() => {
+            this.setState({imagesLoaded: this.state.imagesLoaded + 1})
+          }}
+        />
+        <Layer
+          type="symbol"
+          id={id}
+          layout={{"icon-image": icon}}
+          style={{zIndex: 5}}
+          // images={{imageKey: icon, image: img }}
         >
-        {coords.map(place => this.renderFeature(place))}
-      </Layer>
+          {coords.map(place => this.renderFeature(place))}
+        </Layer>
+      </React.Fragment>
     )
   }
 
@@ -96,6 +115,7 @@ class Map extends Component {
           coords: loc,
           icon: `place-${bus.id}`,
           id: `bus-${bus.id}`,
+          logo: bus.logo,
         })
       }
     })
@@ -136,11 +156,8 @@ class Map extends Component {
           const { lng = -74.0060, lat = 40.7128 } = transform._center || {};
           setCenter([lng, lat]);
         }}
+        
       >
-        {
-          allBusinesses.length 
-            && allBusinesses.map((bus) => <Image id={`place-${bus.id}`} url={bus.logo} key={`icon-${bus.id}`}/>)
-        }
         {
           allBusinesses.length 
             && locations.length
