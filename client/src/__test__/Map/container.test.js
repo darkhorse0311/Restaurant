@@ -51,7 +51,7 @@ describe('Map Contianer', () => {
         expect(mapStateToProps(initialState)).toEqual(expectedState);
     });
 
-    it('should return expected state no values passed in' , () => {
+    it('should return expected state when no values passed in' , () => {
         const expectedState = {
             locations: [],
             allBusinesses: [],

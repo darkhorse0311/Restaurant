@@ -53,6 +53,11 @@ describe('Map Component', () => {
         expect(wrapper.exists()).toBe(true)
     });
 
+    it('map does not render when center is not specified', () => {
+        const wrapper = shallow(<Map {...props} center={[]}/>);
+        expect(wrapper.find(Mapbox).length).toEqual(0)
+    });
+
     it('componentDidMount calls setLoading and getCurrentCoord, setDefaultValues', () => {
         const wrapper = shallow(<Map {...props}/>);
         const instance = wrapper.instance();
@@ -143,4 +148,5 @@ describe('Map Component', () => {
       img.getElement().props.onLoaded();
       expect(imgFunc).toHaveBeenCalled();
     })
+
 });
