@@ -88,10 +88,10 @@ func InitDB() (*gorm.DB, error) {
 	}
 
 	// Production
-	// dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"], k["AWS_PASSWORD"])
+	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"], k["AWS_PASSWORD"])
 
 	// Local
-	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"])
+	// dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"])
 
 	db, err = gorm.Open("postgres", dburi)
 	if err != nil {
