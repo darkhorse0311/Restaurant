@@ -6,7 +6,7 @@ Application that recommends macro friendly meals from local restaurants.
 [![Build Status](https://travis-ci.com/reynld/carbtographer.svg?branch=master)](https://travis-ci.com/reynld/carbtographer)
 [![CodeFactor](https://www.codefactor.io/repository/github/reynld/carbtographer/badge/master)](https://www.codefactor.io/repository/github/reynld/carbtographer/overview/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/reynld/carbtographer)](https://goreportcard.com/report/github.com/reynld/carbtographer)
-[![Coverage Status](https://coveralls.io/repos/github/reynld/carbtographer/badge.svg?branch=coverage-setup)](https://coveralls.io/github/reynld/carbtographer?branch=coverage-setup)
+[![Coverage Status](https://coveralls.io/repos/github/reynld/carbtographer/badge.svg?branch=master)](https://coveralls.io/github/reynld/carbtographer?branch=master)
 
 Frontend Link: https://carbtographer.com
 

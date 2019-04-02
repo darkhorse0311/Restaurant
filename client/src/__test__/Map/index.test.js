@@ -1,36 +1,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Map, { Mapbox } from '../../components/Map/index';
-import { Feature } from "react-mapbox-gl";
+import { Feature, Image } from "react-mapbox-gl";
 
 const props = {
     locations: [
       {
-        "id": "p24aXNna282LwdSk0n-4UQ",
+        "id": "r4jG613xCL4ispS14rEBnA",
         "name": "Subway",
         "coordinates": {
-          "latitude": 40.71289,
-          "longitude": -74.00758
+          "latitude": 40.7163137197495,
+          "longitude": -74.004714936018
         },
         "photos": [
-          "https://s3-media2.fl.yelpcdn.com/bphoto/y5kSjjmza9da5Y4lGyNHxg/o.jpg"
+          "https://s3-media1.fl.yelpcdn.com/bphoto/TWRxx3GueDGljuZWExE5eA/o.jpg"
         ],
-        "distance": 154.94281540312298,
-        "r_id": 1
-      },
+        "distance": 414.39746949756113,
+        "r_id": 26
+      }
+    ],
+    allBusinesses: [
       {
-        "id": "jPIZ3FR5LNcwPuUHi2Fe4g",
-        "name": "McDonald's",
-        "coordinates": {
-          "latitude": 40.70944,
-          "longitude": -74.01012
-        },
-        "photos": [
-          "https://s3-media1.fl.yelpcdn.com/bphoto/uCgd-65G_jhB9PiGxY8uEA/o.jpg"
-        ],
-        "distance": 507.50127180505456,
-        "r_id": 4
-      },
+        id: 26,
+        name: "Subway",
+        logo: "https://i.imgur.com/iPihkvD.png",
+      }
     ],
     center: [-74.0060, 40.7128],
     zoom: [14],
@@ -42,12 +36,18 @@ const props = {
     setShowModal: jest.fn(),
     setLoading: jest.fn(),
     setPermission: jest.fn(),
+    getAllBusinesses: jest.fn(),
 };
 
 describe('Map Component', () => {
     it('renders without crashing', () => {
         const wrapper = shallow(<Map {...props}/>);
         expect(wrapper.exists()).toBe(true)
+    });
+
+    it('map does not render when center is not specified', () => {
+        const wrapper = shallow(<Map {...props} center={[]}/>);
+        expect(wrapper.find(Mapbox).length).toEqual(0)
     });
 
     it('componentDidMount calls setLoading and getCurrentCoord, setDefaultValues', () => {
@@ -106,12 +106,10 @@ describe('Map Component', () => {
       expect(setDV).toHaveBeenCalled();
     });
 
-
-
-    it('two features found', () => {
+    it('one feature found', () => {
         const wrapper = shallow(<Map {...props}/>);
         wrapper.find(Feature)
-        expect(wrapper.find(Feature).length).toEqual(2);
+        expect(wrapper.find(Feature).length).toEqual(1);
     });
 
     it('feature clicked calls markerClick, setCenter and setShowModal', () => {
@@ -129,8 +127,18 @@ describe('Map Component', () => {
 
       map.getElement().props.onMoveEnd();
       expect(props.setCenter).toHaveBeenCalled();
+    })
 
+    it('calls onLoad event from Image and increments imagesLoaded', () => {
+      const wrapper = shallow(<Map {...props}/>);
+      const img = wrapper.find(Image);
+      expect(Image.length).toEqual(1);
 
+      const instance = wrapper.instance();
+      const imgFunc = jest.spyOn(instance, 'imageLoaded');
+
+      img.getElement().props.onLoaded();
+      expect(imgFunc).toHaveBeenCalled();
     })
 
 });

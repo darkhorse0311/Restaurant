@@ -5,11 +5,11 @@ import { getLocations } from '../Map/actions';
 
 export const mapStateToProps = ({
     map: {
-        center =[],
-        loading,
-        permission
-    }
-}) => ({
+        center = [],
+        loading = false,
+        permission = false
+    } = {}
+}= {}) => ({
     center,
     loading,
     permission,

@@ -4,6 +4,7 @@ const initialState = {
     map: {
         locations: [],
         center: [],
+        allBusinesses: [],
         zoom: [14],
         mapStyle: {
             flex: 1,
@@ -33,6 +34,7 @@ describe('Map Contianer', () => {
     it('should return expected state when passed in expectedState' , () => {
         const expectedState = {
             locations: [],
+            allBusinesses: [],
             center: [],
             zoom: [14],
             mapStyle: {
@@ -47,6 +49,19 @@ describe('Map Contianer', () => {
             name: "",
         }
         expect(mapStateToProps(initialState)).toEqual(expectedState);
+    });
+
+    it('should return expected state when no values passed in' , () => {
+        const expectedState = {
+            locations: [],
+            allBusinesses: [],
+            center: [],
+            zoom: [],
+            mapStyle: {},
+            permission: false,
+            name: "",
+        }
+        expect(mapStateToProps()).toEqual(expectedState);
     });
 
     it('should return correct actions', () => {

@@ -15,5 +15,6 @@ type items struct {
 // restuarant struct from json
 type restuarant struct {
 	Name  string  `json:"name"`
+	Logo  string  `json:"logo"`
 	Items []items `json:"items"`
 }

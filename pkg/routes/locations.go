@@ -35,11 +35,6 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- model
 		log.Fatal(err)
 	}
 
-	for i := range res.Search.Business {
-		id := &res.Search.Business[i]
-		id.RID = rest.ID
-	}
-
 	ch <- res
 }
 
@@ -109,5 +104,12 @@ func GetLocations(w http.ResponseWriter, req *http.Request) {
 	}()
 
 	wg.Wait()
+
+	for i, bus := range ab {
+		var dbResp []models.Restaurants
+		database.GetIDByName(bus.Name, &dbResp)
+		ab[i].RID = dbResp[0].ID
+	}
+
 	json.NewEncoder(w).Encode(&ab)
 }

@@ -14,16 +14,22 @@ describe('Navigation Component', () => {
         const wrapper = shallow(<Navigation {...props}/>);
         expect(wrapper.exists()).toBe(true)
     });
+
     it('title exists', () => {
         const wrapper = shallow(<Navigation {...props}/>);
         expect(wrapper.find('h1').length).toEqual(1)
     });
 
-    it('two icon exists if permissions is true', () => {
+    it('fa-redo-alt icon exists if permissions is true', () => {
         const wrapper = shallow(<Navigation {...props}/>);
-        expect(wrapper.find('i').length).toEqual(2)
+        expect(wrapper.find('.fa-redo-alt').length).toEqual(1)
     });
 
+    it('fa-spinner icon exists if loading is true', () => {
+        const wrapper = shallow(<Navigation {...props} loading={true}/>);
+        expect(wrapper.find('.fa-spinner').length).toEqual(1)
+    });
+    
     it('geo location warning shows with no props', () => {
         const wrapper = shallow(<Navigation/>);
         expect(wrapper.find('.geo-off').length).toEqual(1);
