@@ -6,7 +6,8 @@ const props = {
     center: [-74.0060, 40.7128], 
     getLocations: jest.fn(), 
     loading: false, 
-    permission: false
+    permission: false,
+    setCompact: jest.fn(),
 };
 
 describe('Navigation Component', () => {
@@ -45,10 +46,16 @@ describe('Navigation Component', () => {
         expect(wrapper.find('.geo-off').length).toEqual(0);
     });
 
-    it('clicking refresh button calls onRefresh', () => {
+    it('clicking refresh button calls getLocations', () => {
         const wrapper = shallow(<Navigation {...props}/>);
         wrapper.find('.fa-redo-alt').simulate('click');
         expect(props.getLocations).toHaveBeenCalledTimes(1);;
+    });
+
+    it('clicking compact button calls setCompact', () => {
+        const wrapper = shallow(<Navigation {...props}/>);
+        wrapper.find('.fa-buffer').simulate('click');
+        expect(props.setCompact).toHaveBeenCalledTimes(1);;
     });
 
 });
