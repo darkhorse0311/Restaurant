@@ -63,6 +63,7 @@ const ItemMacros = styled.div`
 `;
 
 const StyledItem = styled.div`
+    flex-shrink: 0;
     width: 100%;
     height: 145px;
     border-bottom: 1px solid rgba(0,0,0,0.4);

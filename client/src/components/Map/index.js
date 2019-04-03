@@ -136,10 +136,10 @@ class Map extends Component {
 
     const flyToOptions = { speed: 0.8 };
 
-    const width = document.body.clientWidth < 650 ? "100vw" : "calc(100vw - 325px)";
+    // const width = document.body.clientWidth < 650 ? "100vw" : "calc(100vw - 325px)";
     const mapStyle = {
       flex: 1,
-      width,
+      width: "100vw",
       height: "100vh",
       position: "fixed",
       top: 0,

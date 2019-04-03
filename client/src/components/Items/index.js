@@ -108,12 +108,15 @@ export default ItemsContainer;
 
 const Header = styled.div`
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: flex-start;
-    width: 100%;
     padding: 10px 0px 10px;
+    width: 100%;
+    height: 120px;
+    flex-shrink: 0;
     .title {
+        flex-shrink: 0;
         width: 100%;
         display: flex;
         align-items: center;
@@ -136,6 +139,8 @@ const ItemList = styled.div`
     position: relative;
     border-top: 1px solid black;
     overflow: scroll;
+    width: 100%;
+    max-width: 400px;
 `;
 
 const StyledContainer = styled.div`
@@ -163,14 +168,8 @@ const StyledContainer = styled.div`
     `}
 
     @media (min-width: 650px) {
-        width: 325px;
-        position: absolute;
-        height: 100vh;
+        max-width: 400px;
         right: 0;
-        margin-left: 0px;
-        transition: transform none;
-        transform: translateY(0);
-        border-top-right-radius: 0px;
     }
 `;
 
@@ -179,6 +178,7 @@ const StyledAction = styled.div`
     justify-content: flex-start;
     align-items: center;
     user-select: none;
+    flex-shrink: 0;
     .arrow-box {
         height: 30px;
         font-size: 14px;
