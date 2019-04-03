@@ -79,7 +79,7 @@ const StyledHeader = styled.div`
                 font-size: 28px;
             }
             &.fa-buffer {
-                ${({compact}) => compact === true && css`
+                ${({compact = false} = {}) => compact === true && css`
                     color: white;
                 `}
             }

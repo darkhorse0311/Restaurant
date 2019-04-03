@@ -8,6 +8,7 @@ const props = {
     loading: false, 
     permission: false,
     setCompact: jest.fn(),
+    compact: false,
 };
 
 describe('Navigation Component', () => {
@@ -53,7 +54,7 @@ describe('Navigation Component', () => {
     });
 
     it('clicking compact button calls setCompact', () => {
-        const wrapper = shallow(<Navigation {...props}/>);
+        const wrapper = shallow(<Navigation {...props} compact={true}/>);
         wrapper.find('.fa-buffer').simulate('click');
         expect(props.setCompact).toHaveBeenCalledTimes(1);;
     });
