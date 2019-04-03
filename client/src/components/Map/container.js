@@ -27,6 +27,7 @@ export const mapStateToProps = ({
         mapStyle = {},
         permission = false,
         allBusinesses = [],
+        compact = false,
     } = {},
     business: {
         name = "",
@@ -39,6 +40,7 @@ export const mapStateToProps = ({
     name,
     permission,
     allBusinesses,
+    compact,
 })
 
 export const mapDispatchToProps = dispatch => (

@@ -4,6 +4,7 @@ export const SET_CENTER = 'set_center';
 export const LOADING = 'loading';
 export const SET_PERMISSION = 'set_permission';
 export const SET_BUSINESSES = 'set_businesses';
+export const SET_COMPACT = 'set_compact';
 
 
 const url = process.env.REACT_APP_BACKEND_URL;
@@ -31,3 +32,4 @@ export const getAllBusinesses = () => async dispatch => {
 export const setCenter = (coords) => ({type: SET_CENTER, payload: coords });
 export const setLoading = (value) => ({ type: LOADING, payload: value });
 export const setPermission = (value) => ({ type: SET_PERMISSION, payload: value});
+export const setCompact = (value) => ({ type: SET_COMPACT, payload: value});

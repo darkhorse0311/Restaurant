@@ -1,4 +1,10 @@
-import { SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION, SET_BUSINESSES } from './actions'
+import { 
+    SET_LOCATIONS, 
+    SET_CENTER, LOADING, 
+    SET_PERMISSION, 
+    SET_BUSINESSES,
+    SET_COMPACT,
+} from './actions'
 
 export const defaultState = {
     locations: [],
@@ -7,6 +13,7 @@ export const defaultState = {
     permission: false,
     loading: false,
     allBusinesses: [],
+    compact: false,
 }
 
 export default (state = defaultState, action) => {
@@ -38,6 +45,11 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 allBusinesses: payload
+            }
+        case SET_COMPACT:
+            return {
+                ...state,
+                compact: payload
             }
         default: return {...state};
     }

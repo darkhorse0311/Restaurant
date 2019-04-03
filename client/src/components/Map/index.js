@@ -70,6 +70,7 @@ class Map extends Component {
   }
 
   renderLayer = (layer) => {
+    const { compact } = this.props;
     const { coords, icon, id, logo } = layer;
 
     return (
@@ -84,8 +85,8 @@ class Map extends Component {
           id={id}
           layout={{
             "icon-image": icon,
-            // "icon-allow-overlap": true,
-            // "text-allow-overlap": true,
+            "icon-allow-overlap": compact ? false : true,
+            "text-allow-overlap": compact ? false : true,
           }}
           style={{zIndex: 5}}
           // images={{imageKey: icon, image: img }}
