@@ -145,6 +145,7 @@ class Map extends Component {
       left: 0
     };
 
+    console.log("center: ", center)
     return center.length === 2 ? (
       <Mapbox
         // eslint-disable-next-line react/style-prop-object
@@ -161,8 +162,8 @@ class Map extends Component {
         
       >
         {
-          allBusinesses.length 
-            && locations.length
+          allBusinesses.length > 0
+            && locations.length > 0
               && this.filterLayers().map(layer => this.renderLayer(layer))
         }
       </Mapbox>
