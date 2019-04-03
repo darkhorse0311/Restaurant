@@ -9,12 +9,29 @@ export const SET_COMPACT = 'set_compact';
 
 const url = process.env.REACT_APP_BACKEND_URL;
 
-export const getLocations = (lon, lat) => async dispatch => {
+export const getLocations = (lon, lat, loc = []) => async dispatch => {
     dispatch({ type: LOADING, payload: true })
     const locations = await axios.get(`${url}/locations/${lat}/${lon}`);
+
+    let check = {};
+
+    let filterdLoc = [];
+
+    loc.forEach(l => {
+        check[l.id] = true;
+        filterdLoc.push(l)
+    })
+
+    locations.data.forEach(l => {
+        if (!(l.id in check)) {
+            check[l.id] = true;
+            filterdLoc.push(l);
+        }
+    })
+
     dispatch({
         type: SET_LOCATIONS,
-        payload: locations.data
+        payload: filterdLoc
     })
     dispatch({ type: LOADING, payload: false })
 }

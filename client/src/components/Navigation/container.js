@@ -9,12 +9,14 @@ export const mapStateToProps = ({
         loading = false,
         permission = false,
         compact = false,
+        locations,
     } = {}
 }= {}) => ({
     center,
     loading,
     permission,
     compact,
+    locations,
 });
 
 export const mapDispatchToProps = dispatch => bindActionCreators({

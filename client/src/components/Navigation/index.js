@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components'
 
-const Navigation = ({center, getLocations, loading, permission, compact, setCompact}) => {
+const Navigation = ({center, getLocations, loading, permission, compact, setCompact, locations}) => {
     return (
         <StyledHeader compact={compact}>
             <h1>Carbtographer</h1>
@@ -12,7 +12,7 @@ const Navigation = ({center, getLocations, loading, permission, compact, setComp
                         : (<i
                             className="fas fa-redo-alt"
                             onClick={() => {
-                                getLocations(center[0], center[1])
+                                getLocations(center[0], center[1], locations)
                             }}
                         />)
                 }
