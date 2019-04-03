@@ -113,6 +113,7 @@ const Header = styled.div`
     align-items: flex-start;
     padding: 10px 0px 10px;
     width: 100%;
+    max-width: 400px;
     height: 120px;
     flex-shrink: 0;
     .title {
@@ -205,6 +206,7 @@ const StyledAction = styled.div`
 
 const ActionGroup = styled.div`
     width: 100%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
