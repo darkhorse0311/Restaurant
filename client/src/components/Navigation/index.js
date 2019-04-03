@@ -1,20 +1,26 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
-const Navigation = ({center, getLocations, loading, permission}) => {
+const Navigation = ({center, getLocations, loading, permission, compact, setCompact, locations}) => {
     return (
-        <StyledHeader>
+        <StyledHeader compact={compact}>
             <h1>Carbtographer</h1>
-            {
-                loading
-                ? (<i className="fas fa-spinner spinner" />)
-                : (<i
-                    className="fas fa-redo-alt"
-                    onClick={() => {
-                        getLocations(center[0], center[1])
-                    }}
-                />)
-            }
+            <span className="header-actions">
+                {
+                    loading
+                        ? (<i className="fas fa-spinner spinner" />)
+                        : (<i
+                            className="fas fa-redo-alt"
+                            onClick={() => {
+                                getLocations(center[0], center[1], locations)
+                            }}
+                        />)
+                }
+                <i 
+                    className="fab fa-buffer"
+                    onClick={() => setCompact(!compact)}
+                ></i>
+            </span>
             {
                 !permission ? (
                     <span className="geo-off">
@@ -39,9 +45,12 @@ const rotation = keyframes`
 `
 
 const StyledHeader = styled.div`
-    width: 100vw;
+    width: 100%;
+    /* @media (min-width: 650px) {
+        width: calc(100vw - 325px)
+    }; */
     height: 60px;
-    position: fixed;
+    position: absolute;
     z-index: 2;
     top: 0;
     left: 0;
@@ -50,14 +59,33 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     color: rgba(255,255,255,0.74);
-    i {
-        font-size: 26px;
-        height: 60px;
-        width: 60px;
-        line-height: 60px;
-        text-align: center;
-        &.spinner {
-            animation: ${rotation} 2.5s infinite linear;
+    .header-actions {
+        display: flex;
+        /* flex-direction: column; */
+        /* margin-top: 78px; */
+        margin-top: 18px;
+        justify-content: flex-start;
+        align-items: center;
+        i {
+            color: rgba(255,255,255,0.70);
+            font-size: 26px;
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+            transition: font-size 200ms ease-in-out;
+            :hover {
+                font-size: 28px;
+            }
+            &.fa-buffer {
+                ${({compact = false} = {}) => compact === true && css`
+                    color: white;
+                `}
+            }
+            &.spinner {
+                animation: ${rotation} 2.5s infinite linear;
+            }
         }
     }
     h1 {

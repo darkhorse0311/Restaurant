@@ -12,6 +12,7 @@ import {
 import {
     setShowModal,
     getItems,
+    setSortMode,
 } from '../Items/actions'
 
 
@@ -26,6 +27,7 @@ export const mapStateToProps = ({
         mapStyle = {},
         permission = false,
         allBusinesses = [],
+        compact = false,
     } = {},
     business: {
         name = "",
@@ -38,6 +40,7 @@ export const mapStateToProps = ({
     name,
     permission,
     allBusinesses,
+    compact,
 })
 
 export const mapDispatchToProps = dispatch => (
@@ -50,6 +53,7 @@ export const mapDispatchToProps = dispatch => (
             setLoading,
             setPermission,
             getAllBusinesses,
+            setSortMode,
         },
         dispatch
     )

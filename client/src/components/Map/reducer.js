@@ -1,20 +1,19 @@
-import { SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION, SET_BUSINESSES } from './actions'
+import { 
+    SET_LOCATIONS, 
+    SET_CENTER, LOADING, 
+    SET_PERMISSION, 
+    SET_BUSINESSES,
+    SET_COMPACT,
+} from './actions'
 
 export const defaultState = {
     locations: [],
     center: [],
     zoom: [14],
-    mapStyle: {
-        flex: 1,
-        width: "100vw",
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        left: 0
-    },
     permission: false,
     loading: false,
     allBusinesses: [],
+    compact: false,
 }
 
 export default (state = defaultState, action) => {
@@ -46,6 +45,11 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 allBusinesses: payload
+            }
+        case SET_COMPACT:
+            return {
+                ...state,
+                compact: payload
             }
         default: return {...state};
     }

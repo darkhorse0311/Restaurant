@@ -1,5 +1,5 @@
 import reducer, { defaultState } from '../../components/Map/reducer';
-import { SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION, SET_BUSINESSES } from '../../components/Map/actions'
+import { SET_LOCATIONS, SET_CENTER, LOADING, SET_PERMISSION, SET_BUSINESSES, SET_COMPACT } from '../../components/Map/actions'
 
 const locations = [
     {
@@ -91,6 +91,18 @@ describe('Map reducer', () => {
         ).toEqual({
             ...defaultState, 
             allBusinesses: [0, 1]
+        })
+    });
+
+    it('should handle SET_COMPACT', () => {
+        expect(
+          reducer(defaultState, {
+            type: SET_COMPACT,
+            payload: true,
+          })
+        ).toEqual({
+            ...defaultState, 
+            compact: true,
         })
     });
 });

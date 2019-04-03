@@ -7,7 +7,6 @@ export const Mapbox = ReactMapBoxGl({
   accessToken: token,
 });
 
-
 class Map extends Component {
 
   state = {
@@ -43,7 +42,8 @@ class Map extends Component {
   }
 
   markerClick = (place, coord) => {
-    const { setCenter, getItems, setShowModal, name } = this.props;
+    const { setCenter, getItems, setShowModal, name, setSortMode } = this.props;
+    setSortMode('N', 'A');
     setCenter(coord);
     if (place.name !== name) {
       getItems(place);
@@ -70,13 +70,9 @@ class Map extends Component {
   }
 
   renderLayer = (layer) => {
+    const { compact } = this.props;
     const { coords, icon, id, logo } = layer;
 
-    // let img = new Image();
-    // img.src = logo;
-    // img.alt = icon;
-    // img.width = 60;
-    // img.height = 60;
     return (
       <React.Fragment key={id}>
         <Image 
@@ -87,7 +83,11 @@ class Map extends Component {
         <Layer
           type="symbol"
           id={id}
-          layout={{"icon-image": icon}}
+          layout={{
+            "icon-image": icon,
+            "icon-allow-overlap": compact ? false : true,
+            "text-allow-overlap": compact ? false : true,
+          }}
           style={{zIndex: 5}}
           // images={{imageKey: icon, image: img }}
         >
@@ -135,17 +135,17 @@ class Map extends Component {
     } = this.props;
 
     const flyToOptions = { speed: 0.8 };
-    
+
+    // const width = document.body.clientWidth < 650 ? "100vw" : "calc(100vw - 325px)";
     const mapStyle = {
       flex: 1,
-      width: '100vw',
+      width: "100vw",
       height: "100vh",
       position: "fixed",
       top: 0,
       left: 0
     };
 
-    console.log("center: ", center)
     return center.length === 2 ? (
       <Mapbox
         // eslint-disable-next-line react/style-prop-object

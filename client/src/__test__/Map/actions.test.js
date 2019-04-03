@@ -8,11 +8,13 @@ import {
     LOADING, 
     SET_PERMISSION,
     SET_BUSINESSES,
+    SET_COMPACT,
     getLocations,
     setCenter,
     setLoading,
     setPermission,
     getAllBusinesses,
+    setCompact,
 } from '../../components/Map/actions'
 
 const middlewares = [thunk]
@@ -35,7 +37,36 @@ describe('Map Actions', () => {
             })
         );
 
-        return store.dispatch(getLocations()).then(() => {
+        return store.dispatch(getLocations(0, 0)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+        })
+    })
+
+    it('should return non duplicate locations', async () => {
+        const payload = [
+            {
+                id: "001"
+            },
+            {
+                id: "002"
+            },
+        ]
+        const expectedPayload = [...payload, {id: "003"}]
+        const expectedActions = [
+            {type: LOADING, payload: true},
+            {type: SET_LOCATIONS, payload: expectedPayload},
+            {type: LOADING, payload: false},
+        ]
+        const store = mockStore({})
+
+        // setup axios
+        mockAxios.get.mockImplementationOnce(() =>
+            Promise.resolve({
+                data: expectedPayload
+            })
+        );
+
+        return store.dispatch(getLocations(0, 0, payload)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
     })
@@ -85,5 +116,14 @@ describe('Map Actions', () => {
             payload,
         }
         expect(setPermission(payload)).toEqual(expectedAction)
+    })
+
+    it('setCompact should call SET_COMPACT actions', () => {
+        const payload = true;
+        const expectedAction = {
+            type: SET_COMPACT,
+            payload,
+        }
+        expect(setCompact(payload)).toEqual(expectedAction)
     })
   })

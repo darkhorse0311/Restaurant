@@ -28,14 +28,6 @@ const props = {
     ],
     center: [-74.0060, 40.7128],
     zoom: [14],
-    mapStyle: {
-        flex: 1,
-        width: "100vw",
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        left: 0
-    },
     permission: false,
     name: "",
     getLocations: jest.fn(),
@@ -45,6 +37,7 @@ const props = {
     setLoading: jest.fn(),
     setPermission: jest.fn(),
     getAllBusinesses: jest.fn(),
+    setSortMode: jest.fn(),
 };
 
 describe('Map Component', () => {
@@ -121,7 +114,7 @@ describe('Map Component', () => {
     });
 
     it('feature clicked calls markerClick, setCenter and setShowModal', () => {
-        const wrapper = shallow(<Map {...props}/>);
+        const wrapper = shallow(<Map {...props} compact={true}/>);
         wrapper.find(Feature).at(0).simulate('click');
 
         expect(props.setCenter).toHaveBeenCalled();

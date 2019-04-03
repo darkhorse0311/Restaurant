@@ -4,6 +4,7 @@ import { LOADING } from '../Map/actions'
 export const SET_BUSINESS = 'set_business';
 export const SET_ITEMS = 'set_items';
 export const SHOW_MODAL = 'show_modal';
+export const SET_MODE = 'set_mode';
 
 const url = process.env.REACT_APP_BACKEND_URL;
 
@@ -29,5 +30,15 @@ export const setShowModal = (value) => {
     return {
         type: SHOW_MODAL,
         payload: value
+    }
+}
+
+export const setSortMode = (sortMode, order) => {
+    return {
+        type: SET_MODE,
+        payload: {
+            sortMode,
+            order
+        }
     }
 }
