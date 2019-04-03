@@ -73,6 +73,11 @@ const StyledHeader = styled.div`
             width: 60px;
             line-height: 60px;
             text-align: center;
+            cursor: pointer;
+            transition: font-size 200ms ease-in-out;
+            :hover {
+                font-size: 28px;
+            }
             &.fa-buffer {
                 ${({compact}) => compact === true && css`
                     color: white;
