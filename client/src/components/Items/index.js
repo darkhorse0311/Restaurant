@@ -14,6 +14,30 @@ const ItemsContainer = ({name, items, setShowModal, showModal, setSortMode, sort
         setSortMode(mode, nOrder);
     }
 
+    const sortItems = (items) => {
+        let key = sortMode === 'C'
+            ? 'carbs'
+                : sortMode === 'P'
+                ? 'protein'
+                    : sortMode === 'F'
+                    ? 'fats'
+                        : null;
+
+        if (key == null) {
+            return items
+        }
+
+        let sItems = items.sort((a, b) => {
+            return a[key] - b[key]
+        });
+
+        if (order === 'D') {
+            return sItems.reverse();
+        }
+
+        return sItems;
+    }
+
     return (
         <StyledContainer showModal={showModal}>
             <Header>
@@ -32,7 +56,7 @@ const ItemsContainer = ({name, items, setShowModal, showModal, setSortMode, sort
             </Header>
             <ItemList>
             {
-                items.length ? items.map((item, i) => (
+                items.length ? sortItems(items).map((item, i) => (
                     <Item key={i} item={item}/>
                 )) : null
             }
