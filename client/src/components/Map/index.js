@@ -42,7 +42,8 @@ class Map extends Component {
   }
 
   markerClick = (place, coord) => {
-    const { setCenter, getItems, setShowModal, name } = this.props;
+    const { setCenter, getItems, setShowModal, name, setSortMode } = this.props;
+    setSortMode('N', 'A');
     setCenter(coord);
     if (place.name !== name) {
       getItems(place);
@@ -144,7 +145,6 @@ class Map extends Component {
       left: 0
     };
 
-    console.log("center: ", center)
     return center.length === 2 ? (
       <Mapbox
         // eslint-disable-next-line react/style-prop-object

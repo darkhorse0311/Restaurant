@@ -7,14 +7,20 @@ const ItemsContainer = ({name, items, setShowModal, showModal, setSortMode, sort
 
     const changeMode = (mode) => {
         let nOrder = 'A';
-        if (sortMode === mode) {
-            nOrder = (order === 'A') ? 'D' : 'A';
+
+        if (order === 'D'){
+            setSortMode('N', 'A');
+        } else {
+            if (sortMode === mode) {
+                nOrder = (order === 'A') ? 'D' : 'A';
+            }
+            setSortMode(mode, nOrder);
         }
 
-        setSortMode(mode, nOrder);
     }
 
-    const sortItems = (items) => {
+    const sortItems = () => {
+
         let key = sortMode === 'C'
             ? 'carbs'
                 : sortMode === 'P'
@@ -22,12 +28,12 @@ const ItemsContainer = ({name, items, setShowModal, showModal, setSortMode, sort
                     : sortMode === 'F'
                     ? 'fats'
                         : null;
-
+        
         if (key == null) {
             return items
         }
 
-        let sItems = items.sort((a, b) => {
+        let sItems = [...items].sort((a, b) => {
             return a[key] - b[key]
         });
 
@@ -45,18 +51,51 @@ const ItemsContainer = ({name, items, setShowModal, showModal, setSortMode, sort
                     <h2>{name}</h2>
                     <i 
                         onClick={() => setShowModal(false)}
-                        className={"down fas fa-times"}
+                        className={"close fas fa-times"}
                     />
                 </div>
-                <div className={"actions"}>
-                    <span onClick={() => changeMode('C')}>CARBS</span>
-                    <span onClick={() => changeMode('P')}>PROTEIN</span>
-                    <span onClick={() => changeMode('F')}>FATS</span>
-                </div>
+                <ActionGroup>
+                    <StyledAction 
+                        mode={sortMode}
+                        order={order}
+                        type={'C'}
+                        onClick={() => changeMode('C')}
+                    >
+                        <span>CARBS</span>
+                        <span className="arrow-box">
+                            <i className="fas fa-sort-up"></i>
+                            <i className="fas fa-sort-down"></i>
+                        </span>
+                    </StyledAction>
+                    <StyledAction 
+                        onClick={() => changeMode('P')}
+                        mode={sortMode}
+                        order={order}
+                        type={'P'}
+                    >
+                        <span>PROTEIN</span>
+                        <span className="arrow-box">
+                            <i className="fas fa-sort-up"></i>
+                            <i className="fas fa-sort-down"></i>
+                        </span>
+                    </StyledAction>
+                    <StyledAction 
+                        onClick={() => changeMode('F')}
+                        mode={sortMode}
+                        order={order}
+                        type={'F'}
+                    >
+                        <span>FATS</span>
+                        <span className="arrow-box">
+                            <i className="fas fa-sort-up"></i>
+                            <i className="fas fa-sort-down"></i>
+                        </span>
+                    </StyledAction>
+                </ActionGroup>
             </Header>
             <ItemList>
             {
-                items.length ? sortItems(items).map((item, i) => (
+                items.length ? sortItems().map((item, i) => (
                     <Item key={i} item={item}/>
                 )) : null
             }
@@ -67,8 +106,6 @@ const ItemsContainer = ({name, items, setShowModal, showModal, setSortMode, sort
 
 export default ItemsContainer;
 
-
-
 const Header = styled.div`
     display: flex;
     justify-content: center;
@@ -76,17 +113,6 @@ const Header = styled.div`
     align-items: flex-start;
     width: 100%;
     padding: 10px 0px 10px;
-    .actions {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 60px;
-        font-size: 15px;
-        font-weight: 600;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
     .title {
         width: 100%;
         display: flex;
@@ -94,7 +120,7 @@ const Header = styled.div`
         justify-content: space-between;
         height: 40px;
     }
-    .down {
+    .close {
         font-size: 26px;
     }
     h2 {
@@ -148,3 +174,43 @@ const StyledContainer = styled.div`
     }
 `;
 
+const StyledAction = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    user-select: none;
+    .arrow-box {
+        height: 30px;
+        font-size: 14px;
+        position: relative;
+        margin: 0px 5px;
+        .fa-sort-up {
+            position: absolute;
+            top:8px;
+            opacity: 0.3;
+            ${({mode, order, type}) => (mode === type && order === 'A') && css`
+                opacity: 1;
+            `}
+        }
+        .fa-sort-down {
+            position: absolute;
+            top:10px;
+            opacity: 0.3;
+            ${({mode, order, type}) => (mode === type && order === 'D') && css`
+                opacity: 1;
+            `}
+        }
+    }
+`;
+
+const ActionGroup = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+`

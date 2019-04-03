@@ -12,6 +12,7 @@ import {
 import {
     setShowModal,
     getItems,
+    setSortMode,
 } from '../Items/actions'
 
 
@@ -50,6 +51,7 @@ export const mapDispatchToProps = dispatch => (
             setLoading,
             setPermission,
             getAllBusinesses,
+            setSortMode,
         },
         dispatch
     )
