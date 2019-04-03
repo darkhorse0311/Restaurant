@@ -9,7 +9,7 @@ export const mapStateToProps = ({
         loading = false,
         permission = false,
         compact = false,
-        locations,
+        locations = [],
     } = {}
 }= {}) => ({
     center,

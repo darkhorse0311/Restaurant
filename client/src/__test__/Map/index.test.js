@@ -37,6 +37,7 @@ const props = {
     setLoading: jest.fn(),
     setPermission: jest.fn(),
     getAllBusinesses: jest.fn(),
+    setSortMode: jest.fn(),
 };
 
 describe('Map Component', () => {
@@ -113,7 +114,7 @@ describe('Map Component', () => {
     });
 
     it('feature clicked calls markerClick, setCenter and setShowModal', () => {
-        const wrapper = shallow(<Map {...props}/>);
+        const wrapper = shallow(<Map {...props} compact={true}/>);
         wrapper.find(Feature).at(0).simulate('click');
 
         expect(props.setCenter).toHaveBeenCalled();

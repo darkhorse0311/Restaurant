@@ -16,6 +16,7 @@ const initialState = {
         },
         permission: false,
         loading: false,
+        compact: false,
     },
     business: {
         id: null,
@@ -47,6 +48,7 @@ describe('Map Contianer', () => {
             },
             permission: false,
             name: "",
+            compact: false,
         }
         expect(mapStateToProps(initialState)).toEqual(expectedState);
     });
@@ -60,6 +62,7 @@ describe('Map Contianer', () => {
             mapStyle: {},
             permission: false,
             name: "",
+            compact: false,
         }
         expect(mapStateToProps()).toEqual(expectedState);
     });

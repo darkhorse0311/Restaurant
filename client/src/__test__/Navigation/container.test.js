@@ -17,6 +17,7 @@ const initialState = {
         },
         permission: false,
         loading: false,
+        compact: false,
     }
 }
 
@@ -27,6 +28,8 @@ describe('Navigator Contianer', () => {
             center: [],
             permission: false,
             loading: false,
+            compact: false,
+            locations: [],
         }
         expect(mapStateToProps(initialState)).toEqual(expectedState);
     });
@@ -36,6 +39,8 @@ describe('Navigator Contianer', () => {
             center: [],
             permission: false,
             loading: false,
+            compact: false,
+            locations: [],
         }
         expect(mapStateToProps()).toEqual(expectedState);
     });
