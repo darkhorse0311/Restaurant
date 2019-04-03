@@ -81,7 +81,11 @@ class Map extends Component {
         <Layer
           type="symbol"
           id={id}
-          layout={{"icon-image": icon}}
+          layout={{
+            "icon-image": icon,
+            // "icon-allow-overlap": true,
+            // "text-allow-overlap": true,
+          }}
           style={{zIndex: 5}}
           // images={{imageKey: icon, image: img }}
         >

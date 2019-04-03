@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { setShowModal } from './actions';
+import { setShowModal, setSortMode } from './actions';
 
 import Items from './index';
 
@@ -15,8 +15,10 @@ const mapStateToProps = ({
         r_id = null,
         items = [],
         showModal = false,
-    },
-}) => ({
+        sortMode = 'N',
+        order = 'A',
+    } = {},
+} = {}) => ({
     id,
     name,
     coordinates,
@@ -24,13 +26,18 @@ const mapStateToProps = ({
     distance,
     r_id,
     items,
-    showModal
+    showModal,
+    sortMode,
+    order,
 })
 
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators(
-        {setShowModal},
+        {
+            setShowModal,
+            setSortMode
+        },
         dispatch
     )
 );
