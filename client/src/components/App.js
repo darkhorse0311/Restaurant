@@ -25,13 +25,14 @@ class App extends Component {
 export default App;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   position: relative;
   background-color: #2B2B2B;
+  overflow: hidden;
   /* border: solid 1px red; */
 `;
 
