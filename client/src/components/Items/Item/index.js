@@ -68,7 +68,7 @@ const StyledItem = styled.div`
     height: 145px;
     border-bottom: 1px solid rgba(0,0,0,0.4);
     position: relative;
-    padding: 20px 0px;
+    padding: 20px 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

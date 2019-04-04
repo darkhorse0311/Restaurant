@@ -140,6 +140,8 @@ const ItemList = styled.div`
     position: relative;
     border-top: 1px solid black;
     overflow: scroll;
+    overflow-x: hidden;
+    /* overflow: hidden; */
     width: 100%;
     max-width: 400px;
 `;
