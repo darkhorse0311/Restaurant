@@ -58,12 +58,12 @@ func migrateSeed() {
 // getDBKeys makes sure all enviroment variables are set and return them
 func getDBKeys() (map[string]string, error) {
 	keys := []string{
-		"AWS_HOST",
-		"AWS_PORT",
-		"AWS_USER",
-		"AWS_DBNAME",
-		"AWS_PASSWORD",
-		"YELP_API_KEY",
+		"DB_HOST",
+		"DB_PORT",
+		"DB_USER",
+		"DB_NAME",
+		"DB_PASSWORD",
+		"YELP_API",
 	}
 
 	d := map[string]string{}
@@ -88,7 +88,7 @@ func InitDB() (*gorm.DB, error) {
 	}
 
 	// Production
-	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"], k["AWS_PASSWORD"])
+	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["DB_HOST"], k["DB_PORT"], k["DB_USER"], k["DB_NAME"], k["DB_PASSWORD"])
 
 	// Local
 	// dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"])

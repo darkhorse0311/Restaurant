@@ -1,36 +1,47 @@
 package routes
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 
-	"github.com/reynld/carbtographer/pkg/database"
-
 	"github.com/gorilla/mux"
-	"github.com/reynld/carbtographer/pkg/models"
+	"github.com/reynld/carbtographer/pkg/business"
+	"github.com/reynld/carbtographer/pkg/yelp"
 )
 
-// GetItems returns all items per restuarant id
-func GetItems(w http.ResponseWriter, req *http.Request) {
-	params := mux.Vars(req)
-	var items []models.Items
-	database.GetItems(params["id"], &items)
-	json.NewEncoder(w).Encode(&items)
+// Routes struct
+type Routes struct {
+	Router *mux.Router
 }
 
-// GetNames returns all restaurant names in database
-func GetNames(w http.ResponseWriter, req *http.Request) {
-	var rest []models.Restaurants
-	database.GetNames(&rest)
-	json.NewEncoder(w).Encode(&rest)
-}
-
-// LoggingMiddleware logs HTTP request
-func LoggingMiddleware(next http.Handler) http.Handler {
+// loggingMiddleware logs HTTP request
+func loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.RequestURI)
 		// Call the next handler, which can be another middleware in the chain, or the final handler.
 		next.ServeHTTP(w, r)
 	})
+}
+
+// GetServerIsUp '/' endpoint cheks if server is up
+func GetServerIsUp(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("server is live"))
+}
+
+// RouteNotFound '/*' endpoint for undefined routes
+func RouteNotFound(w http.ResponseWriter, req *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+	w.Write([]byte("route not found"))
+}
+
+// InitializeRouter maps all the routes the their handlers
+func (r *Routes) InitializeRouter() {
+	r.Router = mux.NewRouter()
+	r.Router.Use(loggingMiddleware)
+
+	r.Router.HandleFunc("/", GetServerIsUp).Methods("GET")
+	r.Router.HandleFunc("/names", business.GetNames).Methods("GET")
+	r.Router.HandleFunc("/items/{id}", business.GetItems).Methods("GET")
+	r.Router.HandleFunc("/locations/{lat}/{lon}", yelp.GetLocations).Methods("GET")
+	r.Router.NotFoundHandler = http.HandlerFunc(RouteNotFound)
 }

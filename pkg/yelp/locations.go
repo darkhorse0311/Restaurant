@@ -1,4 +1,4 @@
-package routes
+package yelp
 
 import (
 	"context"
@@ -17,13 +17,46 @@ import (
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
+// Search db response
+type Search struct {
+	Total    int               `json:"total"`
+	Business []models.Business `json:"business"`
+}
+
+// Response db response
+type Response struct {
+	Search Search `json:"search"`
+}
+
+// YelpQuery for business info
+var YelpQuery = `query ($name: String!, $lat:Float, $lon: Float) {
+	search(
+		term: $name,
+		latitude: $lat,
+		longitude: $lon,
+		radius: 500
+	) {
+		total
+		business {
+			id
+			name
+			coordinates {
+				latitude
+				longitude
+			}
+			photos
+			distance
+		}
+	}
+}`
+
 // searchBusiness gets ran in goroutine and returns the response to channel when done
-func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- models.YelpResponse, lat *float64, lon *float64) {
+func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- Response, lat *float64, lon *float64) {
 	key := os.Getenv("YELP_API_KEY")
 
-	var res models.YelpResponse
+	var res Response
 
-	req := graphql.NewRequest(models.YelpQuery)
+	req := graphql.NewRequest(YelpQuery)
 	req.Var("name", rest.Name)
 	req.Var("lat", lat)
 	req.Var("lon", lon)
@@ -66,7 +99,7 @@ func GetLocations(w http.ResponseWriter, req *http.Request) {
 	var ab []models.Business // all businesses
 	var uid []string         // unique id
 
-	c := make(chan models.YelpResponse)
+	c := make(chan Response)
 	var wg sync.WaitGroup
 
 	for i, name := range names {
