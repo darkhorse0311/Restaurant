@@ -1,4 +1,4 @@
-package routes
+package server
 
 import (
 	"io/ioutil"
@@ -17,7 +17,7 @@ func TestGetServerIsUp(t *testing.T) {
 	}
 
 	rec := httptest.NewRecorder()
-	GetServerIsUp(rec, req)
+	getServerIsUp(rec, req)
 
 	res := rec.Result()
 	if res.StatusCode != http.StatusOK {
@@ -42,7 +42,7 @@ func TestRouteNotFound(t *testing.T) {
 	}
 
 	rec := httptest.NewRecorder()
-	RouteNotFound(rec, req)
+	routeNotFound(rec, req)
 
 	res := rec.Result()
 	if res.StatusCode != http.StatusNotFound {

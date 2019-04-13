@@ -1,4 +1,4 @@
-package business
+package server
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 )
 
 // GetItems returns all items per restuarant id
-func GetItems(w http.ResponseWriter, req *http.Request) {
+func (s *Server) GetItems(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	var items []models.Items
 	database.GetItems(params["id"], &items)
@@ -18,7 +18,7 @@ func GetItems(w http.ResponseWriter, req *http.Request) {
 }
 
 // GetNames returns all restaurant names in database
-func GetNames(w http.ResponseWriter, req *http.Request) {
+func (s *Server) GetNames(w http.ResponseWriter, req *http.Request) {
 	var rest []models.Restaurants
 	database.GetNames(&rest)
 	json.NewEncoder(w).Encode(&rest)

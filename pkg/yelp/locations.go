@@ -4,15 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"log"
-	"net/http"
 	"os"
-	"strconv"
 	"sync"
 	"time"
 
 	"github.com/reynld/carbtographer/pkg/database"
 
-	"github.com/gorilla/mux"
 	"github.com/machinebox/graphql"
 	"github.com/reynld/carbtographer/pkg/models"
 )
@@ -72,24 +69,12 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- Respo
 }
 
 // GetLocations returns local businees that names match restuarants in our db
-func GetLocations(w http.ResponseWriter, req *http.Request) {
-	params := mux.Vars(req)
-
-	lat, err := strconv.ParseFloat(params["lat"], 64)
-	if err != nil {
-		log.Fatal(err)
-	}
-	lon, err := strconv.ParseFloat(params["lon"], 64)
-	if err != nil {
-		log.Fatal(err)
-	}
+func GetLocations(lat float64, lon float64) []models.Business {
 
 	if lon == float64(-74.0060) && lat == float64(40.7128) {
 		jsonRes := make([]models.Business, 0)
 		json.Unmarshal(DefaultLocation, &jsonRes)
-
-		json.NewEncoder(w).Encode(jsonRes)
-		return
+		return jsonRes
 	}
 
 	var names []models.Restaurants
@@ -144,5 +129,5 @@ func GetLocations(w http.ResponseWriter, req *http.Request) {
 		ab[i].RID = dbResp[0].ID
 	}
 
-	json.NewEncoder(w).Encode(&ab)
+	return ab
 }
