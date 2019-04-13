@@ -1,59 +1,11 @@
 package database
 
 import (
-	"encoding/json"
+	"database/sql"
 	"fmt"
-	"io/ioutil"
+	"log"
 	"os"
-
-	"github.com/jinzhu/gorm"
-	"github.com/reynld/carbtographer/pkg/models"
 )
-
-var db *gorm.DB
-var err error
-
-// migrateSeed migrates and seeds databse with JSON file from scraper
-func migrateSeed() {
-	db.DropTableIfExists(&models.Restaurants{}, &models.Items{})
-	db.AutoMigrate(&models.Restaurants{}, &models.Items{})
-
-	// Path to json file to seed DB
-	path := os.Getenv("SQLITE_PATH")
-	// Open our jsonFile
-	jsonFile, err := os.Open(path)
-	// if we os.Open returns an error then handle it
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer jsonFile.Close()
-
-	// Convert file to array of bytes
-	byteValue, _ := ioutil.ReadAll(jsonFile)
-	// Makes a array of Restuarant strucs
-	jsonInfo := make([]restuarant, 0)
-	// Converst array of bytes to array of structs
-	json.Unmarshal(byteValue, &jsonInfo)
-
-	// Loops through array of resturatns to seed database
-	for i, rest := range jsonInfo {
-		fmt.Printf("inserting: %d:%d \n", i, len(jsonInfo))
-		db.Create(&models.Restaurants{Name: rest.Name, Logo: rest.Logo})
-		for _, item := range rest.Items {
-			db.Create(&models.Items{
-				Name:      item.Name,
-				Type:      item.Type,
-				Protein:   item.Protein,
-				Carbs:     item.Carbs,
-				Fats:      item.Fats,
-				Calories:  item.Calories,
-				CalPerPro: item.CalPerPro,
-				Sodium:    item.Sodium,
-				RID:       i + 1,
-			})
-		}
-	}
-}
 
 // getDBKeys makes sure all enviroment variables are set and return them
 func getDBKeys() (map[string]string, error) {
@@ -63,41 +15,68 @@ func getDBKeys() (map[string]string, error) {
 		"DB_USER",
 		"DB_NAME",
 		"DB_PASSWORD",
-		"YELP_API",
 	}
 
-	d := map[string]string{}
+	values := map[string]string{}
 
 	for _, key := range keys {
 		v := os.Getenv(key)
 		if v == "" {
 			return nil, fmt.Errorf("eviroment variable %s is required", key)
 		}
-		d[key] = v
+		values[key] = v
 	}
 
-	return d, nil
+	return values, nil
 }
 
-// InitDB creates, migrates and seeds database
-func InitDB() (*gorm.DB, error) {
-
-	k, err := getDBKeys()
+// getDBUri makes sure all enviroment variables are set and return them
+func getDBUri() (string, error) {
+	d, err := getDBKeys()
 	if err != nil {
-		panic(err)
+		return "", err
 	}
 
-	// Production
-	dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", k["DB_HOST"], k["DB_PORT"], k["DB_USER"], k["DB_NAME"], k["DB_PASSWORD"])
-
-	// Local
-	// dburi := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable", k["AWS_HOST"], k["AWS_PORT"], k["AWS_USER"], k["AWS_DBNAME"])
-
-	db, err = gorm.Open("postgres", dburi)
-	if err != nil {
-		return nil, err
+	var dburi string
+	if d["ENVIROMENT"] == "PROD" {
+		// Production
+		dburi = fmt.Sprintf(
+			"host=%s port=%s user=%s dbname=%s password=%s",
+			d["DB_HOST"],
+			d["DB_PORT"],
+			d["DB_USER"],
+			d["DB_NAME"],
+			d["DB_PASSWORD"],
+		)
+	} else {
+		// Local
+		dburi = fmt.Sprintf(
+			"host=%s port=%s user=%s dbname=%s sslmode=disable",
+			d["DB_HOST"],
+			d["DB_PORT"],
+			d["DB_USER"],
+			d["DB_NAME"],
+		)
 	}
-	// Migrate and seed DB
-	// migrateSeed()
-	return db, nil
+
+	return dburi, nil
+}
+
+// InitializeDB connects to DB
+func InitializeDB() *sql.DB {
+	dburi, err := getDBUri()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db, err := sql.Open("postgres", dburi)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err = db.Ping(); err != nil {
+		log.Fatal(err)
+	}
+
+	return db
 }

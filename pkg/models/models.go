@@ -33,3 +33,22 @@ type Business struct {
 	Distance float64  `json:"distance"`
 	RID      int      `json:"r_id"`
 }
+
+// JSONItem struct from json
+type JSONItem struct {
+	Name      string  `json:"name"`
+	Type      string  `json:"type"`
+	Protein   int     `json:"protein"`
+	Fats      int     `json:"fats"`
+	Carbs     int     `json:"carbs"`
+	Calories  int     `json:"calories"`
+	CalPerPro float32 `json:"calperpro"`
+	Sodium    int     `json:"Sodium"`
+}
+
+// JSONRestaurant struct from json
+type JSONRestaurant struct {
+	Name  string     `json:"name"`
+	Logo  string     `json:"logo"`
+	Items []JSONItem `json:"items"`
+}

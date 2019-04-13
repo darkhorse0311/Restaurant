@@ -21,6 +21,7 @@ type Server struct {
 // InitializeServer maps DB and Router instance to Server struct
 func (s *Server) InitializeServer() {
 	s.InitializeRouter()
+	s.DB = database.InitializeDB()
 }
 
 // Run runs the server router
