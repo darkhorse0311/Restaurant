@@ -17,6 +17,7 @@ func CheckEnviroment() error {
 		"DB_PORT",
 		"YELP_API",
 		"ENVIROMENT",
+		"JWT_KEY",
 	}
 
 	for _, v := range variables {
