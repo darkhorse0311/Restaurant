@@ -24,6 +24,10 @@ func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 
-	businesses := yelp.GetLocations(lat, lon)
+	businesses, err := yelp.GetLocations(s.DB, lat, lon)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 	json.NewEncoder(w).Encode(businesses)
 }

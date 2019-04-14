@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"sync"
@@ -50,7 +51,7 @@ var YelpQuery = `query ($name: String!, $lat:Float, $lon: Float) {
 
 // searchBusiness gets ran in goroutine and returns the response to channel when done
 func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- Response, lat *float64, lon *float64) {
-	key := os.Getenv("YELP_API_KEY")
+	key := os.Getenv("YELP_API")
 
 	var res Response
 
@@ -126,6 +127,7 @@ func GetLocations(db *sql.DB, lat float64, lon float64) ([]models.Business, erro
 
 	wg.Wait()
 
+	fmt.Printf("ab :%+v", ab)
 	for i, bus := range ab {
 		id, err := database.GetRestaurantID(db, bus.Name)
 		if err != nil {

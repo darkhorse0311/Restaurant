@@ -67,7 +67,7 @@ func GetNames(db *sql.DB) ([]models.Restaurants, error) {
 // GetRestaurantID returns the id of the restuarant
 func GetRestaurantID(db *sql.DB, name string) (int, error) {
 	var id int
-	err := db.QueryRow(`SELECT id FROM restaurants WHERE name = $1`, name).Scan(id)
+	err := db.QueryRow(`SELECT id FROM restaurants WHERE name = $1`, name).Scan(&id)
 	if err != nil {
 		return 0, err
 	}

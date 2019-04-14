@@ -8,6 +8,7 @@ import (
 // CheckEnviroment function makes sure all enviroment variables are set befire running
 func CheckEnviroment() error {
 	variables := []string{
+		"PORT",
 		"DB_HOST",
 		"DB_PORT",
 		"DB_NAME",

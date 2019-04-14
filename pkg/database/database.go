@@ -15,6 +15,7 @@ func getDBKeys() (map[string]string, error) {
 		"DB_USER",
 		"DB_NAME",
 		"DB_PASSWORD",
+		"ENVIROMENT",
 	}
 
 	values := map[string]string{}
@@ -38,7 +39,7 @@ func getDBUri() (string, error) {
 	}
 
 	var dburi string
-	if d["ENVIROMENT"] == "PROD" {
+	if d["ENVIROMENT"] == "PRO" {
 		// Production
 		dburi = fmt.Sprintf(
 			"host=%s port=%s user=%s dbname=%s password=%s",
@@ -48,7 +49,7 @@ func getDBUri() (string, error) {
 			d["DB_NAME"],
 			d["DB_PASSWORD"],
 		)
-	} else {
+	} else if d["ENVIROMENT"] == "DEV" {
 		// Local
 		dburi = fmt.Sprintf(
 			"host=%s port=%s user=%s dbname=%s sslmode=disable",
@@ -57,6 +58,8 @@ func getDBUri() (string, error) {
 			d["DB_USER"],
 			d["DB_NAME"],
 		)
+	} else {
+		return "", fmt.Errorf("ENVIROMENT variable must be PRO or DEV")
 	}
 
 	return dburi, nil

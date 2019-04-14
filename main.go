@@ -37,12 +37,7 @@ func main() {
 		s.Initialize()
 
 		if *serve {
-			port := os.Getenv("PORT")
-			if port == "" {
-				log.Fatal("PORT env variable is required\n")
-			}
-			fmt.Printf("server listening on port: %s\n", port)
-			s.Run(fmt.Sprintf(":%s", port))
+			s.Run()
 		}
 		if *migrate {
 			database.RunMigrations(s.DB)

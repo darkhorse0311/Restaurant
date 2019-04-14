@@ -7,13 +7,12 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/reynld/carbtographer/pkg/database"
-	"github.com/reynld/carbtographer/pkg/models"
 )
 
 // GetItems returns all items per restuarant id
 func (s *Server) GetItems(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	items, err := database.GetItems(params["id"])
+	items, err := database.GetItems(s.DB, params["id"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		log.Print(err)
@@ -25,7 +24,10 @@ func (s *Server) GetItems(w http.ResponseWriter, req *http.Request) {
 
 // GetNames returns all restaurant names in database
 func (s *Server) GetNames(w http.ResponseWriter, req *http.Request) {
-	var rest []models.Restaurants
-	database.GetNames(&rest)
+	rest, err := database.GetNames(s.DB)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 	json.NewEncoder(w).Encode(&rest)
 }
