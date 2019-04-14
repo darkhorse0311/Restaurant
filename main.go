@@ -1,41 +1,53 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 
-	"github.com/gorilla/handlers"
-	"github.com/gorilla/mux"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"github.com/reynld/carbtographer/pkg/database"
-	"github.com/reynld/carbtographer/pkg/routes"
+	"github.com/reynld/carbtographer/pkg/server"
+	"github.com/reynld/carbtographer/pkg/utils"
 )
 
 func main() {
 	godotenv.Load()
-	db, err := database.InitDB()
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		panic("enviroment variable PORT is required")
+	if err := utils.CheckEnviroment(); err != nil {
+		log.Fatal(err)
 	}
 
-	r := mux.NewRouter()
-	r.Use(routes.LoggingMiddleware)
+	serve := flag.Bool("serve", false, "runs server")
+	migrate := flag.Bool("migrate", false, "migrates database")
+	seed := flag.Bool("seed", false, "seeds database")
+	flag.Parse()
 
-	r.HandleFunc("/", routes.GetServerIsUp).Methods("GET")
-	r.HandleFunc("/names", routes.GetNames).Methods("GET")
-	r.HandleFunc("/items/{id}", routes.GetItems).Methods("GET")
-	r.HandleFunc("/locations/{lat}/{lon}", routes.GetLocations).Methods("GET")
-	r.NotFoundHandler = http.HandlerFunc(routes.RouteNotFound)
+	if len(os.Args) > 1 {
+		if flag.NFlag() != 1 {
+			fmt.Println("pass just one argument")
+			flag.Usage()
+			os.Exit(1)
+		}
 
-	fmt.Printf("server live on port: %s\n", port)
-	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS()(r)))
+		s := server.Server{}
+		s.Initialize()
+
+		if *serve {
+			s.Run()
+		}
+		if *migrate {
+			database.RunMigrations(s.DB)
+		}
+		if *seed {
+			database.RunSeeds(s.DB)
+		}
+
+	} else {
+		fmt.Println("pass at least one argument")
+		flag.Usage()
+	}
 }

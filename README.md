@@ -47,24 +47,29 @@ You can generate one following the intructions here: [Mapbox: Access tokens](htt
 You will require a Yelp API Key to make authenticated requests.
  
 You can generate one following the intructions here: [Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
-- ``YELP_API_KEY`` - your Yelp Key (API Key)
-- ``AWS_HOST`` - your database Host URL
-- ``AWS_PORT``- your database PORT
-- ``AWS_USER`` - your database user
-- ``AWS_DBNAME`` - your database name
-- ``AWS_PASSWORD`` - your database password
+- ``PORT``- your server PORT
+- ``YELP_API`` - your Yelp Key (API Key)
+- ``DB_HOST`` - your database Host URL
+- ``DB_PORT``- your database PORT
+- ``DB_USER`` - your database user
+- ``DB_NAME`` - your database name
+- ``DB_PASSWORD`` - your database password
+- ``ENVIROMENT`` - must be PRO or DEV
+- ``JSON_PATH`` - path to resturantDataJSON file
 
 ## Usage
- With all enviroment variables in place you can now run the api locally
 
-#### Install
-`go install`
+#### Enable go modules
+`export GO111MODULE=on`
+
+#### Run migrations
+`go run main.go -migrate`
  
-#### Build
- `go build`
+#### Run seeds
+ `go run main.go -seeds`
  
-#### Run
- `./carbtographer`
+#### Run server
+ `go run main.go -serve`
 
 <br/>
 
