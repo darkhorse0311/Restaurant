@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/reynld/carbtographer/pkg/models"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // RunSeeds migrates and seeds databse with JSON file from scraper
@@ -48,5 +49,16 @@ func RunSeeds(db *sql.DB) {
 				log.Fatal(err)
 			}
 		}
+	}
+
+	hash, err := bcrypt.GenerateFromPassword([]byte("pass"), 10)
+	if err != nil {
+		log.Fatal("error hasing seed password")
+	}
+
+	var id int
+	err = CreateUser(db, &id, "rey", string(hash))
+	if err != nil {
+		log.Fatal("error seeding user")
 	}
 }
