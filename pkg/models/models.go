@@ -1,5 +1,11 @@
 package models
 
+import (
+	"time"
+
+	jwt "github.com/dgrijalva/jwt-go"
+)
+
 //Items from databse
 type Items struct {
 	ID        int     `gorm:"primary_key" json:"id"`
@@ -51,4 +57,32 @@ type JSONRestaurant struct {
 	Name  string     `json:"name"`
 	Logo  string     `json:"logo"`
 	Items []JSONItem `json:"items"`
+}
+
+// Claims a struct that will be encoded to a JWT.
+// We add jwt.StandardClaims as an embedded type, to provide fields like expiry time
+type Claims struct {
+	Username string `json:"username"`
+	ID       int    `json:"id"`
+	jwt.StandardClaims
+}
+
+// JWTResponse struct returned from generate token
+type JWTResponse struct {
+	Token string
+	Time  time.Time
+}
+
+// Credentials a struct to read the username and password from the request body
+type Credentials struct {
+	Password string `json:"password"`
+	Username string `json:"username"`
+}
+
+// User response from database
+type User struct {
+	ID       int    `json:"id"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
 }
