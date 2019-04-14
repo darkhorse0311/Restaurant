@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -12,8 +13,13 @@ import (
 // GetItems returns all items per restuarant id
 func (s *Server) GetItems(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	var items []models.Items
-	database.GetItems(params["id"], &items)
+	items, err := database.GetItems(params["id"])
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		log.Print(err)
+		return
+	}
+
 	json.NewEncoder(w).Encode(&items)
 }
 

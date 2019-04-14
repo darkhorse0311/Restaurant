@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/reynld/carbtographer/pkg/database"
 
 	"github.com/gorilla/handlers"
 )
@@ -18,8 +19,8 @@ type Server struct {
 	Router *mux.Router
 }
 
-// InitializeServer maps DB and Router instance to Server struct
-func (s *Server) InitializeServer() {
+// Initialize maps DB and Router instance to Server struct
+func (s *Server) Initialize() {
 	s.InitializeRouter()
 	s.DB = database.InitializeDB()
 }

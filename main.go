@@ -1,10 +1,15 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
+	"os"
 
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"github.com/reynld/carbtographer/pkg/database"
 	"github.com/reynld/carbtographer/pkg/server"
 	"github.com/reynld/carbtographer/pkg/utils"
@@ -12,18 +17,42 @@ import (
 
 func main() {
 	godotenv.Load()
-	s := server.Server{}
-
 	if err := utils.CheckEnviroment(); err != nil {
 		log.Fatal(err)
 	}
 
-	db, err := database.InitDB()
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
+	serve := flag.Bool("serve", false, "runs server")
+	migrate := flag.Bool("migrate", false, "migrates database")
+	seed := flag.Bool("seed", false, "seeds database")
+	flag.Parse()
 
-	s.InitializeServer()
-	s.Run()
+	if len(os.Args) > 1 {
+		if flag.NFlag() != 1 {
+			fmt.Println("pass just one argument")
+			flag.Usage()
+			os.Exit(1)
+		}
+
+		s := server.Server{}
+		s.Initialize()
+
+		if *serve {
+			port := os.Getenv("PORT")
+			if port == "" {
+				log.Fatal("PORT env variable is required\n")
+			}
+			fmt.Printf("server listening on port: %s\n", port)
+			s.Run(fmt.Sprintf(":%s", port))
+		}
+		if *migrate {
+			database.RunMigrations(s.DB)
+		}
+		if *seed {
+			database.RunSeeds(s.DB)
+		}
+
+	} else {
+		fmt.Println("pass at least one argument")
+		flag.Usage()
+	}
 }

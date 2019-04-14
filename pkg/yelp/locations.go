@@ -2,6 +2,7 @@ package yelp
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"log"
 	"os"
@@ -69,16 +70,18 @@ func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- Respo
 }
 
 // GetLocations returns local businees that names match restuarants in our db
-func GetLocations(lat float64, lon float64) []models.Business {
+func GetLocations(db *sql.DB, lat float64, lon float64) ([]models.Business, error) {
 
 	if lon == float64(-74.0060) && lat == float64(40.7128) {
 		jsonRes := make([]models.Business, 0)
 		json.Unmarshal(DefaultLocation, &jsonRes)
-		return jsonRes
+		return jsonRes, nil
 	}
 
-	var names []models.Restaurants
-	database.GetNames(&names)
+	names, err := database.GetNames(db)
+	if err != nil {
+		return nil, err
+	}
 
 	client := graphql.NewClient("https://api.yelp.com/v3/graphql")
 	var ab []models.Business // all businesses
@@ -124,10 +127,12 @@ func GetLocations(lat float64, lon float64) []models.Business {
 	wg.Wait()
 
 	for i, bus := range ab {
-		var dbResp []models.Restaurants
-		database.GetIDByName(bus.Name, &dbResp)
-		ab[i].RID = dbResp[0].ID
+		id, err := database.GetRestaurantID(db, bus.Name)
+		if err != nil {
+			return nil, err
+		}
+		ab[i].RID = id
 	}
 
-	return ab
+	return ab, nil
 }

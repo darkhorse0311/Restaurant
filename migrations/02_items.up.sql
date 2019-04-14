@@ -8,5 +8,5 @@ CREATE TABLE items (
   calories      INTEGER     NOT NULL,
   calsperpro    DECIMAL     NOT NULL,
   sodium        INTEGER     NOT NULL,
-  RID           INTEGER     REFERENCES items(id) ON DELETE CASCADE ON UPDATE CASCADE
+  r_id          INTEGER     REFERENCES items(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
