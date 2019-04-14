@@ -76,7 +76,7 @@ func GetRestaurantID(db *sql.DB, name string) (int, error) {
 
 // InsertRestaurant adds restaurant
 func InsertRestaurant(db *sql.DB, name string, logo string, id *int) error {
-	err := db.QueryRow(`INSERT INTO restaurant(name, logo)
+	err := db.QueryRow(`INSERT INTO restaurants(name, logo)
 		VALUES
 		($1, $2)
 		RETURNING id`, name, logo).Scan(id)
@@ -96,7 +96,7 @@ func InsertItem(db *sql.DB, item *models.JSONItem, restID int, id *int) error {
 			carbs, 
 			fats, 
 			calories, 
-			alsperpro, 
+			calsperpro, 
 			sodium, 
 			r_id
 		)

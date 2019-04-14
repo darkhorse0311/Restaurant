@@ -32,7 +32,7 @@ func RunSeeds(db *sql.DB) {
 
 	// Loops through array of resturatns to seed database
 	for i, rest := range jsonInfo {
-		fmt.Printf("INSERTING: %d:%d \n", i, len(jsonInfo))
+		fmt.Printf("INSERTING: %d:%d \n", i+1, len(jsonInfo))
 
 		var id int
 		err := InsertRestaurant(db, rest.Name, rest.Logo, &id)

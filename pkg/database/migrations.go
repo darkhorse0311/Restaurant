@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/golang-migrate/migrate"
-	"github.com/golang-migrate/migrate/database/postgres"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/postgres"
 )
 
 // RunMigrations runs migrations on database

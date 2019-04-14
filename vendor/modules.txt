@@ -1,12 +1,17 @@
-# github.com/golang-migrate/migrate v3.5.4+incompatible
-github.com/golang-migrate/migrate
-github.com/golang-migrate/migrate/database/postgres
-github.com/golang-migrate/migrate/database
-github.com/golang-migrate/migrate/source
+# github.com/golang-migrate/migrate/v4 v4.2.5
+github.com/golang-migrate/migrate/v4/source/file
+github.com/golang-migrate/migrate/v4
+github.com/golang-migrate/migrate/v4/database/postgres
+github.com/golang-migrate/migrate/v4/source
+github.com/golang-migrate/migrate/v4/database
 # github.com/gorilla/handlers v1.4.0
 github.com/gorilla/handlers
 # github.com/gorilla/mux v1.7.0
 github.com/gorilla/mux
+# github.com/hashicorp/errwrap v1.0.0
+github.com/hashicorp/errwrap
+# github.com/hashicorp/go-multierror v1.0.0
+github.com/hashicorp/go-multierror
 # github.com/jinzhu/gorm v1.9.2
 github.com/jinzhu/gorm/dialects/postgres
 # github.com/joho/godotenv v1.3.0

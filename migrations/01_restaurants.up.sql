@@ -1,5 +1,5 @@
 CREATE TABLE restaurants (
   id    serial      PRIMARY KEY,
-  name  varchar(40) UNIQUE NOT NULL,
-  logo  text        NOTNULL
+  name  varchar(240) UNIQUE NOT NULL,
+  logo  text        NOT NULL
 );
