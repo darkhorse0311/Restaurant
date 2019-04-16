@@ -57,6 +57,10 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 - ``ENVIROMENT`` - must be PRO or DEV
 - ``JSON_PATH`` - path to resturantDataJSON file
 - ``JWT_KEY`` - jwt secret key
+- ``CACHE_ADDRS`` - redis server address
+- ``CACHE_PASSWORD`` - redis server password
+- ``CACHE_DB`` - redis databse number
+
 
 ## Usage
 
