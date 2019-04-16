@@ -6,6 +6,8 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/reynld/carbtographer/pkg/yelp"
+
 	"github.com/go-redis/redis"
 )
 
@@ -27,6 +29,8 @@ func InitializeCache() *redis.Client {
 		fmt.Println("here")
 		log.Fatal(err)
 	}
+
+	client.Set("-74.0060:40.7128", string(yelp.DefaultLocation), -1)
 
 	return client
 }
