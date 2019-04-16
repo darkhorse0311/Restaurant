@@ -20,9 +20,8 @@ func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 	lat := params["lat"]
 	key := fmt.Sprintf("%s:%s", lon, lat)
 
-	getCmd := s.Cache.Get(key)
-	value, err := getCmd.Result()
-	if err != redis.Nil {
+	value, err := s.Cache.Get(key).Result()
+	if err != redis.Nil && err != nil {
 		jsonRes := make([]models.Business, 0)
 		json.Unmarshal([]byte(value), &jsonRes)
 		json.NewEncoder(w).Encode(jsonRes)
@@ -40,8 +39,7 @@ func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 		log.Println(err)
 	}
 
-	setCmd := s.Cache.Set(key, string(cacheBusinesses), -1)
-	value, err = setCmd.Result()
+	value, err = s.Cache.Set(key, string(cacheBusinesses), -1).Result()
 	if err != redis.Nil {
 		log.Println(err)
 	}

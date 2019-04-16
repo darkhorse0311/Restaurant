@@ -16,39 +16,6 @@ import (
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
-// Search db response
-type Search struct {
-	Total    int               `json:"total"`
-	Business []models.Business `json:"business"`
-}
-
-// Response db response
-type Response struct {
-	Search Search `json:"search"`
-}
-
-// YelpQuery for business info
-var YelpQuery = `query ($name: String!, $lat:Float, $lon: Float) {
-	search(
-		term: $name,
-		latitude: $lat,
-		longitude: $lon,
-		radius: 500
-	) {
-		total
-		business {
-			id
-			name
-			coordinates {
-				latitude
-				longitude
-			}
-			photos
-			distance
-		}
-	}
-}`
-
 // searchBusiness gets ran in goroutine and returns the response to channel when done
 func searchBusiness(name string, ch chan<- FusionResponse, lat string, lon string) {
 	key := os.Getenv("YELP_API")

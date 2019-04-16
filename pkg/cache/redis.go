@@ -33,5 +33,6 @@ func InitializeCache() *redis.Client {
 
 // RunSeeds Sets default response to redis
 func RunSeeds(c *redis.Client) {
+	c.FlushAll()
 	c.Set("-74.0060:40.7128", string(DefaultLocation), -1)
 }
