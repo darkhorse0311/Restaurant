@@ -32,11 +32,11 @@ type Business struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Coordinates struct {
-		Latitude  float64 `json:"latitude"`
-		Longitude float64 `json:"longitude"`
+		Latitude  float32 `json:"latitude"`
+		Longitude float32 `json:"longitude"`
 	} `json:"coordinates"`
 	Photos   []string `json:"photos"`
-	Distance float64  `json:"distance"`
+	Distance float32  `json:"distance"`
 	RID      int      `json:"r_id"`
 }
 

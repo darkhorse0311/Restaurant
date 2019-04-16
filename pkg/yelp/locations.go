@@ -1,18 +1,18 @@
 package yelp
 
 import (
-	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
+	"regexp"
 	"sync"
 	"time"
 
 	"github.com/reynld/carbtographer/pkg/database"
 
-	"github.com/machinebox/graphql"
 	"github.com/reynld/carbtographer/pkg/models"
 )
 
@@ -50,59 +50,71 @@ var YelpQuery = `query ($name: String!, $lat:Float, $lon: Float) {
 }`
 
 // searchBusiness gets ran in goroutine and returns the response to channel when done
-func searchBusiness(cl *graphql.Client, rest models.Restaurants, ch chan<- Response, lat *float64, lon *float64) {
+func searchBusiness(name string, ch chan<- FusionResponse, lat string, lon string) {
 	key := os.Getenv("YELP_API")
+	client := http.Client{}
 
-	var res Response
+	query := fmt.Sprintf(
+		"https://api.yelp.com/v3/businesses/search?latitude=%s&longitude=%s&term=%s&radius=%d",
+		lat,
+		lon,
+		name,
+		500,
+	)
 
-	req := graphql.NewRequest(YelpQuery)
-	req.Var("name", rest.Name)
-	req.Var("lat", lat)
-	req.Var("lon", lon)
-	req.Header.Add("Authorization", "Bearer "+key)
-	ctx := context.Background()
+	// log.Println(query)
 
-	err := cl.Run(ctx, req, &res)
+	req, err := http.NewRequest("GET", query, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
+	}
+	req.Header.Set("Authorization", "Bearer "+key)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatalln(err)
 	}
 
-	ch <- res
+	// body, err := ioutil.ReadAll(resp.Body)
+	// if err != nil {
+	// 	log.Fatalln(err)
+	// }
+	// log.Println(string(body))
+	log.Println(resp.Status)
+
+	var result FusionResponse
+	json.NewDecoder(resp.Body).Decode(&result)
+
+	ch <- result
 }
 
 // GetLocations returns local businees that names match restuarants in our db
-func GetLocations(db *sql.DB, lat float64, lon float64) ([]models.Business, error) {
-
-	if lon == float64(-74.0060) && lat == float64(40.7128) {
-		jsonRes := make([]models.Business, 0)
-		json.Unmarshal(DefaultLocation, &jsonRes)
-		return jsonRes, nil
-	}
+func GetLocations(db *sql.DB, lat string, lon string) ([]Business, error) {
 
 	names, err := database.GetNames(db)
 	if err != nil {
 		return nil, err
 	}
 
-	client := graphql.NewClient("https://api.yelp.com/v3/graphql")
-	var ab []models.Business // all businesses
-	var uid []string         // unique id
-
-	c := make(chan Response)
+	c := make(chan FusionResponse)
 	var wg sync.WaitGroup
 
 	for i, name := range names {
 		wg.Add(1)
 		go func(n models.Restaurants, m int) {
-			time.Sleep(time.Millisecond * time.Duration(150*m))
+			time.Sleep(time.Millisecond * time.Duration(200*m))
 			defer wg.Done()
-			searchBusiness(client, n, c, &lat, &lon)
+			re := regexp.MustCompile(`\b \b`)
+			urlName := re.ReplaceAllLiteralString(n.Name, "%20")
+			searchBusiness(urlName, c, lat, lon)
 		}(name, i)
 	}
 
+	var ab []Business // all businesses
+	var uid []string  // unique id
 	go func() {
 		for yr := range c {
-			for _, business := range yr.Search.Business {
+			for _, business := range yr.Businesses {
 				exist := false
 				for _, id := range uid {
 					if id == business.ID {
@@ -127,7 +139,6 @@ func GetLocations(db *sql.DB, lat float64, lon float64) ([]models.Business, erro
 
 	wg.Wait()
 
-	fmt.Printf("ab :%+v", ab)
 	for i, bus := range ab {
 		id, err := database.GetRestaurantID(db, bus.Name)
 		if err != nil {
