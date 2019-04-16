@@ -2,10 +2,9 @@ package server
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
-	"strconv"
 
+	"github.com/reynld/carbtographer/pkg/models"
 	"github.com/reynld/carbtographer/pkg/yelp"
 
 	"github.com/gorilla/mux"
@@ -14,14 +13,14 @@ import (
 // Locations returns local businees that names match restuarants in our db
 func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
+	lon := params["lon"]
+	lat := params["lat"]
 
-	lat, err := strconv.ParseFloat(params["lat"], 64)
-	if err != nil {
-		log.Fatal(err)
-	}
-	lon, err := strconv.ParseFloat(params["lon"], 64)
-	if err != nil {
-		log.Fatal(err)
+	if lon == "-74.0060" && lat == "40.7128" {
+		jsonRes := make([]models.Business, 0)
+		json.Unmarshal(yelp.DefaultLocation, &jsonRes)
+		json.NewEncoder(w).Encode(jsonRes)
+		return
 	}
 
 	businesses, err := yelp.GetLocations(s.DB, lat, lon)
