@@ -10,6 +10,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+	"github.com/reynld/carbtographer/pkg/cache"
 	"github.com/reynld/carbtographer/pkg/database"
 	"github.com/reynld/carbtographer/pkg/server"
 	"github.com/reynld/carbtographer/pkg/utils"
@@ -44,6 +45,7 @@ func main() {
 		}
 		if *seed {
 			database.RunSeeds(s.DB)
+			cache.RunSeeds(s.Cache)
 		}
 
 	} else {
