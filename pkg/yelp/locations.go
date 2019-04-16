@@ -75,13 +75,7 @@ func searchBusiness(name string, ch chan<- FusionResponse, lat string, lon strin
 		log.Fatalln(err)
 	}
 
-	// body, err := ioutil.ReadAll(resp.Body)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// log.Println(string(body))
 	log.Println(resp.Status)
-
 	var result FusionResponse
 	json.NewDecoder(resp.Body).Decode(&result)
 
