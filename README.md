@@ -56,6 +56,7 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 - ``DB_PASSWORD`` - your database password
 - ``ENVIROMENT`` - must be PRO or DEV
 - ``JSON_PATH`` - path to resturantDataJSON file
+- ``JWT_KEY`` - jwt secret key
 
 ## Usage
 

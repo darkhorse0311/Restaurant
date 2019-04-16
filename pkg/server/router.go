@@ -36,5 +36,7 @@ func (s *Server) InitializeRouter() {
 	s.Router.HandleFunc("/names", s.GetNames).Methods("GET")
 	s.Router.HandleFunc("/items/{id}", s.GetItems).Methods("GET")
 	s.Router.HandleFunc("/locations/{lat}/{lon}", s.Locations).Methods("GET")
+	s.Router.HandleFunc("/signin", s.Signin).Methods("POST")
+	s.Router.HandleFunc("/register", s.Register).Methods("POST")
 	s.Router.NotFoundHandler = http.HandlerFunc(routeNotFound)
 }
