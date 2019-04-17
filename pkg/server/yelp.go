@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/go-redis/redis"
 	"github.com/reynld/carbtographer/pkg/models"
@@ -21,7 +22,7 @@ func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 	key := fmt.Sprintf("%s:%s", lon, lat)
 
 	value, err := s.Cache.Get(key).Result()
-	if err != redis.Nil && err != nil {
+	if err != redis.Nil {
 		jsonRes := make([]models.Business, 0)
 		json.Unmarshal([]byte(value), &jsonRes)
 		json.NewEncoder(w).Encode(jsonRes)
@@ -39,7 +40,7 @@ func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 		log.Println(err)
 	}
 
-	value, err = s.Cache.Set(key, string(cacheBusinesses), 172800).Result()
+	value, err = s.Cache.Set(key, string(cacheBusinesses), time.Second*time.Duration(172800)).Result()
 	if err != redis.Nil {
 		log.Println(err)
 	}
