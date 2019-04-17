@@ -25,6 +25,7 @@ func main() {
 	serve := flag.Bool("serve", false, "runs server")
 	migrate := flag.Bool("migrate", false, "migrates database")
 	seed := flag.Bool("seed", false, "seeds database")
+	seedCache := flag.Bool("seedCache", false, "seeds redis cache")
 	flag.Parse()
 
 	if len(os.Args) > 1 {
@@ -45,6 +46,8 @@ func main() {
 		}
 		if *seed {
 			database.RunSeeds(s.DB)
+		}
+		if *seedCache {
 			cache.RunSeeds(s.Cache)
 		}
 
