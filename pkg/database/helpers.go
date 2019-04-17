@@ -8,7 +8,7 @@ import (
 
 // GetItems returns all items per restuarant id
 func GetItems(db *sql.DB, id string) ([]models.Items, error) {
-	rows, err := db.Query(`SELECT * FROM users u WHERE r_id = $1`, id)
+	rows, err := db.Query(`SELECT * FROM items WHERE r_id = $1`, id)
 	if err != nil {
 		return nil, err
 	}
