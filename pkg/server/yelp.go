@@ -39,7 +39,7 @@ func (s *Server) Locations(w http.ResponseWriter, req *http.Request) {
 		log.Println(err)
 	}
 
-	value, err = s.Cache.Set(key, string(cacheBusinesses), -1).Result()
+	value, err = s.Cache.Set(key, string(cacheBusinesses), 172800).Result()
 	if err != redis.Nil {
 		log.Println(err)
 	}
