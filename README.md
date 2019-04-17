@@ -70,8 +70,11 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 #### Run migrations
 `go run main.go -migrate`
  
-#### Run seeds
- `go run main.go -seeds`
+#### Run Postgress seeds
+ `go run main.go -seed`
+
+#### Run Redis seeds
+ `go run main.go -seed-cache`
  
 #### Run server
  `go run main.go -serve`
