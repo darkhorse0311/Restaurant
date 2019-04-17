@@ -18,6 +18,8 @@ func CheckEnviroment() error {
 		"YELP_API",
 		"ENVIROMENT",
 		"JWT_KEY",
+		"CACHE_ADDRS",
+		"CACHE_DB",
 	}
 
 	for _, v := range variables {

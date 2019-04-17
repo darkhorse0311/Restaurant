@@ -1,4 +1,4 @@
-package yelp
+package cache
 
 // DefaultLocation are locations given when geoLocations denied
 var DefaultLocation = []byte(`[

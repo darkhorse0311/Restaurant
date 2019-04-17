@@ -57,6 +57,10 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 - ``ENVIROMENT`` - must be PRO or DEV
 - ``JSON_PATH`` - path to resturantDataJSON file
 - ``JWT_KEY`` - jwt secret key
+- ``CACHE_ADDRS`` - redis server address
+- ``CACHE_PASSWORD`` - redis server password
+- ``CACHE_DB`` - redis databse number
+
 
 ## Usage
 
@@ -66,8 +70,11 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 #### Run migrations
 `go run main.go -migrate`
  
-#### Run seeds
- `go run main.go -seeds`
+#### Run Postgress seeds
+ `go run main.go -seed`
+
+#### Run Redis seeds
+ `go run main.go -seed-cache`
  
 #### Run server
  `go run main.go -serve`
