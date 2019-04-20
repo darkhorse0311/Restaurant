@@ -12,6 +12,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/reynld/carbtographer/pkg/cache"
 	"github.com/reynld/carbtographer/pkg/database"
+	"github.com/reynld/carbtographer/pkg/scraper"
 	"github.com/reynld/carbtographer/pkg/server"
 	"github.com/reynld/carbtographer/pkg/utils"
 )
@@ -22,10 +23,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	serve := flag.Bool("serve", false, "runs server")
+	scrape := flag.Bool("scrape", false, "scrapes default restaurant macro info")
 	migrate := flag.Bool("migrate", false, "migrates database")
 	seed := flag.Bool("seed", false, "seeds database")
 	seedCache := flag.Bool("seed-cache", false, "seeds redis cache")
+	serve := flag.Bool("serve", false, "runs server")
 	flag.Parse()
 
 	if len(os.Args) > 1 {
@@ -38,6 +40,9 @@ func main() {
 		s := server.Server{}
 		s.Initialize()
 
+		if *scrape {
+			scraper.RunScraper()
+		}
 		if *serve {
 			s.Run()
 		}
