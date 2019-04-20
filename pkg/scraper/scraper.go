@@ -9,19 +9,26 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const url = "http://fastfoodmacros.com#"
+const url = "http://fastfoodmacros.com"
+
+// Scraper struct
+type Scraper struct {
+	URL   string
+	Links []string
+}
 
 // This will get called for each HTML element found
-func processElement(index int, element *goquery.Selection) {
+func (s *Scraper) processElement(index int, element *goquery.Selection) {
 	// See if the href attribute exists on the element
 	href, exists := element.Children().First().Attr("href")
 	if exists && strings.Contains(href, "food.asp") {
-		fmt.Println(href)
+		s.Links = append(s.Links, fmt.Sprintf("%s/%s", url, href))
 	}
 }
 
 // RunScraper get restaurant macro info
 func RunScraper() {
+	s := Scraper{}
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
@@ -34,6 +41,7 @@ func RunScraper() {
 		log.Fatal("Error loading HTTP response body. ", err)
 	}
 
-	document.Find(".pushy-submenu > ul > li").Each(processElement)
+	document.Find(".pushy-submenu > ul > li").Each(s.processElement)
+	fmt.Println(s.Links)
 
 }
