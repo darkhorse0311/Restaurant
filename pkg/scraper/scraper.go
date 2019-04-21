@@ -26,6 +26,12 @@ var remove = []string{
 	"Zaxby",
 }
 
+var rename = map[string]string{
+	"KentuckyFriedChicken": "KFC",
+	"In-N-Out":             "In-N-Out Burger",
+	"Hardee's/CarlsJr.":    "CarlsJr",
+}
+
 // Scraper struct
 type Scraper struct {
 	URL         string
@@ -70,7 +76,13 @@ func (s *Scraper) getInfo() {
 			t := strings.Split(titleEl, " ")
 
 			resName := strings.Join(t[:len(t)-3], "")
-			s.Restaurants[i].Name = resName
+
+			if val, ok := rename[resName]; ok {
+				s.Restaurants[i].Name = val
+			} else {
+				s.Restaurants[i].Name = resName
+			}
+
 		}
 
 		rows := document.Find("tbody").Children()
@@ -148,8 +160,3 @@ func RunScraper() {
 	utils.Check(err)
 
 }
-
-// Edit
-// "KentuckyFriedChicken" -> "KFC"
-// "In-N-Out" -> "In-N-Out Burger"
-// "Hardee's/CarlsJr." -> "CarlsJr"
