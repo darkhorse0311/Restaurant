@@ -17,6 +17,15 @@ import (
 
 const url = "http://fastfoodmacros.com"
 
+var remove = []string{
+	"Culver",
+	"Krystal+Burger",
+	"Qdoba",
+	"Tijuana+Flats+Burrito+Builder",
+	"YaYa",
+	"Zaxby",
+}
+
 // Scraper struct
 type Scraper struct {
 	URL         string
@@ -24,12 +33,23 @@ type Scraper struct {
 	Restaurants []models.JSONRestaurant
 }
 
+func isException(s string) error {
+	for _, r := range remove {
+		if strings.Contains(s, r) {
+			return fmt.Errorf("is in exception array")
+		}
+	}
+	return nil
+}
+
 // This will get called for each HTML element found
 func (s *Scraper) processLink(index int, element *goquery.Selection) {
 	// See if the href attribute exists on the element
 	href, exists := element.Children().First().Attr("href")
 	if exists && strings.Contains(href, "food.asp") {
-		s.Links = append(s.Links, fmt.Sprintf("%s/%s", url, href))
+		if err := isException(href); err == nil {
+			s.Links = append(s.Links, fmt.Sprintf("%s/%s", url, href))
+		}
 	}
 }
 
@@ -56,7 +76,6 @@ func (s *Scraper) getInfo() {
 		rows := document.Find("tbody").Children()
 		for k := range rows.Nodes {
 
-			fmt.Printf("K:%d\n", k)
 			row := rows.Eq(k).Children()
 
 			_, err := strconv.ParseFloat(row.Eq(3).First().Text(), 32)
@@ -119,7 +138,7 @@ func RunScraper() {
 	utils.Check(err)
 
 	pwd, _ := os.Getwd()
-	f, err := os.Create(filepath.Join(pwd, "testRestaurant.json"))
+	f, err := os.Create(filepath.Join(pwd, "restaurantData.json"))
 	utils.Check(err)
 
 	defer f.Close()
@@ -129,3 +148,8 @@ func RunScraper() {
 	utils.Check(err)
 
 }
+
+// Edit
+// "KentuckyFriedChicken" -> "KFC"
+// "In-N-Out" -> "In-N-Out Burger"
+// "Hardee's/CarlsJr." -> "CarlsJr"
