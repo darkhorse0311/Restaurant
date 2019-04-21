@@ -52,12 +52,8 @@ func (s *Scraper) getInfo() {
 			resName := strings.Join(t[:len(t)-3], "")
 			s.Restaurants[i].Name = resName
 		}
-		// fmt.Println(s.Restaurants[i].Name)
 
 		rows := document.Find("tbody").Children()
-		items := make([]models.JSONItem, len(rows.Nodes))
-		s.Restaurants[i].Items = items
-
 		for k := range rows.Nodes {
 
 			fmt.Printf("K:%d\n", k)
@@ -68,29 +64,30 @@ func (s *Scraper) getInfo() {
 				continue
 			}
 
-			for l := range row.Nodes {
-				fmt.Printf("L:%d\n", l)
+			item := models.JSONItem{}
 
+			for l := range row.Nodes {
 				switch l {
 				case 1:
-					s.Restaurants[i].Items[k].Name = row.Eq(l).First().Text()
+					item.Name = row.Eq(l).First().Text()
 				case 2:
-					s.Restaurants[i].Items[k].Type = row.Eq(l).First().Text()
+					item.Type = row.Eq(l).First().Text()
 				case 3:
-					s.Restaurants[i].Items[k].Protein = getMacro(row.Eq(l))
+					item.Protein = getMacro(row.Eq(l))
 				case 4:
-					s.Restaurants[i].Items[k].Fats = getMacro(row.Eq(l))
+					item.Fats = getMacro(row.Eq(l))
 				case 5:
-					s.Restaurants[i].Items[k].Carbs = getMacro(row.Eq(l))
+					item.Carbs = getMacro(row.Eq(l))
 				case 6:
-					s.Restaurants[i].Items[k].Calories = getMacro(row.Eq(l))
+					item.Calories = getMacro(row.Eq(l))
 				case 7:
-					s.Restaurants[i].Items[k].CalPerPro = getMacro(row.Eq(l))
+					item.CalPerPro = getMacro(row.Eq(l))
 				case 8:
-					s.Restaurants[i].Items[k].Sodium = getMacro(row.Eq(l))
+					item.Sodium = getMacro(row.Eq(l))
 				}
-
 			}
+
+			s.Restaurants[i].Items = append(s.Restaurants[i].Items, item)
 		}
 	}
 }
