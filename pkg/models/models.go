@@ -44,12 +44,12 @@ type Business struct {
 type JSONItem struct {
 	Name      string  `json:"name"`
 	Type      string  `json:"type"`
-	Protein   int     `json:"protein"`
-	Fats      int     `json:"fats"`
-	Carbs     int     `json:"carbs"`
-	Calories  int     `json:"calories"`
+	Protein   float32 `json:"protein"`
+	Fats      float32 `json:"fats"`
+	Carbs     float32 `json:"carbs"`
+	Calories  float32 `json:"calories"`
 	CalPerPro float32 `json:"calperpro"`
-	Sodium    int     `json:"Sodium"`
+	Sodium    float32 `json:"Sodium"`
 }
 
 // JSONRestaurant struct from json

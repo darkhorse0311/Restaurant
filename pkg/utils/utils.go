@@ -2,7 +2,6 @@ package utils
 
 import (
 	"fmt"
-	"log"
 	"os"
 )
 
@@ -35,6 +34,6 @@ func CheckEnviroment() error {
 // Check checks if error exists
 func Check(err error) {
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
