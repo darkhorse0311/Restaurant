@@ -2,11 +2,11 @@ CREATE TABLE items (
   ID            SERIAL      PRIMARY KEY,
   name          varchar(240) NOT NULL,
   type          varchar(240) NOT NULL,
-  protein       INTEGER     NOT NULL,
-  carbs         INTEGER     NOT NULL,
-  fats          INTEGER     NOT NULL,
-  calories      INTEGER     NOT NULL,
-  calsperpro    DECIMAL     NOT NULL,
-  sodium        INTEGER     NOT NULL,
-  r_id          INTEGER     REFERENCES items(id) ON DELETE CASCADE ON UPDATE CASCADE
+  protein       REAL     NOT NULL,
+  carbs         REAL     NOT NULL,
+  fats          REAL     NOT NULL,
+  calories      REAL     NOT NULL,
+  calsperpro    DECIMAL  NOT NULL,
+  sodium        REAL     NOT NULL,
+  r_id          REAL     REFERENCES items(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
