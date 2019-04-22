@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"sync"
@@ -30,37 +31,38 @@ var remove = []string{
 var rename = map[string]string{
 	"KentuckyFriedChicken": "KFC",
 	"In-N-Out":             "In-N-Out Burger",
-	"Hardee's/CarlsJr.":    "CarlsJr",
+	"Hardee's/CarlsJr.":    "Carls Jr",
+	"SonicDrive-In":        "Sonic Drive-In",
 }
 
 var logos = map[string]string{
 	"Arby's":          "https://i.imgur.com/ZZtDD7M.png",
-	"Boston Market":   "https://i.imgur.com/2OfB4Xm.png",
-	"Burger King":     "https://i.imgur.com/AMwVZFX.png",
+	"BostonMarket":    "https://i.imgur.com/2OfB4Xm.png",
+	"BurgerKing":      "https://i.imgur.com/AMwVZFX.png",
 	"Chick Fil A":     "https://i.imgur.com/ZKGJde3.png",
 	"Chipotle":        "https://i.imgur.com/1eKcZVo.png",
-	"Dairy Queen":     "https://i.imgur.com/DTMvyUb.png",
-	"Del Taco":        "https://i.imgur.com/B8oRmq5.png",
+	"DairyQueen":      "https://i.imgur.com/DTMvyUb.png",
+	"DelTaco":         "https://i.imgur.com/B8oRmq5.png",
 	"Domino's":        "https://i.imgur.com/5VZg5sN.png",
-	"El Pollo Loco":   "https://i.imgur.com/FSd4mrl.png",
-	"Firehouse Subs":  "https://i.imgur.com/tKUZVdN.png",
-	"Five Guys":       "https://i.imgur.com/jcjy1yW.png",
+	"ElPolloLoco":     "https://i.imgur.com/FSd4mrl.png",
+	"FirehouseSubs":   "https://i.imgur.com/tKUZVdN.png",
+	"FiveGuys":        "https://i.imgur.com/jcjy1yW.png",
 	"Carl's Jr":       "https://i.imgur.com/KtrWf5D.png",
 	"In-N-Out Burger": "https://i.imgur.com/hHIwrbN.png",
-	"Jack in the Box": "https://i.imgur.com/wuOZWUf.png",
-	"Jersey Mike's":   "https://i.imgur.com/y7ZB7yC.png",
-	"Jimmy John's":    "https://i.imgur.com/KRluZGT.png",
+	"JackintheBox":    "https://i.imgur.com/wuOZWUf.png",
+	"JerseyMike's":    "https://i.imgur.com/y7ZB7yC.png",
+	"JimmyJohn's":     "https://i.imgur.com/KRluZGT.png",
 	"KFC":             "https://i.imgur.com/cjRw1pY.png",
 	"McDonald's":      "https://i.imgur.com/ZcANVPe.png",
 	"Moe's":           "https://i.imgur.com/49e5Bql.png",
-	"Panda Express":   "https://i.imgur.com/OiETaHQ.png",
-	"Popeyes Chicken": "https://i.imgur.com/ryYOY3d.png",
+	"PandaExpress":    "https://i.imgur.com/OiETaHQ.png",
+	"PopeyesChicken":  "https://i.imgur.com/ryYOY3d.png",
 	"Potbelly":        "https://i.imgur.com/FWgwDAJ.png",
 	"Quiznos":         "https://i.imgur.com/zdi03On.png",
 	"Sonic Drive-In":  "https://i.imgur.com/kDzvEDn.png",
 	"Starbucks":       "https://i.imgur.com/5ZQysI2.png",
 	"Subway":          "https://i.imgur.com/iPihkvD.png",
-	"Taco Bell":       "https://i.imgur.com/gDFXzSu.png",
+	"TacoBell":        "https://i.imgur.com/gDFXzSu.png",
 	"Wendy's":         "https://i.imgur.com/FJTkLbe.png",
 	"Whataburger":     "https://i.imgur.com/nnIRV3y.png",
 }
@@ -122,8 +124,11 @@ func (s *Scraper) getInfo(link string, c chan<- Comu, index int) {
 		s.Restaurants[index].Name = val
 		s.Restaurants[index].Logo = logos[val]
 	} else {
-		s.Restaurants[index].Name = resName
-		s.Restaurants[index].Logo = logos[resName]
+		re := regexp.MustCompile(`\-`)
+		newName := re.ReplaceAllLiteralString(resName, " ")
+		fmt.Println(newName)
+		s.Restaurants[index].Name = newName
+		s.Restaurants[index].Logo = logos[newName]
 	}
 
 	rows := document.Find("tbody").Children()
