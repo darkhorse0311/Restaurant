@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/reynld/carbtographer/pkg/models"
 	"golang.org/x/crypto/bcrypt"
@@ -15,7 +16,8 @@ import (
 // RunSeeds migrates and seeds databse with JSON file from scraper
 func RunSeeds(db *sql.DB) {
 	// Path to json file to seed DB
-	path := os.Getenv("JSON_PATH")
+	pwd, _ := os.Getwd()
+	path := filepath.Join(pwd, "restaurantData.json")
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
 	// if we os.Open returns an error then handle it

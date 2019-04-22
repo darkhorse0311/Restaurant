@@ -2,6 +2,7 @@ module github.com/reynld/carbtographer
 
 require (
 	github.com/Microsoft/go-winio v0.4.12 // indirect
+	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.13.1 // indirect
