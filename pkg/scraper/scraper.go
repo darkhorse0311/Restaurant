@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/reynld/carbtographer/pkg/models"
@@ -71,6 +72,18 @@ type Scraper struct {
 	Restaurants []models.JSONRestaurant
 }
 
+// Comu struct is the data passed between getInfo channels
+type Comu struct {
+	Items []models.JSONItem
+	Index int
+}
+
+func getMacro(sel *goquery.Selection) float32 {
+	macro, err := strconv.ParseFloat(sel.First().Text(), 32)
+	utils.Check(err)
+	return float32(macro)
+}
+
 func isException(s string) error {
 	for _, r := range remove {
 		if strings.Contains(s, r) {
@@ -91,78 +104,90 @@ func (s *Scraper) processLink(index int, element *goquery.Selection) {
 	}
 }
 
-func (s *Scraper) getInfo() {
+func (s *Scraper) getInfo(link string, c chan<- Comu, index int) {
+	response, err := http.Get(link)
+	utils.Check(err)
 
-	for i, link := range s.Links {
-		response, err := http.Get(link)
-		utils.Check(err)
-
-		document, err := goquery.NewDocumentFromReader(response.Body)
-		if err != nil {
-			log.Fatal("Error loading HTTP response body. ", err)
-		}
-
-		titles := document.Find("head > title")
-		for j := range titles.Nodes {
-			titleEl := titles.Eq(j).Text()
-			t := strings.Split(titleEl, " ")
-
-			resName := strings.Join(t[:len(t)-3], "")
-
-			if val, ok := rename[resName]; ok {
-				s.Restaurants[i].Name = val
-			} else {
-				s.Restaurants[i].Name = resName
-			}
-
-		}
-
-		rows := document.Find("tbody").Children()
-		for k := range rows.Nodes {
-
-			row := rows.Eq(k).Children()
-
-			_, err := strconv.ParseFloat(row.Eq(3).First().Text(), 32)
-			if err != nil {
-				continue
-			}
-
-			item := models.JSONItem{}
-
-			for l := range row.Nodes {
-				switch l {
-				case 1:
-					item.Name = row.Eq(l).First().Text()
-				case 2:
-					item.Type = row.Eq(l).First().Text()
-				case 3:
-					item.Protein = getMacro(row.Eq(l))
-				case 4:
-					item.Fats = getMacro(row.Eq(l))
-				case 5:
-					item.Carbs = getMacro(row.Eq(l))
-				case 6:
-					item.Calories = getMacro(row.Eq(l))
-				case 7:
-					item.CalPerPro = getMacro(row.Eq(l))
-				case 8:
-					item.Sodium = getMacro(row.Eq(l))
-				}
-			}
-
-			s.Restaurants[i].Items = append(s.Restaurants[i].Items, item)
-		}
+	document, err := goquery.NewDocumentFromReader(response.Body)
+	if err != nil {
+		log.Fatal("Error loading HTTP response body. ", err)
 	}
+
+	title := document.Find("head > title").First().Text()
+	t := strings.Split(title, " ")
+
+	resName := strings.Join(t[:len(t)-3], "")
+
+	if val, ok := rename[resName]; ok {
+		s.Restaurants[index].Name = val
+		s.Restaurants[index].Logo = logos[val]
+	} else {
+		s.Restaurants[index].Name = resName
+		s.Restaurants[index].Logo = logos[resName]
+	}
+
+	rows := document.Find("tbody").Children()
+	items := []models.JSONItem{}
+	for k := range rows.Nodes {
+		row := rows.Eq(k).Children()
+
+		_, err := strconv.ParseFloat(row.Eq(3).First().Text(), 32)
+		if err != nil {
+			continue
+		}
+
+		item := models.JSONItem{}
+
+		for l := range row.Nodes {
+			switch l {
+			case 1:
+				item.Name = row.Eq(l).First().Text()
+			case 2:
+				item.Type = row.Eq(l).First().Text()
+			case 3:
+				item.Protein = getMacro(row.Eq(l))
+			case 4:
+				item.Fats = getMacro(row.Eq(l))
+			case 5:
+				item.Carbs = getMacro(row.Eq(l))
+			case 6:
+				item.Calories = getMacro(row.Eq(l))
+			case 7:
+				item.CalPerPro = getMacro(row.Eq(l))
+			case 8:
+				item.Sodium = getMacro(row.Eq(l))
+			}
+		}
+
+		items = append(items, item)
+	}
+	c <- Comu{Items: items, Index: index}
 }
 
-func getMacro(sel *goquery.Selection) float32 {
-	macro, err := strconv.ParseFloat(sel.First().Text(), 32)
-	utils.Check(err)
-	return float32(macro)
+func (s *Scraper) getItems() {
+	c := make(chan Comu)
+	var wg sync.WaitGroup
+
+	for index, link := range s.Links {
+		wg.Add(1)
+		go func(l string, i int) {
+			defer wg.Done()
+			s.getInfo(l, c, i)
+		}(link, index)
+	}
+
+	go func() {
+		for co := range c {
+			s.Restaurants[co.Index].Items = co.Items
+		}
+	}()
+
+	wg.Wait()
 }
 
 // RunScraper get restaurant macro info
 func RunScraper() {
+	fmt.Println("Scraping starting...")
 	s := Scraper{}
 	response, err := http.Get(url)
 	utils.Check(err)
@@ -171,12 +196,13 @@ func RunScraper() {
 
 	document, err := goquery.NewDocumentFromReader(response.Body)
 	utils.Check(err)
-
 	document.Find(".pushy-submenu > ul > li").Each(s.processLink)
+	fmt.Println("Retrieved all links...")
 
 	res := make([]models.JSONRestaurant, len(s.Links))
 	s.Restaurants = res
-	s.getInfo()
+	s.getItems()
+	fmt.Println("Scraped info successfully")
 
 	jsonString, err := json.Marshal(s.Restaurants)
 	utils.Check(err)
@@ -184,11 +210,13 @@ func RunScraper() {
 	pwd, _ := os.Getwd()
 	f, err := os.Create(filepath.Join(pwd, "restaurantData.json"))
 	utils.Check(err)
+	fmt.Println("Writing file....")
 
 	defer f.Close()
 
 	jsonBytes := []byte(jsonString)
 	_, err = f.Write(jsonBytes)
 	utils.Check(err)
+	fmt.Println("Done!")
 
 }
