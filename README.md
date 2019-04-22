@@ -45,6 +45,7 @@ You can generate one following the intructions here: [Mapbox: Access tokens](htt
 
 ## Enviroment Variables
 You will require a Yelp API Key to make authenticated requests.
+Locally ran Postgress and Redis server to test locally
  
 You can generate one following the intructions here: [Creating an app on Yelp's Developers site](https://www.yelp.com/developers/documentation/v3/authentication)
 - ``PORT``- your server PORT
@@ -55,17 +56,19 @@ You can generate one following the intructions here: [Creating an app on Yelp's 
 - ``DB_NAME`` - your database name
 - ``DB_PASSWORD`` - your database password
 - ``ENVIROMENT`` - must be PRO or DEV
-- ``JSON_PATH`` - path to resturantDataJSON file
 - ``JWT_KEY`` - jwt secret key
 - ``CACHE_ADDRS`` - redis server address
 - ``CACHE_PASSWORD`` - redis server password
 - ``CACHE_DB`` - redis databse number
 
 
-## Usage
+## Run locally
 
 #### Enable go modules
 `export GO111MODULE=on`
+
+#### Scrape Info
+`go run main.go -scrape`
 
 #### Run migrations
 `go run main.go -migrate`
