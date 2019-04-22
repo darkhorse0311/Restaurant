@@ -10,7 +10,7 @@ Application that recommends macro friendly meals from local restaurants.
 
 Frontend Link: https://carbtographer.com
 
-Backend Link: https://carbtographer.herokuapp.com
+Backend Link: https://api.carbtographer.com
 
 #### NOTICE
 Recently ported Node.js backend to a Golang backend.
