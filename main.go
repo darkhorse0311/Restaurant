@@ -10,16 +10,14 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-	"github.com/reynld/carbtographer/pkg/cache"
-	"github.com/reynld/carbtographer/pkg/database"
-	"github.com/reynld/carbtographer/pkg/scraper"
-	"github.com/reynld/carbtographer/pkg/server"
-	"github.com/reynld/carbtographer/pkg/utils"
+	"github.com/reynld/carbtographer/server"
+	"github.com/reynld/carbtographer/server/models"
+	"github.com/reynld/carbtographer/server/scraper"
 )
 
 func main() {
 	godotenv.Load()
-	if err := utils.CheckEnviroment(); err != nil {
+	if err := server.CheckEnviroment(); err != nil {
 		log.Fatal(err)
 	}
 
@@ -27,7 +25,7 @@ func main() {
 	migrate := flag.Bool("migrate", false, "migrates database")
 	seed := flag.Bool("seed", false, "seeds database")
 	seedCache := flag.Bool("seed-cache", false, "seeds redis cache")
-	serve := flag.Bool("serve", false, "runs server")
+	run := flag.Bool("run", false, "runs server")
 	flag.Parse()
 
 	if len(os.Args) > 1 {
@@ -43,17 +41,17 @@ func main() {
 		if *scrape {
 			scraper.RunScraper()
 		}
-		if *serve {
+		if *run {
 			s.Run()
 		}
 		if *migrate {
-			database.RunMigrations(s.DB)
+			models.RunMigrations(s.DB)
 		}
 		if *seed {
-			database.RunSeeds(s.DB)
+			models.RunSeeds(s.DB)
 		}
 		if *seedCache {
-			cache.RunSeeds(s.Cache)
+			models.RunCacheSeeds(s.Cache)
 		}
 
 	} else {

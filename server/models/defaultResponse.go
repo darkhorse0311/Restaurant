@@ -1,4 +1,4 @@
-package cache
+package models
 
 // DefaultLocation are locations given when geoLocations denied
 var DefaultLocation = []byte(`[

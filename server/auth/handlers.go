@@ -1,19 +1,17 @@
-package server
+package auth
 
 import (
+	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
 
-	"github.com/reynld/carbtographer/pkg/auth"
-	"github.com/reynld/carbtographer/pkg/database"
-	"github.com/reynld/carbtographer/pkg/models"
-
+	"github.com/reynld/carbtographer/server/models"
 	"golang.org/x/crypto/bcrypt"
 )
 
-// Signin the Signin handler
-func (s *Server) Signin(w http.ResponseWriter, r *http.Request) {
+// Login the Login handler
+func Login(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
 	// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
@@ -23,8 +21,7 @@ func (s *Server) Signin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var user models.User
-	err = database.GetByUsername(s.DB, &user, creds.Username)
+	user, err := models.GetByUsername(db, creds.Username)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
@@ -36,7 +33,7 @@ func (s *Server) Signin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	jwtToken, err := auth.GenerateToken(user.Username, user.ID)
+	jwtToken, err := GenerateToken(user.Username, user.ID)
 	if err != nil {
 		// If there is an error in creating the JWT return an internal server error
 		w.WriteHeader(http.StatusInternalServerError)
@@ -53,7 +50,7 @@ func (s *Server) Signin(w http.ResponseWriter, r *http.Request) {
 }
 
 // Register the Signin handler
-func (s *Server) Register(w http.ResponseWriter, r *http.Request) {
+func Register(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
 	// Get the JSON body and decode into credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
@@ -71,15 +68,14 @@ func (s *Server) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var id int
-	err = database.CreateUser(s.DB, &id, creds.Username, string(hash))
+	user, err := models.CreateUser(db, creds.Username, string(hash))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		log.Print(err)
 		return
 	}
 
-	jwtToken, err := auth.GenerateToken(creds.Username, id)
+	jwtToken, err := GenerateToken(user.Username, user.ID)
 	if err != nil {
 		// If there is an error in creating the JWT return an internal server error
 		w.WriteHeader(http.StatusInternalServerError)
