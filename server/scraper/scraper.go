@@ -13,8 +13,8 @@ import (
 	"sync"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/reynld/carbtographer/pkg/models"
-	"github.com/reynld/carbtographer/pkg/utils"
+	"github.com/reynld/carbtographer/server"
+	"github.com/reynld/carbtographer/server/models"
 )
 
 const url = "http://fastfoodmacros.com"
@@ -74,15 +74,9 @@ type Scraper struct {
 	Restaurants []models.JSONRestaurant
 }
 
-// Comu struct is the data passed between getInfo channels
-type Comu struct {
-	Items []models.JSONItem
-	Index int
-}
-
 func getMacro(sel *goquery.Selection) float32 {
 	macro, err := strconv.ParseFloat(sel.First().Text(), 32)
-	utils.Check(err)
+	server.Check(err)
 	return float32(macro)
 }
 
@@ -106,9 +100,9 @@ func (s *Scraper) processLink(index int, element *goquery.Selection) {
 	}
 }
 
-func (s *Scraper) getInfo(link string, c chan<- Comu, index int) {
+func (s *Scraper) getInfo(link string, c chan<- models.Comu, index int) {
 	response, err := http.Get(link)
-	utils.Check(err)
+	server.Check(err)
 
 	document, err := goquery.NewDocumentFromReader(response.Body)
 	if err != nil {
@@ -166,11 +160,11 @@ func (s *Scraper) getInfo(link string, c chan<- Comu, index int) {
 
 		items = append(items, item)
 	}
-	c <- Comu{Items: items, Index: index}
+	c <- models.Comu{Items: items, Index: index}
 }
 
 func (s *Scraper) getItems() {
-	c := make(chan Comu)
+	c := make(chan models.Comu)
 	var wg sync.WaitGroup
 
 	for index, link := range s.Links {
@@ -195,12 +189,12 @@ func RunScraper() {
 	fmt.Println("Scraping starting...")
 	s := Scraper{}
 	response, err := http.Get(url)
-	utils.Check(err)
+	server.Check(err)
 
 	defer response.Body.Close()
 
 	document, err := goquery.NewDocumentFromReader(response.Body)
-	utils.Check(err)
+	server.Check(err)
 	document.Find(".pushy-submenu > ul > li").Each(s.processLink)
 	fmt.Println("Retrieved all links...")
 
@@ -210,18 +204,18 @@ func RunScraper() {
 	fmt.Println("Scraped info successfully")
 
 	jsonString, err := json.Marshal(s.Restaurants)
-	utils.Check(err)
+	server.Check(err)
 
 	pwd, _ := os.Getwd()
 	f, err := os.Create(filepath.Join(pwd, "restaurantData.json"))
-	utils.Check(err)
+	server.Check(err)
 	fmt.Println("Writing file....")
 
 	defer f.Close()
 
 	jsonBytes := []byte(jsonString)
 	_, err = f.Write(jsonBytes)
-	utils.Check(err)
+	server.Check(err)
 	fmt.Println("Done!")
 
 }

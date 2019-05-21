@@ -1,22 +1,54 @@
-package database
+package models
 
 import (
 	"database/sql"
-
-	"github.com/reynld/carbtographer/pkg/models"
 )
 
+//Items from databse
+type Items struct {
+	ID        int     `gorm:"primary_key" json:"id"`
+	Name      string  `json:"name"`
+	Type      string  `json:"type"`
+	Protein   float32 `json:"protein"`
+	Carbs     float32 `json:"carbs"`
+	Fats      float32 `json:"fats"`
+	Calories  float32 `json:"calories"`
+	CalPerPro float32 `json:"calperpro"`
+	Sodium    float32 `json:"sodium"`
+	RID       int     `sql:"type:integer REFERENCES restaurants(id) ON DELETE CASCADE ON UPDATE CASCADE" json:"r_id"`
+}
+
+// Restaurants resposne from databse
+type Restaurants struct {
+	ID   int    `gorm:"primary_key" json:"id"`
+	Name string `json:"name"`
+	Logo string `json:"logo"`
+}
+
+// Business db struct
+type Business struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Coordinates struct {
+		Latitude  float32 `json:"latitude"`
+		Longitude float32 `json:"longitude"`
+	} `json:"coordinates"`
+	Photos   []string `json:"photos"`
+	Distance float32  `json:"distance"`
+	RID      int      `json:"r_id"`
+}
+
 // GetItems returns all items per restuarant id
-func GetItems(db *sql.DB, id string) ([]models.Items, error) {
+func GetItems(db *sql.DB, id string) ([]Items, error) {
 	rows, err := db.Query(`SELECT * FROM items WHERE r_id = $1`, id)
 	if err != nil {
 		return nil, err
 	}
 
-	items := []models.Items{}
+	items := []Items{}
 
 	for rows.Next() {
-		var item models.Items
+		var item Items
 		err := rows.Scan(
 			&item.ID,
 			&item.Name,
@@ -40,15 +72,15 @@ func GetItems(db *sql.DB, id string) ([]models.Items, error) {
 }
 
 // GetNames returns all restaurant names in database
-func GetNames(db *sql.DB) ([]models.Restaurants, error) {
+func GetNames(db *sql.DB) ([]Restaurants, error) {
 	rows, err := db.Query(`SELECT * FROM restaurants`)
 	if err != nil {
 		return nil, err
 	}
 
-	restuarants := []models.Restaurants{}
+	restuarants := []Restaurants{}
 	for rows.Next() {
-		var rest models.Restaurants
+		var rest Restaurants
 		err := rows.Scan(
 			&rest.ID,
 			&rest.Name,
@@ -87,7 +119,7 @@ func InsertRestaurant(db *sql.DB, name string, logo string, id *int) error {
 }
 
 // InsertItem adds item with relation to restaurant
-func InsertItem(db *sql.DB, item *models.JSONItem, restID int, id *int) error {
+func InsertItem(db *sql.DB, item *JSONItem, restID int, id *int) error {
 	err := db.QueryRow(`INSERT INTO 
 		items(
 			name, 
@@ -112,29 +144,6 @@ func InsertItem(db *sql.DB, item *models.JSONItem, restID int, id *int) error {
 		item.Sodium,
 		restID,
 	).Scan(id)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-// GetByUsername gets User by username
-func GetByUsername(db *sql.DB, user *models.User, username string) error {
-	err := db.QueryRow(
-		`SELECT u.id, u.username, u.password FROM users u WHERE username = $1`,
-		username).Scan(&user.ID, &user.Username, &user.Password)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-// CreateUser returns User by username
-func CreateUser(db *sql.DB, id *int, username string, password string) error {
-	err := db.QueryRow(`INSERT INTO users(username, password)
-		VALUES
-		($1, $2)
-		RETURNING id`, username, password).Scan(id)
 	if err != nil {
 		return err
 	}

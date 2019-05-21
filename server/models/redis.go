@@ -1,4 +1,4 @@
-package cache
+package models
 
 import (
 	"fmt"
@@ -31,8 +31,8 @@ func InitializeCache() *redis.Client {
 	return client
 }
 
-// RunSeeds Sets default response to redis
-func RunSeeds(c *redis.Client) {
+// RunCacheSeeds Sets default response to redis
+func RunCacheSeeds(c *redis.Client) {
 	c.FlushAll()
 	c.Set("-74.0060:40.7128", string(DefaultLocation), 0)
 }

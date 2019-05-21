@@ -7,13 +7,8 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/reynld/carbtographer/pkg/models"
+	"github.com/reynld/carbtographer/server/models"
 )
-
-//getJWTKey returns JWTiKey
-func getJWTKey() []byte {
-	return []byte(os.Getenv("JWT_KEY"))
-}
 
 // Protected middleware
 func Protected(next http.HandlerFunc) http.HandlerFunc {
@@ -145,4 +140,9 @@ func Refresh(w http.ResponseWriter, r *http.Request) {
 		Value:   tokenString,
 		Expires: expirationTime,
 	})
+}
+
+//getJWTKey returns JWTiKey
+func getJWTKey() []byte {
+	return []byte(os.Getenv("JWT_KEY"))
 }

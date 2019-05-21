@@ -1,18 +1,19 @@
-package server
+package business
 
 import (
+	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/reynld/carbtographer/pkg/database"
+	"github.com/reynld/carbtographer/server/models"
 )
 
 // GetItems returns all items per restuarant id
-func (s *Server) GetItems(w http.ResponseWriter, req *http.Request) {
+func GetItems(db *sql.DB, w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	items, err := database.GetItems(s.DB, params["id"])
+	items, err := models.GetItems(db, params["id"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		log.Print(err)
@@ -23,8 +24,8 @@ func (s *Server) GetItems(w http.ResponseWriter, req *http.Request) {
 }
 
 // GetNames returns all restaurant names in database
-func (s *Server) GetNames(w http.ResponseWriter, req *http.Request) {
-	rest, err := database.GetNames(s.DB)
+func GetNames(db *sql.DB, w http.ResponseWriter, req *http.Request) {
+	rest, err := models.GetNames(db)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return

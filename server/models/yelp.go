@@ -1,4 +1,4 @@
-package yelp
+package models
 
 // FusionResponse from yelps fusion api
 type FusionResponse struct {
@@ -12,8 +12,8 @@ type FusionResponse struct {
 	} `json:"region"`
 }
 
-// Business struct
-type Business struct {
+// BusinessResponse struct
+type BusinessResponse struct {
 	Rating     int    `json:"rating"`
 	Price      string `json:"price"`
 	Phone      string `json:"phone"`
